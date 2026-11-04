@@ -119,5 +119,82 @@
     [{ nome: "estilo", padrao: "deslizar | cartoes | celula" }, { nome: "colunas", padrao: "lista de títulos" }, { nome: "linhas", padrao: "matriz de textos" }, { nome: "col", padrao: "índice da coluna numérica (ordena do maior para o menor)" }, { nome: "heroLinha", padrao: "linha da célula-herói (celula)" }],
     "as linhas entram, depois se reordenam do maior para o menor; o primeiro lugar ganha destaque (cartões: medalhas; célula: cursor + pop)", false, 2.6);
 
-  Object.assign(EL, { progresso, barras_comida: barrasComida, tabela_viva: tabelaViva });
+  // =============== MOTO DE ENTREGA (peça de apoio, reaproveitada em linha e corrida): scooter com a bag térmica vermelha na garupa
+  // Origem = chão sob o meio da moto, olhando para a direita. { g, rodas(a) } gira as rodas.
+  const moto = (pai, cor = C.amarelo) => {
+    const g = el("g", {}, pai);
+    el("rect", { x: -80, y: -80, width: 46, height: 42, rx: 10, fill: C.cereja }, g); el("rect", { x: -80, y: -66, width: 46, height: 8, fill: C.creme }, g);
+    el("path", { d: "M-44 -30Q-44 -44 -30 -44H20L34 -68H46L42 -30Q42 -22 34 -22H-34Q-44 -22 -44 -30Z", fill: cor }, g);
+    el("rect", { x: -40, y: -54, width: 46, height: 11, rx: 5, fill: C.tinta }, g); el("rect", { x: 30, y: -76, width: 24, height: 8, rx: 4, fill: C.tinta }, g);
+    const rs = [-30, 36].map((cx) => { const r = el("g", {}, g); el("circle", { r: 16, fill: C.tinta }, r); el("circle", { r: 7, fill: C.creme }, r); el("rect", { x: -1.5, y: -14, width: 3, height: 28, fill: C.creme }, r); r.dataset.cx = cx; return r; });
+    return { g, rodas(a) { rs.forEach((r) => r.setAttribute("transform", `translate(${r.dataset.cx} -16) rotate(${a})`)); } };
+  };
+
+  // =============== LINHA VIVA: a evolução no tempo com um viajante (pin, moto) ou um broto que cresce
+  const linhaViva = (pai, { x, y, s, rot, cartao: ct = true, estilo = "pin", dados = [{ rotulo: "Jan", valor: 20 }, { rotulo: "Fev", valor: 38 }, { rotulo: "Mar", valor: 30 }, { rotulo: "Abr", valor: 62 }, { rotulo: "Mai", valor: 90 }], max = 100, cor = null } = {}) => {
+    const g = nova(pai, x, y, s, rot), w = 520, h = 420, n = dados.length; cartao(g, w, h, ct);
+    const base = h / 2 - 90, alt = 220, px = (i) => -w / 2 + 70 + i * (w - 140) / (n - 1), py = (v) => base - alt * v / max, brt = estilo === "broto", c = cor || (brt ? C.verde : C.cereja);
+    el("line", { x1: -w / 2 + 28, x2: w / 2 - 28, y1: base, y2: base, stroke: C.tinta, "stroke-width": 5, "stroke-linecap": "round" }, g);
+    const d = dados.map((q, i) => (i ? "L" : "M") + px(i) + " " + py(q.valor)).join("");
+    if (!brt) el("path", { d: d + `L${px(n - 1)} ${base}L${px(0)} ${base}Z`, fill: c, "fill-opacity": .16 }, g);
+    const tr = el("path", { d, fill: "none", stroke: c, "stroke-width": brt ? 14 : 12, "stroke-linecap": "round", "stroke-linejoin": "round" }, g), L = tr.getTotalLength();
+    tr.setAttribute("stroke-dasharray", L);
+    const pts = dados.map((q, i) => { const o = { i };
+      txt(g, px(i), base + 36, q.rotulo, 22, C.tinta, UI).setAttribute("fill-opacity", .7); o.nu = txt(g, px(i), base + 72, String(q.valor), 30, C.tinta, DISP);
+      if (brt) { if (i < n - 1) { o.fo = [1, -1].map((lado) => { const f = el("g", {}, g); el("path", { d: "M0 0Q22 -4 38 -26Q12 -34 0 0Z", fill: i % 2 ? C.menta : C.verde, transform: `scale(${lado} 1)` }, f); f.dataset.lado = lado; return f; }); } }
+      else o.dot = el("circle", { r: 11, fill: C.creme, stroke: c, "stroke-width": 6 }, g);
+      return o; });
+    let ve = null, fruto = null, bud = null;
+    if (estilo === "pin") { ve = el("g", {}, g); el("path", { d: "M0 0C-10 -16 -30 -30 -30 -50A30 30 0 1 1 30 -50C30 -30 10 -16 0 0Z", fill: C.cereja }, ve); el("circle", { cy: -50, r: 11, fill: C.creme }, ve); }
+    else if (estilo === "moto") { const m = moto(g, C.amarelo); ve = m.g; ve.rodas = m.rodas; }
+    else { bud = el("circle", { r: 13, fill: C.menta }, g); fruto = el("g", {}, g); el("circle", { r: 24, fill: C.cereja }, fruto); el("circle", { cx: -8, cy: -8, r: 7, fill: "#fff", "fill-opacity": .5 }, fruto); el("path", { d: "M0 -22Q14 -38 28 -30Q16 -18 0 -22Z", fill: C.verde }, fruto); }
+    return { g, set(p) { const u = ease(lim(p)); tr.setAttribute("stroke-dashoffset", L * (1 - u)); const pos = tr.getPointAtLength(L * u), p2 = tr.getPointAtLength(Math.min(L, L * u + 2)), p1 = tr.getPointAtLength(Math.max(0, L * u - 2));
+      const ang = Math.max(-38, Math.min(38, Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI));
+      pts.forEach((o) => { const q = lim((u * (n - 1) - (o.i - .3)) / .3); o.nu.setAttribute("opacity", q); const tp = (e, sc) => e.setAttribute("transform", `translate(${px(o.i)} ${py(dados[o.i].valor)}) scale(${Math.max(sc, .001)})`);
+        if (o.dot) { tp(o.dot, back(q)); o.dot.setAttribute("opacity", q > 0 ? 1 : 0); }
+        if (o.fo) o.fo.forEach((f, k) => { const sc = back(q); f.setAttribute("transform", `translate(${px(o.i)} ${py(dados[o.i].valor)}) rotate(${-14 - k * 4}) scale(${Math.max(sc, .001) * (+f.dataset.lado)} ${Math.max(sc, .001)})`); f.setAttribute("opacity", q > 0 ? 1 : 0); }); });
+      if (estilo === "pin") { ve.setAttribute("transform", `translate(${pos.x} ${pos.y}) scale(${.9 + .1 * Math.sin(u * 40)})`); ve.setAttribute("opacity", p > 0 ? 1 : 0); }
+      else if (estilo === "moto") { ve.setAttribute("transform", `translate(${pos.x} ${pos.y}) rotate(${ang}) scale(.82)`); ve.rodas(u * 1100); ve.setAttribute("opacity", p > 0 ? 1 : 0); }
+      else { const f = back(lim((p - .86) / .14)); bud.setAttribute("transform", `translate(${pos.x} ${pos.y}) scale(${1 - lim((p - .86) / .1)})`); fruto.setAttribute("transform", `translate(${px(n - 1)} ${py(dados[n - 1].valor) - 6}) scale(${Math.max(f, .001)})`); } } };
+  };
+  ficha("linha_viva", "Linha viva", "evolução no tempo com 3 a 8 pontos: um pin de mapa, uma moto de entrega ou um broto percorre a linha e cada ponto aparece quando é alcançado", "são menos de 3 pontos (use numero) ou os pontos não seguem uma ordem no tempo", { w: 520, h: 420 },
+    [{ nome: "estilo", padrao: "pin | moto | broto" }, { nome: "dados", padrao: DADOS }, { nome: "max", padrao: 100 }, { nome: "cor", padrao: "depende do estilo" }, { nome: "cartao", padrao: true }],
+    "a linha se desenha com o viajante na ponta (a moto gira as rodas e acompanha a inclinação; o broto solta folhas e termina em fruto)", false, 2.6);
+
+  // =============== CORRIDA: quem passa quem. Barras que trocam de posição, pódio ou pistas com motos
+  const corrida = (pai, { x, y, s, rot, cartao: ct = true, estilo = "barras", dados = [{ rotulo: "Sopa", de: 20, valor: 90 }, { rotulo: "Salada", de: 60, valor: 70 }, { rotulo: "Marmita", de: 80, valor: 50 }, { rotulo: "Suco", de: 30, valor: 85 }], max = 100 } = {}) => {
+    const g = nova(pai, x, y, s, rot), w = 520, h = 420, n = dados.length; cartao(g, w, h, ct);
+    const val = (o, u) => lerp(o.de == null ? 0 : o.de, o.valor, u);
+    if (estilo === "podio") {
+      const top = [...dados].sort((a, b) => b.valor - a.valor).slice(0, 3), ord = [1, 0, 2], hts = [190, 140, 100], cs = [C.amarelo, C.rosa, C.areia], base = h / 2 - 70, bw = 138;
+      const it = ord.map((r, k) => { const d = top[r]; if (!d) return null; const cx = -150 + k * 150, gr = el("g", {}, g), bl = el("g", {}, gr);
+        el("rect", { x: cx - bw / 2 + 8, y: base - hts[r] + 7, width: bw, height: hts[r], rx: 14, ...SOMBRA }, bl); el("rect", { x: cx - bw / 2, y: base - hts[r], width: bw, height: hts[r], rx: 14, fill: cs[r] }, bl);
+        txt(bl, cx, base - hts[r] + 60, String(r + 1), 64, C.tinta, DISP); const vn = txt(bl, cx, base - 14, "0", 34, C.tinta, DISP); txt(g, cx, base + 38, d.rotulo, 22, C.tinta, UI).setAttribute("fill-opacity", .75);
+        const fr = el("g", {}, gr); el("circle", { r: 26, fill: COR5[r === 0 ? 0 : r === 1 ? 1 : 3] }, fr); el("circle", { cx: -8, cy: -8, r: 8, fill: "#fff", "fill-opacity": .5 }, fr); el("path", { d: "M0 -24Q14 -40 30 -32Q18 -20 0 -24Z", fill: C.verde }, fr);
+        let st = null; if (r === 0) { st = el("path", { d: "M0 -26L8 -8L28 -6L13 7L18 27L0 17L-18 27L-13 7L-28 -6L-8 -8Z", fill: C.amarelo }, gr); }
+        return { cx, r, bl, vn, fr, st, topo: base - hts[r], v: d.valor }; }).filter(Boolean);
+      return { g, set(p) { it.forEach((o) => { const q = lim((p - (2 - o.r) * .16) / .35), e = ease(q), f = back(lim((p - (2 - o.r) * .16 - .3) / .25));
+        o.bl.setAttribute("transform", `translate(0 ${base}) scale(1 ${Math.max(e, .001)}) translate(0 ${-base})`); o.vn.textContent = String(Math.round(o.v * ease(lim((p - .3 - (2 - o.r) * .1) / .5))));
+        o.fr.setAttribute("transform", `translate(${o.cx} ${o.topo - 30 - (1 - f) * 120}) scale(${Math.max(lim(f * 3), .001)})`); o.fr.setAttribute("opacity", lim(f * 4));
+        if (o.st) { const sf = back(lim((p - .82) / .18)); o.st.setAttribute("transform", `translate(${o.cx} ${o.topo - 96}) rotate(${(1 - sf) * -180}) scale(${Math.max(sf, .001)})`); } }); } };
+    }
+    if (estilo === "pistas") {
+      const lh = Math.min(78, (h - 100) / n), y0 = -h / 2 + 50, x0 = -w / 2 + 160, x1 = w / 2 - 138, itens = dados.map((d, i) => { const yy = y0 + i * lh + lh / 2, c = COR5[i % 5];
+        el("rect", { x: -w / 2 + 120, y: yy - lh / 2 + 4, width: w - 144, height: lh - 8, rx: 16, fill: "#E9DDE0" }, g); txt(g, -w / 2 + 28, yy + 9, d.rotulo, 24, C.tinta, UI, "start");
+        el("line", { x1: x0, x2: x1 + 26, y1: yy + lh * .27, y2: yy + lh * .27, stroke: "#fff", "stroke-width": 3, "stroke-dasharray": "10 10", "stroke-opacity": .8 }, g);
+        const m = moto(g, c), nu = txt(g, w / 2 - 24, yy + 10, "0", 28, C.tinta, DISP, "end"); return { d, m, nu, yy }; });
+      for (let k = 0; k < Math.floor(lh * n / 10); k++) el("rect", { x: x1 + 30 + (k % 2) * 10, y: y0 + 8 + k * 10, width: 10, height: 10, fill: (k + Math.floor(k / 2)) % 2 ? C.tinta : C.creme }, g);
+      return { g, set(p) { const u = ease(lim((p - .08) / .85)); itens.forEach((o) => { const v = val(o.d, u), xx = x0 + (x1 - x0) * v / max; o.m.g.setAttribute("transform", `translate(${xx} ${o.yy + lh * .3}) scale(.5)`); o.m.rodas(u * 1400); o.nu.textContent = String(Math.round(v)); }); } };
+    }
+    const rh = Math.min(82, (h - 80) / n), y0 = -h / 2 + 40, x0 = -w / 2 + 140, tw = w - 140 - 100, s0 = max * .012;
+    const rows = dados.map((d, i) => { const gr = el("g", {}, g); txt(gr, -w / 2 + 28, 9, d.rotulo, 26, C.tinta, UI, "start"); const b = el("rect", { x: x0, y: -19, height: 38, rx: 19, fill: COR5[i % 5] }, gr), nu = txt(gr, w / 2 - 24, 10, "0", 30, C.tinta, DISP, "end"); return { d, gr, b, nu }; });
+    return { g, set(p) { const u = ease(lim((p - .1) / .8)), vs = dados.map((d) => val(d, u));
+      rows.forEach((o, i) => { let rk = 0; vs.forEach((v, j) => { if (j !== i) rk += 1 / (1 + Math.exp(-(v - vs[i]) / s0)); }); o.gr.setAttribute("transform", `translate(0 ${y0 + rk * rh + rh / 2})`); o.gr.setAttribute("opacity", lim(p / .1));
+        o.b.setAttribute("width", Math.max(tw * vs[i] / max, 38)); o.nu.textContent = String(Math.round(vs[i])); }); } };
+  };
+  ficha("corrida", "Corrida (ranking que muda)", "mostrar quem passou quem: barras que trocam de posição, pódio dos 3 primeiros, ou pistas com motos de entrega correndo até a linha de chegada", "só existe um momento no tempo (use barras_comida) ou são mais de 6 itens", { w: 520, h: 420 },
+    [{ nome: "estilo", padrao: "barras | podio | pistas" }, { nome: "dados", padrao: "[{rotulo, de, valor}]: de = valor inicial (opcional, padrão 0), valor = final; podio usa só os 3 maiores valores e mostra a POSIÇÃO (valores em texto)" }, { nome: "max", padrao: 100 }, { nome: "cartao", padrao: true }],
+    "os valores vão de `de` até `valor`; nas barras, quem passa troca de lugar suavemente; nas pistas as motos correm; no pódio os degraus sobem e a estrela cai no 1º", false, 2.8);
+
+  Object.assign(EL, { progresso, barras_comida: barrasComida, tabela_viva: tabelaViva, moto, linha_viva: linhaViva, corrida });
 })();

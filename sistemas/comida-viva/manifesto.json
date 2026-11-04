@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.5.0",
+  "versao": "0.6.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -78,7 +78,7 @@
     "layout": 4,
     "computador": 16,
     "dados": 6,
-    "graficos": 3,
+    "graficos": 5,
     "texto": 8,
     "fundos": 6,
     "transicoes": 5
@@ -2316,6 +2316,116 @@
         "param": "p",
         "duracao_s": 2.6,
         "descricao": "as linhas entram, depois se reordenam do maior para o menor; o primeiro lugar ganha destaque (cartões: medalhas; célula: cursor + pop)",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "linha_viva",
+      "nome": "Linha viva",
+      "familia": "graficos",
+      "tipo": "grafico",
+      "serve_para": "evolução no tempo com 3 a 8 pontos: um pin de mapa, uma moto de entrega ou um broto percorre a linha e cada ponto aparece quando é alcançado",
+      "nao_usar_quando": "são menos de 3 pontos (use numero) ou os pontos não seguem uma ordem no tempo",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "estilo",
+          "padrao": "pin | moto | broto"
+        },
+        {
+          "nome": "dados",
+          "padrao": "[{rotulo, valor}] (valores sempre a partir do zero)"
+        },
+        {
+          "nome": "max",
+          "padrao": 100
+        },
+        {
+          "nome": "cor",
+          "padrao": "depende do estilo"
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "a linha se desenha com o viajante na ponta (a moto gira as rodas e acompanha a inclinação; o broto solta folhas e termina em fruto)",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "corrida",
+      "nome": "Corrida (ranking que muda)",
+      "familia": "graficos",
+      "tipo": "grafico",
+      "serve_para": "mostrar quem passou quem: barras que trocam de posição, pódio dos 3 primeiros, ou pistas com motos de entrega correndo até a linha de chegada",
+      "nao_usar_quando": "só existe um momento no tempo (use barras_comida) ou são mais de 6 itens",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "estilo",
+          "padrao": "barras | podio | pistas"
+        },
+        {
+          "nome": "dados",
+          "padrao": "[{rotulo, de, valor}]: de = valor inicial (opcional, padrão 0), valor = final; podio usa só os 3 maiores valores e mostra a POSIÇÃO (valores em texto)"
+        },
+        {
+          "nome": "max",
+          "padrao": 100
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.8,
+        "descricao": "os valores vão de `de` até `valor`; nas barras, quem passa troca de lugar suavemente; nas pistas as motos correm; no pódio os degraus sobem e a estrela cai no 1º",
         "usa_t": false
       }
     },

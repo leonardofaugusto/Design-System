@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<title>Movimento · linha e corrida</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Outfit:wght@700&display=block" rel="stylesheet">
+<style>html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#FF87A0}svg{display:block}text{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase}</style>
+<body>
+<svg id="tela" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+<script src="elementos.js"></script>
+<script src="cozinha.js"></script>
+<script src="layout.js"></script>
+<script src="graficos.js"></script>
+<script>
+// Grade de teste: 3 peças (linhas) × 3 estilos (colunas), todas com os mesmos dados dentro da mesma peça. Dados de exemplo inventados.
+const K=EL, {C,el,clamp}=EL, tela=document.getElementById("tela"), lim=(x)=>clamp(x,0,1), X=[190,540,890];
+el("rect",{width:1080,height:1920,fill:C.rosa},tela);
+const ps=[];
+["pin","moto","broto"].forEach((e,i)=>ps.push(K.linha_viva(tela,{x:X[i],y:600,s:.64,estilo:e})));
+["barras","podio","pistas"].forEach((e,i)=>ps.push(K.corrida(tela,{x:X[i],y:1160,s:.64,estilo:e})));
+window.render=(t)=>{const p=lim(t/3.0);ps.forEach((o)=>o.set(p,t))};
+window.render(0);
+document.fonts.ready.then(()=>{window.render(0);window._pronto=true});
+</script>
+</body>
+</html>
