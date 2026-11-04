@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.3.0",
+  "versao": "0.4.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -77,7 +77,10 @@
     "louca": 3,
     "layout": 4,
     "computador": 16,
-    "dados": 6
+    "dados": 6,
+    "texto": 8,
+    "fundos": 6,
+    "transicoes": 5
   },
   "pecas": [
     {
@@ -2149,6 +2152,793 @@
         "param": "p",
         "duracao_s": 1.6,
         "descricao": "os círculos marcados ganham um check, da esquerda para a direita",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "letras",
+      "nome": "Letra a letra",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "título curto de impacto: cada letra salta de baixo, em sequência",
+      "nao_usar_quando": "o texto passa de ~14 letras (use palavras)",
+      "camada": "frente",
+      "caixa": {
+        "w": 460,
+        "h": 220
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "txt",
+          "padrao": "COMIDA"
+        },
+        {
+          "nome": "fs",
+          "padrao": 160
+        },
+        {
+          "nome": "cor",
+          "padrao": "creme"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.2,
+        "descricao": "as letras saltam de baixo, com leve giro, da esquerda para a direita",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "palavras",
+      "nome": "Palavras que sobem",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "frase de 1 a 3 linhas: cada linha sobe de trás de uma máscara, uma depois da outra",
+      "nao_usar_quando": "é uma palavra só (use letras ou carimbo)",
+      "camada": "frente",
+      "caixa": {
+        "w": 700,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "linhas",
+          "padrao": "[\"do campo\",\"pra mesa\"]"
+        },
+        {
+          "nome": "fs",
+          "padrao": 130
+        },
+        {
+          "nome": "cores",
+          "padrao": "[creme, amarelo]"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.2,
+        "descricao": "cada linha sobe de trás da máscara, com 0,25 de atraso entre elas",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "vazado",
+      "nome": "Contorno que enche",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "palavra-chave grande que 'se completa': o contorno aparece vazio e a cor sobe",
+      "nao_usar_quando": "o fundo é da mesma cor do contorno (some)",
+      "camada": "frente",
+      "caixa": {
+        "w": 700,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "txt",
+          "padrao": "FRESCO"
+        },
+        {
+          "nome": "fs",
+          "padrao": 300
+        },
+        {
+          "nome": "cor",
+          "padrao": "verde"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.4,
+        "descricao": "o preenchimento sobe de baixo para cima dentro do contorno da palavra",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "carimbo",
+      "nome": "Carimbo",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "selo de confirmação ou resultado: APROVADO, NOVO, GRÁTIS; bate na tela e treme",
+      "nao_usar_quando": "o texto é uma frase (cabe uma palavra ou duas)",
+      "camada": "frente",
+      "caixa": {
+        "w": 560,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "txt",
+          "padrao": "APROVADO"
+        },
+        {
+          "nome": "fs",
+          "padrao": 150
+        },
+        {
+          "nome": "cor",
+          "padrao": "cereja"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 0.9,
+        "descricao": "desce de grande, bate em 0,4 do tempo e treme até parar",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "faixa",
+      "nome": "Faixa que rola",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "tira de palavras-chave andando (marquee): ritmo, energia, fundo de apresentação",
+      "nao_usar_quando": "o texto precisa ser lido com calma",
+      "camada": "frente",
+      "caixa": {
+        "w": 1080,
+        "h": 170
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "txt",
+          "padrao": "COMIDA DE VERDADE"
+        },
+        {
+          "nome": "fs",
+          "padrao": 110
+        },
+        {
+          "nome": "cor",
+          "padrao": "creme"
+        },
+        {
+          "nome": "tc",
+          "padrao": "cereja"
+        },
+        {
+          "nome": "vel",
+          "padrao": "220 (negativo anda para o outro lado)"
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "o texto anda sem parar, em volta; vel é px por segundo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "roleta",
+      "nome": "Roleta de palavras",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "trocar uma palavra por outra: lento→gostoso, antes→depois; para na última",
+      "nao_usar_quando": "são mais de 6 palavras",
+      "camada": "frente",
+      "caixa": {
+        "w": 520,
+        "h": 250
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "palavras",
+          "padrao": "[\"lento\",\"caro\",\"chato\",\"gostoso\"]"
+        },
+        {
+          "nome": "fs",
+          "padrao": 190
+        },
+        {
+          "nome": "cor",
+          "padrao": "creme"
+        },
+        {
+          "nome": "tc",
+          "padrao": "cereja"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o visor roda de palavra em palavra, cada uma com um tranco, e para na última",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "riscado",
+      "nome": "Riscado e novo",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "mudança de ideia: 'complicado' riscado e 'simples' entra embaixo; antes→depois, mito→verdade",
+      "nao_usar_quando": "as duas palavras são longas (passam de 12 letras)",
+      "camada": "frente",
+      "caixa": {
+        "w": 720,
+        "h": 360
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "velho",
+          "padrao": "complicado"
+        },
+        {
+          "nome": "novo",
+          "padrao": "simples"
+        },
+        {
+          "nome": "fs",
+          "padrao": 130
+        },
+        {
+          "nome": "risco",
+          "padrao": "amarelo"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.5,
+        "descricao": "a palavra velha aparece, ganha um risco e a nova salta embaixo, maior",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "marca_texto",
+      "nome": "Marca-texto",
+      "familia": "texto",
+      "tipo": "texto",
+      "serve_para": "destacar uma frase dentro do vídeo: a tarja de cor varre o texto como um marca-texto",
+      "nao_usar_quando": "a frase é longa (cabe ~20 letras por linha)",
+      "camada": "frente",
+      "caixa": {
+        "w": 700,
+        "h": 130
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "txt",
+          "padrao": "sem conservante"
+        },
+        {
+          "nome": "fs",
+          "padrao": 110
+        },
+        {
+          "nome": "tc",
+          "padrao": "tinta"
+        },
+        {
+          "nome": "cor",
+          "padrao": "amarelo"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1,
+        "descricao": "a tarja varre da esquerda para a direita e o texto sobe junto",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "xadrez",
+      "nome": "Xadrez (toalha)",
+      "familia": "fundos",
+      "tipo": "padrao",
+      "serve_para": "fundo de cozinha e mesa posta: calmo, afetivo, bom para texto grande por cima",
+      "nao_usar_quando": "a cena já tem muitos objetos pequenos (poluição)",
+      "camada": "fundo",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor base"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "cor do desenho"
+        },
+        {
+          "nome": "tam",
+          "padrao": 120
+        },
+        {
+          "nome": "vel",
+          "padrao": "[30,18]"
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "a toalha desliza na diagonal, devagar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "listras",
+      "nome": "Listras inclinadas",
+      "familia": "fundos",
+      "tipo": "padrao",
+      "serve_para": "fundo de energia e ritmo; o cereja com a versão escura dele aparece como uma textura só",
+      "nao_usar_quando": "o texto por cima é pequeno e fino",
+      "camada": "fundo",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor base"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "cor do desenho"
+        },
+        {
+          "nome": "larg",
+          "padrao": 90
+        },
+        {
+          "nome": "ang",
+          "padrao": -24
+        },
+        {
+          "nome": "vel",
+          "padrao": 40
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "as faixas andam de lado, na direção da inclinação",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "formas",
+      "nome": "Mosaico de Formas",
+      "familia": "fundos",
+      "tipo": "padrao",
+      "serve_para": "fundo da marca: a Forma inclinada repetida; sempre combina",
+      "nao_usar_quando": "nunca (é o fundo padrão quando em dúvida)",
+      "camada": "fundo",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor base"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "cor do desenho"
+        },
+        {
+          "nome": "op",
+          "padrao": 0.16
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "o mosaico desliza devagar na diagonal",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "horta",
+      "nome": "Horta",
+      "familia": "fundos",
+      "tipo": "padrao",
+      "serve_para": "fundo de ingrediente, frescor, 'do campo': brotinhos em fileiras",
+      "nao_usar_quando": "o assunto não tem nada a ver com comida ou plantação",
+      "camada": "fundo",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor base"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "cor do desenho"
+        },
+        {
+          "nome": "op",
+          "padrao": 0.55
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "as fileiras de brotos descem devagar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "raios",
+      "nome": "Raios",
+      "familia": "fundos",
+      "tipo": "padrao",
+      "serve_para": "abertura e destaque: o leque gira atrás de um título ou de um objeto central",
+      "nao_usar_quando": "há uma peça grande que já ocupa o centro e confunde com os raios",
+      "camada": "fundo",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor base"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "cor do desenho"
+        },
+        {
+          "nome": "n",
+          "padrao": 20
+        },
+        {
+          "nome": "vel",
+          "padrao": 5
+        },
+        {
+          "nome": "cx|cy",
+          "padrao": "540|960"
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "o leque gira em graus por segundo (vel)",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "ondas",
+      "nome": "Ondas",
+      "familia": "fundos",
+      "tipo": "padrao",
+      "serve_para": "fundo de líquido, suco, sopa, fluxo; ritmo suave",
+      "nao_usar_quando": "o texto por cima tem linhas finas (as ondas atrapalham)",
+      "camada": "fundo",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor base"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "cor do desenho"
+        },
+        {
+          "nome": "n",
+          "padrao": 14
+        },
+        {
+          "nome": "amp",
+          "padrao": 26
+        },
+        {
+          "nome": "vel",
+          "padrao": 60
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "as faixas ondulam e correm em sentidos alternados",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cortina_forma",
+      "nome": "Cortina de Forma",
+      "familia": "transicoes",
+      "tipo": "transicao",
+      "serve_para": "a transição da marca: a Forma gigante atravessa a tela da esquerda para a direita",
+      "nao_usar_quando": "a cena seguinte tem o mesmo fundo (não dá para ver a troca)",
+      "camada": "frente",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor da cena seguinte"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "acento (opcional)"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 0.7,
+        "descricao": "p=0 limpa; p=0,5 tela coberta (troque a cena); p=1 limpa",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "fatias",
+      "nome": "Fatias",
+      "familia": "transicoes",
+      "tipo": "transicao",
+      "serve_para": "troca rápida e firme: seis faixas entram por lados alternados e saem do outro lado",
+      "nao_usar_quando": "o ritmo da cena é lento e calmo",
+      "camada": "frente",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor da cena seguinte"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "acento (opcional)"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 0.7,
+        "descricao": "p=0 limpa; p=0,5 tela coberta (troque a cena); p=1 limpa",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "cascata",
+      "nome": "Cascata",
+      "familia": "transicoes",
+      "tipo": "transicao",
+      "serve_para": "nove colunas caem em ondas e continuam caindo; boa para mudar de assunto",
+      "nao_usar_quando": "a cena tem texto lido nos últimos 0,3 s",
+      "camada": "frente",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor da cena seguinte"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "acento (opcional)"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 0.7,
+        "descricao": "p=0 limpa; p=0,5 tela coberta (troque a cena); p=1 limpa",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "iris",
+      "nome": "Íris",
+      "familia": "transicoes",
+      "tipo": "transicao",
+      "serve_para": "o assunto vira foco: um círculo fecha e depois abre na cena nova, partindo do centro",
+      "nao_usar_quando": "o centro da cena seguinte está vazio (o círculo mostra o vazio)",
+      "camada": "frente",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor da cena seguinte"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "acento (opcional)"
+        },
+        {
+          "nome": "cx|cy",
+          "padrao": "540|960"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 0.7,
+        "descricao": "p=0 limpa; p=0,5 tela coberta (troque a cena); p=1 limpa",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "onda",
+      "nome": "Onda (maré)",
+      "familia": "transicoes",
+      "tipo": "transicao",
+      "serve_para": "troca suave e líquida: uma maré sobe, cobre e continua subindo; combina com suco, sopa e fluxo",
+      "nao_usar_quando": "o clima é seco, técnico ou sério",
+      "camada": "frente",
+      "caixa": {
+        "w": 1080,
+        "h": 1920
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cor da cena seguinte"
+        },
+        {
+          "nome": "cor2",
+          "padrao": "acento (opcional)"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 0.7,
+        "descricao": "p=0 limpa; p=0,5 tela coberta (troque a cena); p=1 limpa",
         "usa_t": false
       }
     }
