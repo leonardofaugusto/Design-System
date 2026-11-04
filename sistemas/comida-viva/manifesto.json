@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.4.0",
+  "versao": "0.5.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -78,6 +78,7 @@
     "layout": 4,
     "computador": 16,
     "dados": 6,
+    "graficos": 3,
     "texto": 8,
     "fundos": 6,
     "transicoes": 5
@@ -2152,6 +2153,169 @@
         "param": "p",
         "duracao_s": 1.6,
         "descricao": "os círculos marcados ganham um check, da esquerda para a direita",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "progresso",
+      "nome": "Progresso (um valor)",
+      "familia": "graficos",
+      "tipo": "grafico",
+      "serve_para": "mostrar UM valor de 0 a 100%: pote que enche, bag térmica com marcador, ou marmita se preenchendo",
+      "nao_usar_quando": "são vários valores para comparar (use barras_comida)",
+      "camada": "meio",
+      "caixa": {
+        "w": 320,
+        "h": 540
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "estilo",
+          "padrao": "pote | bag | marmita"
+        },
+        {
+          "nome": "valor",
+          "padrao": 0.72
+        },
+        {
+          "nome": "rotulo",
+          "padrao": ""
+        },
+        {
+          "nome": "cor",
+          "padrao": "depende do estilo"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "o nível sobe até o valor e o percentual conta junto (pote: onda e bolhas, que usam t)",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "barras_comida",
+      "nome": "Barras de comida",
+      "familia": "graficos",
+      "tipo": "grafico",
+      "serve_para": "comparar 2 a 7 valores: pilhas de frutas, pilhas de marmitas, ou réguas com um ícone que corre",
+      "nao_usar_quando": "são mais de 7 itens ou os valores precisam de precisão fina (use tabela_viva)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "estilo",
+          "padrao": "frutas | marmitas | reguas"
+        },
+        {
+          "nome": "dados",
+          "padrao": "[{rotulo, valor}] (valores sempre a partir do zero)"
+        },
+        {
+          "nome": "max",
+          "padrao": 100
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "frutas/marmitas caem e empilham, barra após barra; as réguas enchem com o ícone correndo na ponta; o número aparece no fim",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "tabela_viva",
+      "nome": "Tabela viva",
+      "familia": "graficos",
+      "tipo": "grafico",
+      "serve_para": "dados em linhas que mudam de ordem: ranking. As linhas deslizam, viram cartões com medalha, ou o cursor escolhe uma célula-herói",
+      "nao_usar_quando": "são mais de 6 linhas ou 4 colunas (não cabe legível)",
+      "camada": "meio",
+      "caixa": {
+        "w": 560,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "estilo",
+          "padrao": "deslizar | cartoes | celula"
+        },
+        {
+          "nome": "colunas",
+          "padrao": "lista de títulos"
+        },
+        {
+          "nome": "linhas",
+          "padrao": "matriz de textos"
+        },
+        {
+          "nome": "col",
+          "padrao": "índice da coluna numérica (ordena do maior para o menor)"
+        },
+        {
+          "nome": "heroLinha",
+          "padrao": "linha da célula-herói (celula)"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "as linhas entram, depois se reordenam do maior para o menor; o primeiro lugar ganha destaque (cartões: medalhas; célula: cursor + pop)",
         "usa_t": false
       }
     },
