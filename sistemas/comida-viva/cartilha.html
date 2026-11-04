@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <meta charset="utf-8">
-<title>Cartilha visual · v1</title>
+<title>Cartilha visual · v2</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800;900&family=Outfit:wght@400;600;800&display=block" rel="stylesheet">
 <style>
 :root{--cereja:#E50145;--rosa:#FF87A0;--laranja:#F15A22;--areia:#F5D69E;--amarelo:#EFD600;--creme:#FFF9E9;--verde:#0C893E;--menta:#63E578;--roxo:#962E9D;--lilas:#FAC7FF;--tinta:#2A0B2E;
@@ -47,7 +47,7 @@ h2 em{font-style:normal;opacity:.6}
 
 <!-- 0 · CAPA -->
 <div class="banda" style="background:var(--cereja);color:var(--creme)">
-  <span class="eyebrow">Cartilha visual · v1 · cor, forma e movimento</span>
+  <span class="eyebrow">Cartilha visual · v2 · cor, forma, cozinha e movimento</span>
   <h1>Comida<em>viva</em></h1>
   <p class="lede">Cores fortes, formas inclinadas e objetos com volume. Tudo é peça fixa: o mesmo desenho, sempre. O que muda é o movimento.</p>
   <div class="mosaico" id="paleta"></div>
@@ -76,9 +76,23 @@ h2 em{font-style:normal;opacity:.6}
   <p class="nota">Ação de 2,0 s: a tampa levanta e cresce, desliza para o lado girando e some; a comida dá um pulinho e o vapor sobe em loop.</p>
 </div>
 
-<!-- 4 · CONTROLES -->
+<!-- 4 · COZINHA · OBJETOS -->
+<div class="banda" style="background:var(--rosa)">
+  <span class="eyebrow" style="color:var(--cereja)">04 · Cozinha · objetos</span>
+  <h2 style="color:var(--cereja)">Talheres, utensílios <em>e ingredientes</em></h2>
+  <div class="grade g4" style="margin-top:34px" id="cozinha"></div>
+</div>
+
+<!-- 5 · COZINHA · AÇÕES -->
+<div class="banda" style="background:var(--cereja);color:var(--creme)">
+  <span class="eyebrow" style="color:var(--cereja)">05 · Cozinha · ações</span>
+  <h2>Serve, corta, mexe, tempera, monta</h2>
+  <div id="acoes"></div>
+</div>
+
+<!-- 6 · CONTROLES -->
 <div class="banda" style="background:var(--roxo);color:var(--creme)">
-  <span class="eyebrow" style="color:var(--roxo)">04 · Controles</span>
+  <span class="eyebrow" style="color:var(--roxo)">06 · Controles</span>
   <h2>Botões, cupom e chaves</h2>
   <div class="grade g3" style="margin-top:30px">
     <div style="background:var(--cereja);border-radius:26px;padding:34px"><p class="nome">Botão sobre cereja</p><div class="fila"><span class="btn">Baixe o app</span><span class="btn fantasma">Depois</span></div></div>
@@ -92,7 +106,7 @@ h2 em{font-style:normal;opacity:.6}
 
 <!-- 5 · DADOS -->
 <div class="banda" style="background:var(--laranja)">
-  <span class="eyebrow" style="color:var(--laranja)">05 · Dados</span>
+  <span class="eyebrow" style="color:var(--laranja)">07 · Dados</span>
   <h2 style="color:var(--creme)">Gráficos em cores fortes</h2>
   <div class="grade g4" style="margin-top:30px">
     <div class="cartao"><p class="nome">Barras</p><svg viewBox="0 0 300 220" id="gbar" style="width:100%"></svg></div>
@@ -104,7 +118,7 @@ h2 em{font-style:normal;opacity:.6}
 
 <!-- 6 · FORMAÇÕES -->
 <div class="banda" style="background:var(--rosa)">
-  <span class="eyebrow" style="color:var(--cereja)">06 · Formações</span>
+  <span class="eyebrow" style="color:var(--cereja)">08 · Formações</span>
   <h2 style="color:var(--cereja)">Peças juntas em tela vertical</h2>
   <div class="grade g4" style="margin-top:34px">
     <div class="quadro" id="q1" style="background:var(--cereja)"></div>
@@ -115,6 +129,7 @@ h2 em{font-style:normal;opacity:.6}
 </div>
 
 <script src="elementos.js"></script>
+<script src="cozinha.js"></script>
 <script>
 const {C,el,forma,pote,marmita,laranja,abacate,cereja,uva}=EL;
 const $=(id)=>document.getElementById(id);
@@ -171,6 +186,24 @@ $("gbar").innerHTML=`<line x1="10" y1="200" x2="290" y2="200" stroke="#2A0B2E" s
  const s4=el("svg",{viewBox:"0 0 270 480"},q4);forma(s4,C.amarelo,{x:-8,y:150,s:1.18,sombra:"rgba(42,11,46,.22)"});uva(s4,{x:130,y:250,s:1.05});
  const cp=div(q4,"cupom","position:absolute;left:50%;bottom:34px;transform:translateX(-50%);font-size:30px");cp.innerHTML="<span>#CAFE10</span>";
 })();
+
+// ---- cozinha: objetos
+const K=EL;
+const cozObj=[["Garfo",K.garfo,.85,28,0,0],["Faca",K.faca,.85,-24,0,0],["Colher",K.colher,.85,24,0,0],["Colher de pau",K.colherPau,.85,-26,0,0],
+ ["Concha",K.concha,.9,-28,-30,10],["Tábua",K.tabua,.9,0,0,-10],["Prato",K.prato,1.0,0,0,0],["Panela",K.panela,.85,0,-20,10],
+ ["Tigela",K.tigela,1.0,0,0,24],["Garrafa de azeite",K.azeite,.9,20,0,0],["Tomate",K.tomate,2.0,0,0,0],["Cenoura",K.cenoura,1.7,-28,0,0],
+ ["Brócolis",K.brocolis,2.0,0,0,0],["Banana",K.banana,1.8,-10,0,0],["Ovo",K.ovo,2.4,0,0,0],["Limão",K.limao,2.0,0,0,0]];
+const fundos=[[C.amarelo,C.cereja],[C.verde,C.amarelo],[C.lilas,C.roxo],[C.laranja,C.areia],[C.cereja,C.rosa],[C.roxo,C.lilas],[C.amarelo,C.verde],[C.menta,C.verde]];
+cozObj.forEach(([nome,fn,sc,rot,dx,dy],i)=>{const [bg,fm]=fundos[i%fundos.length];const t=div($("cozinha"),"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});
+  fn(sv,{x:200+dx,y:200+dy,s:sc,rot});const r=div(t,"rot");r.textContent=nome;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#2A0B2E"});
+
+// ---- cozinha: ações em quadros-chave
+const acoes=[["Serve","servir",[0,.2,.4,.7,1],2.4,200,215,1.0,[C.amarelo,C.cereja]],["Corta","cortar",[0,.2,.4,.7,1],2.6,200,290,1.15,[C.lilas,C.roxo]],
+ ["Mexe","mexer",[.1,.1,.1,.1,.1],3.0,190,215,.85,[C.laranja,C.amarelo]],["Tempera","temperar",[0,.3,.5,.7,1],2.6,170,230,.82,[C.verde,C.amarelo]],["Monta","montar",[0,.25,.5,.75,1],2.8,200,260,1.0,[C.amarelo,C.verde]]];
+acoes.forEach(([nome,id,ps,dur,ax,ay,sc,[bg,fm]])=>{const h=document.createElement("p");h.className="nome";h.style.cssText="margin:30px 0 12px";h.textContent=nome+" · "+dur+" s";$("acoes").appendChild(h);
+  const row=document.createElement("div");row.className="grade g5";$("acoes").appendChild(row);
+  ps.forEach((p,k)=>{const t=div(row,"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});const o=K[id](sv,{x:ax,y:ay,s:sc});o.set(p,id==="mexer"?k*.4:p*dur);
+    const r=div(t,"rot");r.textContent=id==="mexer"?"t = "+(k*.4).toFixed(1):"p = "+p;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#2A0B2E"});});
 document.fonts.ready.then(()=>{window._pronto=true});
 </script>
 </body>

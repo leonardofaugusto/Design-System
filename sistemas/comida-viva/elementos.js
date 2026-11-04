@@ -12,6 +12,9 @@
   const el = (tipo, attrs, pai) => { const e = document.createElementNS(NS, tipo); for (const k in attrs) e.setAttribute(k, attrs[k]); if (pai) pai.appendChild(e); return e; };
   const rnd = (i) => { const x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); };
   let uid = 0;
+  // catálogo: cada peça se registra com a sua ficha (o manifesto.json é gerado daqui, nunca escrito à mão)
+  const catalogo = [];
+  const reg = (m) => { catalogo.push(m); return m; };
   const SOMBRA = { fill: C.tinta, "fill-opacity": .24 };   // sombra dura: a silhueta deslocada, sem blur
   const grupo = (pai, x, y, s) => el("g", { transform: `translate(${x} ${y}) scale(${s})` }, pai);
 
@@ -159,5 +162,18 @@
     return g;
   }
 
-  window.EL = { C, el, clamp, ease, back, forma, pote, marmita, laranja, abacate, cereja, uva };
+  const P3 = [{ nome: "x", padrao: 0 }, { nome: "y", padrao: 0 }, { nome: "s", padrao: 1 }];
+  const FICHAS = [
+    ["forma", "Forma-assinatura", "forma", "objeto", "abrigar um objeto, um número ou um título; é a assinatura visual", "a tela já tem outra forma em destaque total; nunca use duas formas gigantes ao mesmo tempo", "fundo", { w: 240, h: 240 }, [{ nome: "cor", padrao: "cereja" }, { nome: "sombra", padrao: null }, ...P3], null],
+    ["pote", "Pote de vitamina", "cozinha", "acao", "mostrar algo enchendo: vitamina, progresso, quantidade; é o gráfico-assinatura", "o assunto não é líquido nem enchimento", "meio", { w: 200, h: 300 }, P3, { param: "p", duracao_s: 2.4, descricao: "o nível sobe, a onda se mexe e três frutas caem fazendo marola" }],
+    ["marmita", "Marmita", "cozinha", "acao", "revelar o prato pronto: a tampa levanta, desliza e some; sai vapor", "o assunto não é comida pronta", "meio", { w: 320, h: 220 }, [...P3, { nome: "cor", padrao: "cereja" }], { param: "p", duracao_s: 2.0, descricao: "a tampa levanta e cresce, desliza girando e some; a comida pula e o vapor sobe" }],
+    ["laranja", "Laranja", "ingrediente", "objeto", "enfeite de fruta; vitamina C, frescor", "fundo laranja ou cereja sem forma contrastante", "meio", { w: 150, h: 150 }, P3, null],
+    ["abacate", "Abacate", "ingrediente", "objeto", "enfeite de fruta; gordura boa, cremosidade", "fundo verde sem forma contrastante", "meio", { w: 130, h: 180 }, P3, null],
+    ["cereja", "Cereja", "ingrediente", "objeto", "enfeite de fruta; doce, sobremesa, a cor da marca", "fundo cereja ou rosa sem forma contrastante", "meio", { w: 180, h: 200 }, P3, null],
+    ["uva", "Uva", "ingrediente", "objeto", "enfeite de fruta; roxo, sobremesa, suco", "fundo roxo sem forma contrastante", "meio", { w: 180, h: 220 }, P3, null],
+  ];
+  FICHAS.forEach(([id, nome, familia, tipo, serve_para, nao_usar_quando, camada, caixa, parametros, movimento]) =>
+    reg({ id, nome, familia, tipo, serve_para, nao_usar_quando, camada, caixa, parametros, movimento }));
+
+  window.EL = { C, el, clamp, ease, back, grupo, SOMBRA, rnd, reg, catalogo, forma, pote, marmita, laranja, abacate, cereja, uva };
 })();

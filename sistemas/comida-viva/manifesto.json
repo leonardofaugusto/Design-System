@@ -1,0 +1,984 @@
+{
+  "sistema": "comida-viva",
+  "versao": "0.2.0",
+  "estado": "rascunho",
+  "gerado_de": [
+    "elementos.js",
+    "cozinha.js"
+  ],
+  "aviso": "GERADO pelas fichas das peças (tools/manifesto.py). Não edite à mão: mude a ficha na peça e gere de novo.",
+  "camadas": [
+    "fundo",
+    "meio",
+    "frente"
+  ],
+  "tela": {
+    "ig": [
+      1080,
+      1920
+    ],
+    "yt": [
+      1920,
+      1080
+    ],
+    "quadrado": [
+      1080,
+      1080
+    ],
+    "zona_segura": {
+      "topo": null,
+      "base": null,
+      "lados": null,
+      "nota": "a medir num celular"
+    }
+  },
+  "tokens": {
+    "cores": {
+      "cereja": "#E50145",
+      "rosa": "#FF87A0",
+      "laranja": "#F15A22",
+      "areia": "#F5D69E",
+      "amarelo": "#EFD600",
+      "creme": "#FFF9E9",
+      "verde": "#0C893E",
+      "menta": "#63E578",
+      "roxo": "#962E9D",
+      "lilas": "#FAC7FF",
+      "tinta": "#2A0B2E"
+    },
+    "fontes": {
+      "display": "Barlow Condensed (provisória; alvo: Amsi Pro Condensed)",
+      "texto": "Outfit"
+    }
+  },
+  "regras": [
+    "A peça é fixa: o modelo só escolhe qual, onde e quando; nunca redesenha.",
+    "Sem contorno preto: formas chapadas, luz e sombra dura deslocada.",
+    "Sem filter:blur em movimento.",
+    "A cena é função do tempo: render(t).",
+    "Cada peça vale pela sua ficha: use 'serve_para' e respeite 'nao_usar_quando'."
+  ],
+  "familias": {
+    "forma": 1,
+    "cozinha": 7,
+    "ingrediente": 10,
+    "talher": 3,
+    "utensilio": 4,
+    "louca": 3
+  },
+  "pecas": [
+    {
+      "id": "forma",
+      "nome": "Forma-assinatura",
+      "familia": "forma",
+      "tipo": "objeto",
+      "serve_para": "abrigar um objeto, um número ou um título; é a assinatura visual",
+      "nao_usar_quando": "a tela já tem outra forma em destaque total; nunca use duas formas gigantes ao mesmo tempo",
+      "camada": "fundo",
+      "caixa": {
+        "w": 240,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "cor",
+          "padrao": "cereja"
+        },
+        {
+          "nome": "sombra",
+          "padrao": null
+        },
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "pote",
+      "nome": "Pote de vitamina",
+      "familia": "cozinha",
+      "tipo": "acao",
+      "serve_para": "mostrar algo enchendo: vitamina, progresso, quantidade; é o gráfico-assinatura",
+      "nao_usar_quando": "o assunto não é líquido nem enchimento",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "o nível sobe, a onda se mexe e três frutas caem fazendo marola"
+      }
+    },
+    {
+      "id": "marmita",
+      "nome": "Marmita",
+      "familia": "cozinha",
+      "tipo": "acao",
+      "serve_para": "revelar o prato pronto: a tampa levanta, desliza e some; sai vapor",
+      "nao_usar_quando": "o assunto não é comida pronta",
+      "camada": "meio",
+      "caixa": {
+        "w": 320,
+        "h": 220
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "cor",
+          "padrao": "cereja"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "a tampa levanta e cresce, desliza girando e some; a comida pula e o vapor sobe"
+      }
+    },
+    {
+      "id": "laranja",
+      "nome": "Laranja",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "enfeite de fruta; vitamina C, frescor",
+      "nao_usar_quando": "fundo laranja ou cereja sem forma contrastante",
+      "camada": "meio",
+      "caixa": {
+        "w": 150,
+        "h": 150
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "abacate",
+      "nome": "Abacate",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "enfeite de fruta; gordura boa, cremosidade",
+      "nao_usar_quando": "fundo verde sem forma contrastante",
+      "camada": "meio",
+      "caixa": {
+        "w": 130,
+        "h": 180
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "cereja",
+      "nome": "Cereja",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "enfeite de fruta; doce, sobremesa, a cor da marca",
+      "nao_usar_quando": "fundo cereja ou rosa sem forma contrastante",
+      "camada": "meio",
+      "caixa": {
+        "w": 180,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "uva",
+      "nome": "Uva",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "enfeite de fruta; roxo, sobremesa, suco",
+      "nao_usar_quando": "fundo roxo sem forma contrastante",
+      "camada": "meio",
+      "caixa": {
+        "w": 180,
+        "h": 220
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "garfo",
+      "nome": "Garfo",
+      "familia": "talher",
+      "tipo": "objeto",
+      "serve_para": "talher, refeição, 'à mesa'; combine com faca e colher",
+      "nao_usar_quando": "o assunto não é comer; evite em cenas só de gráfico",
+      "camada": "meio",
+      "caixa": {
+        "w": 72,
+        "h": 316
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "faca",
+      "nome": "Faca",
+      "familia": "talher",
+      "tipo": "objeto",
+      "serve_para": "cortar, preparar; é a ferramenta da ação 'corta'",
+      "nao_usar_quando": "o assunto não envolve preparo",
+      "camada": "meio",
+      "caixa": {
+        "w": 48,
+        "h": 316
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "colher",
+      "nome": "Colher",
+      "familia": "talher",
+      "tipo": "objeto",
+      "serve_para": "sobremesa, sopa, 'provar'",
+      "nao_usar_quando": "o assunto não é comer",
+      "camada": "meio",
+      "caixa": {
+        "w": 68,
+        "h": 316
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "colher-de-pau",
+      "nome": "Colher de pau",
+      "familia": "utensilio",
+      "tipo": "objeto",
+      "serve_para": "cozinhar, 'feito em casa'; é a ferramenta da ação 'mexe'",
+      "nao_usar_quando": "o assunto é industrial ou rápido demais",
+      "camada": "meio",
+      "caixa": {
+        "w": 60,
+        "h": 316
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "concha",
+      "nome": "Concha",
+      "familia": "utensilio",
+      "tipo": "objeto",
+      "serve_para": "servir sopa e caldo; é a ferramenta da ação 'serve'",
+      "nao_usar_quando": "o assunto não é servir",
+      "camada": "meio",
+      "caixa": {
+        "w": 260,
+        "h": 110
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "tabua",
+      "nome": "Tábua de corte",
+      "familia": "utensilio",
+      "tipo": "objeto",
+      "serve_para": "base para cortar; sempre sob o ingrediente",
+      "nao_usar_quando": "o assunto não é preparo",
+      "camada": "meio",
+      "caixa": {
+        "w": 352,
+        "h": 42
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "prato",
+      "nome": "Prato",
+      "familia": "louca",
+      "tipo": "objeto",
+      "serve_para": "base para servir; visto de cima",
+      "nao_usar_quando": "o assunto é líquido que não precisa de base",
+      "camada": "meio",
+      "caixa": {
+        "w": 260,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "panela",
+      "nome": "Panela",
+      "familia": "louca",
+      "tipo": "objeto",
+      "serve_para": "cozinhar; vista de cima, com alças dos lados",
+      "nao_usar_quando": "o assunto não é cozinhar",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "tigela",
+      "nome": "Tigela",
+      "familia": "louca",
+      "tipo": "objeto",
+      "serve_para": "montar e misturar; vista em 3/4 com a borda aberta",
+      "nao_usar_quando": "o assunto é prato raso",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "garrafa-azeite",
+      "nome": "Garrafa de azeite",
+      "familia": "utensilio",
+      "tipo": "objeto",
+      "serve_para": "temperar; a ação 'tempera' inclina e faz o fio escorrer",
+      "nao_usar_quando": "o assunto não é tempero",
+      "camada": "meio",
+      "caixa": {
+        "w": 68,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "tomate",
+      "nome": "Tomate",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "ingrediente: salada, molho, frescor",
+      "nao_usar_quando": "o assunto é doce",
+      "camada": "meio",
+      "caixa": {
+        "w": 100,
+        "h": 100
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "cenoura",
+      "nome": "Cenoura",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "ingrediente: legume, vitamina A, colheita",
+      "nao_usar_quando": "o assunto é doce ou fruta",
+      "camada": "meio",
+      "caixa": {
+        "w": 70,
+        "h": 150
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "brocolis",
+      "nome": "Brócolis",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "ingrediente: verde, saudável, 'come bem'",
+      "nao_usar_quando": "o assunto é doce",
+      "camada": "meio",
+      "caixa": {
+        "w": 110,
+        "h": 110
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "banana",
+      "nome": "Banana",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "ingrediente: fruta, energia, café da manhã",
+      "nao_usar_quando": "fundo amarelo sem forma contrastante",
+      "camada": "meio",
+      "caixa": {
+        "w": 140,
+        "h": 90
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "ovo",
+      "nome": "Ovo",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "ingrediente: proteína, café da manhã",
+      "nao_usar_quando": "fundo creme sem forma contrastante",
+      "camada": "meio",
+      "caixa": {
+        "w": 70,
+        "h": 90
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "limao",
+      "nome": "Limão",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "ingrediente: azedo, tempero, refresco",
+      "nao_usar_quando": "fundo amarelo sem forma contrastante",
+      "camada": "meio",
+      "caixa": {
+        "w": 120,
+        "h": 90
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "servir",
+      "nome": "Serve a sopa",
+      "familia": "cozinha",
+      "tipo": "acao",
+      "serve_para": "mostrar o prato sendo servido: sopa, caldo, comida quente",
+      "nao_usar_quando": "o assunto é comida fria ou seca",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "a concha desce e inclina, um fio de sopa cai e o disco de sopa se espalha pelo prato; no fim, sai vapor",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cortar",
+      "nome": "Corta o tomate",
+      "familia": "cozinha",
+      "tipo": "acao",
+      "serve_para": "mostrar preparo: corte, 'fresquinho', ingredientes",
+      "nao_usar_quando": "o assunto é comida pronta sem preparo",
+      "camada": "meio",
+      "caixa": {
+        "w": 352,
+        "h": 190
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "a faca desce e sobe quatro vezes, da esquerda para a direita; a cada corte as fatias se afastam e giram um pouco",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "mexer",
+      "nome": "Mexe a panela",
+      "familia": "cozinha",
+      "tipo": "acao",
+      "serve_para": "mostrar cozinha em andamento: 'feito na hora', sopa, molho",
+      "nao_usar_quando": "o assunto é comida fria",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "a colher gira dentro da sopa, a espiral gira junto e bolhas estouram; p controla o calor (vapor e bolhas); loop em t",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "temperar",
+      "nome": "Tempera com azeite",
+      "familia": "cozinha",
+      "tipo": "acao",
+      "serve_para": "mostrar tempero: azeite, ervas, finalização",
+      "nao_usar_quando": "o assunto não é comida",
+      "camada": "meio",
+      "caixa": {
+        "w": 320,
+        "h": 320
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "a garrafa inclina, um fio de azeite escorre e forma uma poça brilhante; ervas caem depois e ficam sobre o prato",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "montar",
+      "nome": "Monta a tigela",
+      "familia": "cozinha",
+      "tipo": "acao",
+      "serve_para": "mostrar combinação: bowl, 'monte o seu', ingredientes juntos",
+      "nao_usar_quando": "o assunto é um ingrediente só",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.8,
+        "descricao": "quatro ingredientes entram em arco, um após o outro, e a tigela dá uma achatadinha a cada pouso",
+        "usa_t": true
+      }
+    }
+  ]
+}

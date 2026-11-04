@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<title>Movimento · cozinha</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&display=block" rel="stylesheet">
+<style>html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#FFD400}svg{display:block}text{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase}</style>
+<body>
+<svg id="tela" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+<script src="elementos.js"></script>
+<script src="cozinha.js"></script>
+<script>
+// Cinco ações da cozinha em sequência (2,8 s cada; 14 s no total). Tudo é função do tempo: window.render(t).
+const {C,el,clamp,ease,back,forma}=EL;
+const tela=document.getElementById("tela"), lim=(x)=>clamp(x,0,1), T=2.8, CT=1150;
+const cena=[
+ {id:"servir",  bg:C.amarelo,fm:C.cereja,a:"Serve",b:"a sopa",   ca:C.cereja,cb:C.roxo,  s:2.6,x:540,y:1200,dur:1.9},
+ {id:"cortar",  bg:C.lilas,  fm:C.roxo,  a:"Corta",b:"o tomate", ca:C.cereja,cb:C.roxo,  s:2.4,x:540,y:1330,dur:1.9},
+ {id:"mexer",   bg:C.laranja,fm:C.amarelo,a:"Mexe",b:"a panela", ca:C.creme, cb:C.amarelo,s:2.4,x:540,y:1180,dur:1.2},
+ {id:"temperar",bg:C.verde,  fm:C.amarelo,a:"Tempera",b:"com azeite",ca:C.creme,cb:C.amarelo,s:2.2,x:500,y:1210,dur:1.9},
+ {id:"montar",  bg:C.cereja, fm:C.amarelo,a:"Monta",b:"a tigela",ca:C.creme, cb:C.rosa,  s:2.6,x:540,y:1230,dur:1.9},
+];
+const bg=el("rect",{width:1080,height:1920,fill:cena[0].bg},tela);
+cena.forEach((c)=>{
+  c.g=el("g",{},tela);
+  c.f=el("g",{},c.g); forma(c.f,c.fm,{x:0,y:0,s:4.4,sombra:"rgba(42,11,46,.25)"});
+  c.t1=el("text",{x:70,y:250,"font-size":200,fill:c.ca},c.g); c.t1.textContent=c.a;
+  c.t2=el("text",{x:70,y:430,"font-size":170,fill:c.cb},c.g); c.t2.textContent=c.b;
+  c.o=el("g",{},c.g); c.obj=EL[c.id](c.o,{x:0,y:0,s:c.s});
+});
+// cortinas: a forma gigante, na cor da próxima cena, varre a tela no fim de cada cena
+const cort=cena.slice(1).map((c)=>{const g=el("g",{},tela);forma(g,c.bg,{x:0,y:0,s:14});return g});
+const pop=(g,x,y,u,at)=>{const p=back(lim((u-at)/.45));g.setAttribute("opacity",lim((u-at)/.2));g.setAttribute("transform",`translate(${x} ${y}) scale(${.55+.45*p}) translate(${-x} ${-y})`)};
+
+window.render=(t)=>{
+  const i=Math.min(cena.length-1,Math.floor(t/T)), u=t-i*T, c=cena[i];
+  bg.setAttribute("fill",c.bg);
+  cena.forEach((q,k)=>q.g.setAttribute("opacity",k===i?1:0));
+  const eF=back(lim(u/.55));
+  c.f.setAttribute("transform",`translate(540 ${CT}) rotate(${(1-eF)*-8}) scale(${.5+.5*eF}) translate(-540 ${-CT}) translate(${540-120*4.4} ${CT-144*4.4})`);
+  pop(c.t1,70,250,u,.12); pop(c.t2,70,430,u,.3);
+  const queda=1-back(lim((u-.3)/.6));
+  c.o.setAttribute("transform",`translate(${c.x} ${c.y-queda*520})`);
+  c.o.setAttribute("opacity",lim((u-.3)/.15));
+  c.obj.set(c.id==="mexer"?lim((u-.4)/.8):lim((u-.55)/c.dur), c.id==="mexer"?u+i:u);
+  cort.forEach((g,k)=>{
+    const ativa=(k===i&&i<cena.length-1&&u>T-.6);
+    g.setAttribute("opacity",ativa?1:0);
+    if(ativa){const e=ease(lim((u-(T-.6))/.55));g.setAttribute("transform",`translate(${-1500+(540+1500)*e-120*14} ${960-144*14})`)}
+  });
+};
+window.render(0);
+document.fonts.ready.then(()=>{window._pronto=true});
+</script>
+</body>
+</html>
