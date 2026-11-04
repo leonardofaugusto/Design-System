@@ -1,8 +1,8 @@
 {
   "sistemas": [
     {
-      "id": "reels",
-      "caminho": "sistemas/reels",
+      "id": "comida-viva",
+      "caminho": "sistemas/comida-viva",
       "versao_vigente": null,
       "estado": "rascunho"
     }

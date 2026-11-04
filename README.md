@@ -27,6 +27,6 @@ sistemas/<nome>/     um sistema por pasta
 
 | Sistema | Estado | Para quê |
 |---|---|---|
-| `reels` | rascunho | reels com apresentador no centro, fundo animado e legenda por palavra |
+| `comida-viva` | rascunho (nome provisório) | o universo da comida de verdade: Forma inclinada, objetos ilustrados e movimento. Base dos reels |
 
 Proposta de origem: `docs/propostas/reels-cinema-e-kit.md`, no repositório da Vila.

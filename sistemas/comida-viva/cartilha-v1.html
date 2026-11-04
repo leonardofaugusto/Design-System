@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<title>Cartilha visual · v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800;900&family=Outfit:wght@400;600;800&display=block" rel="stylesheet">
+<style>
+:root{--cereja:#E50145;--rosa:#FF87A0;--laranja:#F15A22;--areia:#F5D69E;--amarelo:#EFD600;--creme:#FFF9E9;--verde:#0C893E;--menta:#63E578;--roxo:#962E9D;--lilas:#FAC7FF;--tinta:#2A0B2E;
+ --display:"Barlow Condensed","Arial Narrow",sans-serif;--texto:"Outfit","Segoe UI",sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{width:1800px;font:400 21px/1.35 var(--texto);color:var(--tinta);background:var(--cereja)}
+.banda{padding:64px 72px 70px;position:relative}
+.eyebrow{display:inline-block;font:800 18px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;background:var(--creme);color:var(--cereja);border-radius:8px;padding:9px 13px 7px;box-shadow:4px 4px 0 var(--tinta)}
+h1{font:900 200px/.84 var(--display);text-transform:uppercase;margin:22px 0 0;color:var(--creme)}
+h1 em{font-style:normal;color:var(--rosa);display:block}
+h2{font:900 86px/.9 var(--display);text-transform:uppercase;margin:16px 0 8px}
+h2 em{font-style:normal;opacity:.6}
+.lede{max-width:880px;font-size:26px;margin:18px 0 0}
+.nome{font:800 21px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px}
+.nota{font-size:17px;opacity:.85;margin-top:10px}
+.grade{display:grid;gap:30px}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}.g6{grid-template-columns:repeat(6,1fr)}
+.tile{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:1}
+.tile svg{position:absolute;inset:0;width:100%;height:100%}
+.tile .rot{position:absolute;left:18px;bottom:14px;font:800 20px/1 var(--display);letter-spacing:.12em;text-transform:uppercase}
+.cartao{background:var(--creme);border-radius:28px;padding:26px 28px 28px;box-shadow:0 14px 32px rgba(42,11,46,.22);color:var(--tinta)}
+.mosaico{display:grid;grid-template-columns:repeat(10,1fr);margin-top:44px;border-radius:22px;overflow:hidden}
+.mosaico div{height:150px;padding:12px 12px;font:800 17px/1.1 var(--display);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:flex-end}
+/* controles */
+.btn{display:inline-block;font:900 36px/1 var(--display);letter-spacing:.03em;text-transform:uppercase;padding:15px 26px 12px;border-radius:10px;position:relative;background:var(--creme);color:var(--cereja);box-shadow:5px 5px 0 -1px var(--creme),5px 5px 0 1.5px var(--cereja)}
+.btn.sobre-claro{background:var(--cereja);color:var(--creme);box-shadow:5px 5px 0 -1px var(--cereja),5px 5px 0 1.5px var(--tinta)}
+.btn.verde{background:var(--creme);color:var(--verde);box-shadow:5px 5px 0 -1px var(--creme),5px 5px 0 1.5px var(--verde)}
+.btn.fantasma{background:transparent;color:inherit;box-shadow:none;border:3px dashed currentColor}
+.cupom{display:inline-block;background:var(--cereja);color:var(--creme);font:900 34px/1 var(--display);letter-spacing:.06em;padding:18px 40px 15px;
+ -webkit-mask:radial-gradient(circle 11px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.cupom span{display:block;border:2.5px dashed var(--creme);border-radius:8px;padding:8px 22px 6px}
+.chip{display:inline-block;font:800 21px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:10px 16px 8px;border-radius:999px}
+.tog{width:96px;height:50px;border-radius:999px;position:relative;display:inline-block;background:var(--menta)}
+.tog::after{content:"";position:absolute;right:5px;top:5px;width:40px;height:40px;border-radius:50%;background:var(--creme)}
+.tog.off{background:rgba(255,255,255,.45)}.tog.off::after{right:auto;left:5px}
+.fila{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.numero{font:900 150px/.85 var(--display);color:var(--cereja)}.numero small{font-size:62px;margin-left:6px}
+.quadro{position:relative;width:100%;aspect-ratio:9/16;border-radius:24px;overflow:hidden;box-shadow:0 14px 32px rgba(42,11,46,.28)}
+.quadro .tt{position:absolute;left:28px;top:32px;right:28px;font:900 66px/.88 var(--display);text-transform:uppercase}
+.quadro svg{position:absolute;inset:0;width:100%;height:100%}
+.barra5{display:flex;height:24px;border-radius:10px;overflow:hidden}.barra5 i{flex:1}
+</style>
+<body>
+
+<!-- 0 · CAPA -->
+<div class="banda" style="background:var(--cereja);color:var(--creme)">
+  <span class="eyebrow">Cartilha visual · v1 · cor, forma e movimento</span>
+  <h1>Comida<em>viva</em></h1>
+  <p class="lede">Cores fortes, formas inclinadas e objetos com volume. Tudo é peça fixa: o mesmo desenho, sempre. O que muda é o movimento.</p>
+  <div class="mosaico" id="paleta"></div>
+</div>
+
+<!-- 1 · FORMA E OBJETOS -->
+<div class="banda" style="background:var(--lilas)">
+  <span class="eyebrow">01 · Forma e objetos</span>
+  <h2 style="color:var(--cereja)">Uma forma, vários objetos <em>saltando dela</em></h2>
+  <div class="grade g4" style="margin-top:34px" id="objetos"></div>
+</div>
+
+<!-- 2 · MOVIMENTO · POTE -->
+<div class="banda" style="background:var(--amarelo)">
+  <span class="eyebrow">02 · Movimento · pote</span>
+  <h2 style="color:var(--cereja)">O pote enche <em>da onda à última fruta</em></h2>
+  <div class="grade g5" style="margin-top:34px" id="m-pote"></div>
+  <p class="nota">Ação de 2,4 s: o nível sobe com desaceleração, a onda se mexe, três frutas caem e cada uma faz uma marola; bolhas sobem o tempo todo.</p>
+</div>
+
+<!-- 3 · MOVIMENTO · MARMITA -->
+<div class="banda" style="background:var(--verde);color:var(--creme)">
+  <span class="eyebrow" style="color:var(--verde)">03 · Movimento · marmita</span>
+  <h2>A marmita abre <em>e solta vapor</em></h2>
+  <div class="grade g5" style="margin-top:34px" id="m-marmita"></div>
+  <p class="nota">Ação de 2,0 s: a tampa levanta e cresce, desliza para o lado girando e some; a comida dá um pulinho e o vapor sobe em loop.</p>
+</div>
+
+<!-- 4 · CONTROLES -->
+<div class="banda" style="background:var(--roxo);color:var(--creme)">
+  <span class="eyebrow" style="color:var(--roxo)">04 · Controles</span>
+  <h2>Botões, cupom e chaves</h2>
+  <div class="grade g3" style="margin-top:30px">
+    <div style="background:var(--cereja);border-radius:26px;padding:34px"><p class="nome">Botão sobre cereja</p><div class="fila"><span class="btn">Baixe o app</span><span class="btn fantasma">Depois</span></div></div>
+    <div style="background:var(--amarelo);border-radius:26px;padding:34px;color:var(--tinta)"><p class="nome">Botão sobre amarelo</p><div class="fila"><span class="btn sobre-claro">Siga</span><span class="btn sobre-claro fantasma" style="color:var(--tinta)">Salve</span></div></div>
+    <div style="background:var(--verde);border-radius:26px;padding:34px"><p class="nome">Botão sobre verde</p><div class="fila"><span class="btn verde">Quero!</span><span class="btn fantasma">Ver mais</span></div></div>
+    <div style="background:var(--lilas);border-radius:26px;padding:34px;color:var(--tinta)"><p class="nome">Cupom</p><div class="cupom"><span>#CAFE10</span></div><p class="nota">Borda recortada e costura tracejada, sempre.</p></div>
+    <div style="background:var(--laranja);border-radius:26px;padding:34px"><p class="nome">Chips</p><div class="fila" id="chips"></div></div>
+    <div style="background:var(--rosa);border-radius:26px;padding:34px;color:var(--tinta)"><p class="nome">Chaves</p><div class="fila" style="gap:26px"><span class="tog"></span><span class="tog off" style="background:rgba(42,11,46,.25)"></span></div><div class="barra5" style="margin-top:26px" id="barra5"></div></div>
+  </div>
+</div>
+
+<!-- 5 · DADOS -->
+<div class="banda" style="background:var(--laranja)">
+  <span class="eyebrow" style="color:var(--laranja)">05 · Dados</span>
+  <h2 style="color:var(--creme)">Gráficos em cores fortes</h2>
+  <div class="grade g4" style="margin-top:30px">
+    <div class="cartao"><p class="nome">Barras</p><svg viewBox="0 0 300 220" id="gbar" style="width:100%"></svg></div>
+    <div class="cartao"><p class="nome">Rosca</p><svg viewBox="0 0 300 220" id="grosca" style="width:100%"></svg></div>
+    <div class="cartao"><p class="nome">Linha</p><svg viewBox="0 0 300 220" id="glinha" style="width:100%"></svg></div>
+    <div class="cartao" style="background:var(--cereja);color:var(--creme)"><p class="nome">Número</p><div class="numero" style="color:var(--creme)">10<small style="color:var(--amarelo)">%</small></div><div style="font:800 36px/1 var(--display);text-transform:uppercase;margin-top:8px">de desconto</div><div style="margin-top:20px;height:22px;border-radius:99px;background:rgba(255,249,233,.28);overflow:hidden"><div style="width:68%;height:100%;background:var(--amarelo)"></div></div></div>
+  </div>
+</div>
+
+<!-- 6 · FORMAÇÕES -->
+<div class="banda" style="background:var(--rosa)">
+  <span class="eyebrow" style="color:var(--cereja)">06 · Formações</span>
+  <h2 style="color:var(--cereja)">Peças juntas em tela vertical</h2>
+  <div class="grade g4" style="margin-top:34px">
+    <div class="quadro" id="q1" style="background:var(--cereja)"></div>
+    <div class="quadro" id="q2" style="background:var(--amarelo)"></div>
+    <div class="quadro" id="q3" style="background:var(--verde)"></div>
+    <div class="quadro" id="q4" style="background:var(--lilas)"></div>
+  </div>
+</div>
+
+<script src="elementos.js"></script>
+<script>
+const {C,el,forma,pote,marmita,laranja,abacate,cereja,uva}=EL;
+const $=(id)=>document.getElementById(id);
+const svg=(pai,vb="0 0 400 400")=>el("svg",{viewBox:vb},pai);
+const div=(pai,cls,css="")=>{const d=document.createElement("div");d.className=cls;d.style.cssText=css;pai.appendChild(d);return d};
+
+// paleta
+[["cereja","#E50145"],["laranja","#F15A22"],["amarelo","#EFD600"],["verde","#0C893E"],["roxo","#962E9D"],["rosa","#FF87A0"],["areia","#F5D69E"],["creme","#FFF9E9"],["menta","#63E578"],["lilás","#FAC7FF"]]
+ .forEach(([n,h],i)=>{const d=document.createElement("div");d.style.background=h;d.style.color=["amarelo","rosa","areia","creme","menta","lilás"].includes(n)?"#2A0B2E":"#FFF9E9";d.innerHTML=n+"<br>"+h;$("paleta").appendChild(d)});
+
+// objetos: cada um num bloco de cor, saltando de uma forma
+const objs=[
+ ["Pote",C.amarelo,C.cereja,(s)=>{const p=pote(s,{x:112,y:46,s:1.05});p.set(1,1.2)}],
+ ["Marmita fechada",C.verde,C.amarelo,(s)=>{const m=marmita(s,{x:44,y:110,s:1.05});m.set(0,0)}],
+ ["Marmita aberta",C.roxo,C.lilas,(s)=>{const m=marmita(s,{x:44,y:110,s:1.05,cor:C.verde,corEsc:C.verdeEsc});m.set(1,1.1)}],
+ ["Laranja",C.cereja,C.laranja,(s)=>{laranja(s,{x:200,y:206,s:1.55})}],
+ ["Abacate",C.laranja,C.verde,(s)=>{abacate(s,{x:200,y:206,s:1.45})}],
+ ["Cereja",C.lilas,C.cereja,(s)=>{cereja(s,{x:196,y:230,s:1.5})}],
+ ["Uva",C.amarelo,C.roxo,(s)=>{uva(s,{x:200,y:190,s:1.3})}],
+ ["Forma sozinha",C.rosa,C.cereja,(s)=>{}],
+];
+objs.forEach(([n,bg,fm,desenha])=>{const t=div($("objetos"),"tile","background:"+bg);const s=svg(t);forma(s,fm,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.22)"});desenha(s);
+  const r=div(t,"rot");r.textContent=n;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#2A0B2E"});
+
+// movimento: quadros-chave
+[0,.25,.5,.75,1].forEach((p)=>{const t=div($("m-pote"),"tile","background:var(--lilas)");const s=svg(t);forma(s,C.cereja,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});const o=pote(s,{x:112,y:46,s:1.05});o.set(p,.6+p);
+  const r=div(t,"rot");r.textContent="p = "+p;r.style.color="#E50145"});
+[0,.2,.4,.65,1].forEach((p)=>{const t=div($("m-marmita"),"tile","background:var(--amarelo)");const s=svg(t);forma(s,C.cereja,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});const o=marmita(s,{x:44,y:110,s:1.05,cor:C.roxo,corEsc:C.roxoEsc});o.set(p,.4+p*2);
+  const r=div(t,"rot");r.textContent="p = "+p;r.style.color="#E50145"});
+
+// chips e barra
+[["cereja","creme","novo"],["amarelo","tinta","salve"],["menta","tinta","dica"],["roxo","creme","nba"]].forEach(([a,b,tx])=>{const c=document.createElement("span");c.className="chip";c.style.background=C[a];c.style.color=C[b];c.textContent=tx;$("chips").appendChild(c)});
+$("barra5").innerHTML=["cereja","laranja","amarelo","verde","roxo"].map(k=>`<i style="background:${C[k]}"></i>`).join("");
+
+// dados
+$("gbar").innerHTML=`<line x1="10" y1="200" x2="290" y2="200" stroke="#2A0B2E" stroke-width="5" stroke-linecap="round"/>`+[["cereja",70],["laranja",120],["amarelo",95],["verde",150],["roxo",180]].map(([k,h],i)=>`<rect x="${22+i*54}" y="${200-h}" width="40" height="${h}" rx="10" fill="${C[k]}"/>`).join("");
+(()=>{const seg=[["cereja",.38],["laranja",.24],["verde",.22],["roxo",.16]];let a=-90;const R=78,cx=150,cy=108;let s="";seg.forEach(([k,v])=>{const a2=a+v*360;const p=(g)=>[cx+R*Math.cos(g*Math.PI/180),cy+R*Math.sin(g*Math.PI/180)];const [x1,y1]=p(a),[x2,y2]=p(a2);s+=`<path d="M${x1} ${y1}A${R} ${R} 0 ${v>.5?1:0} 1 ${x2} ${y2}" fill="none" stroke="${C[k]}" stroke-width="44"/>`;a=a2});$("grosca").innerHTML=s})();
+(()=>{const pts=[[14,170],[70,140],[120,150],[170,90],[225,100],[284,40]];const d=pts.map((p,i)=>(i?"L":"M")+p[0]+" "+p[1]).join("");$("glinha").innerHTML=`<path d="${d}" fill="none" stroke="${C.cereja}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="10" fill="#FFF9E9" stroke="${C.cereja}" stroke-width="6"/>`).join("")+`<line x1="10" y1="205" x2="290" y2="205" stroke="#2A0B2E" stroke-width="5" stroke-linecap="round"/>`})();
+
+// formações
+(()=>{ // 1: pote + título + botão
+ const q=$("q1");const t=div(q,"tt");t.style.color="#FFF9E9";t.innerHTML="Enche<br><span style='color:#FF87A0'>o pote</span>";
+ const s=el("svg",{viewBox:"0 0 270 480"},q);forma(s,C.rosa,{x:-8,y:170,s:1.18,sombra:"rgba(42,11,46,.25)"});const p=pote(s,{x:46,y:160,s:.9});p.set(.8,2);
+ const b=div(q,"btn","position:absolute;right:20px;bottom:22px;font-size:26px");b.textContent="Siga";
+ // 2: marmita
+ const q2=$("q2");const t2=div(q2,"tt");t2.style.color="#E50145";t2.innerHTML="Abre e<br><span style='color:#2A0B2E'>é só curtir</span>";
+ const s2=el("svg",{viewBox:"0 0 270 480"},q2);forma(s2,C.cereja,{x:-8,y:190,s:1.18,sombra:"rgba(42,11,46,.22)"});const m=marmita(s2,{x:20,y:230,s:.72,cor:C.verde,corEsc:C.verdeEsc});m.set(.9,2);
+ // 3: laranja + número
+ const q3=$("q3");const t3=div(q3,"tt");t3.style.color="#FFF9E9";t3.innerHTML="Vitamina<br><span style='color:#EFD600'>C em dia</span>";
+ const s3=el("svg",{viewBox:"0 0 270 480"},q3);forma(s3,C.amarelo,{x:-8,y:170,s:1.18,sombra:"rgba(42,11,46,.25)"});laranja(s3,{x:130,y:290,s:1.1});laranja(s3,{x:60,y:360,s:.55});
+ const n=div(q3,"numero","position:absolute;left:24px;bottom:24px;font-size:120px;color:#FFF9E9");n.innerHTML="87<small style='font-size:50px;color:#EFD600'>%</small>";
+ // 4: uva + cupom
+ const q4=$("q4");const t4=div(q4,"tt");t4.style.color="#962E9D";t4.innerHTML="Use o<br><span style='color:#E50145'>cupom</span>";
+ const s4=el("svg",{viewBox:"0 0 270 480"},q4);forma(s4,C.amarelo,{x:-8,y:150,s:1.18,sombra:"rgba(42,11,46,.22)"});uva(s4,{x:130,y:250,s:1.05});
+ const cp=div(q4,"cupom","position:absolute;left:50%;bottom:34px;transform:translateX(-50%);font-size:30px");cp.innerHTML="<span>#CAFE10</span>";
+})();
+document.fonts.ready.then(()=>{window._pronto=true});
+</script>
+</body>
+</html>
