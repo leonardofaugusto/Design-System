@@ -27,4 +27,4 @@ python tools/imprimir.py sistemas/comida-viva/cartilha-v1.html saida.png
 python tools/animar.py sistemas/comida-viva/movimento.html saida.mp4 --dur 7.6
 ```
 
-As ferramentas (`imprimir.py`, `animar.py`) ficam por enquanto na pasta de produção do Leonardo.
+As ferramentas estão em `ferramentas/` (Python; precisam de `playwright`, `faster-whisper` e `ffmpeg`). Vídeos e takes ficam fora do git.

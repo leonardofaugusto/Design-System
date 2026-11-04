@@ -5,7 +5,7 @@
   const NS = "http://www.w3.org/2000/svg";
   const C = { cereja: "#E50145", cerejaEsc: "#B80037", rosa: "#FF87A0", laranja: "#F15A22", laranjaEsc: "#C9430F", areia: "#F5D69E",
     amarelo: "#EFD600", creme: "#FFF9E9", verde: "#0C893E", verdeEsc: "#096B31", menta: "#63E578", roxo: "#962E9D", roxoEsc: "#6F2275",
-    lilas: "#FAC7FF", tinta: "#2A0B2E" };
+    lilas: "#FAC7FF", tinta: "#5C0A24" };
   const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
   const ease = (x) => 1 - Math.pow(1 - x, 3);
   const back = (x) => { const c = 1.70158; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };

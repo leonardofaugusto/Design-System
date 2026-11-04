@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="pt-BR">
 <meta charset="utf-8">
-<title>Cartilha visual · v2</title>
+<title>Cartilha visual · v3</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800;900&family=Outfit:wght@400;600;800&display=block" rel="stylesheet">
 <style>
-:root{--cereja:#E50145;--rosa:#FF87A0;--laranja:#F15A22;--areia:#F5D69E;--amarelo:#EFD600;--creme:#FFF9E9;--verde:#0C893E;--menta:#63E578;--roxo:#962E9D;--lilas:#FAC7FF;--tinta:#2A0B2E;
+:root{--cereja:#E50145;--rosa:#FF87A0;--laranja:#F15A22;--areia:#F5D69E;--amarelo:#EFD600;--creme:#FFF9E9;--verde:#0C893E;--menta:#63E578;--roxo:#962E9D;--lilas:#FAC7FF;--tinta:#5C0A24;
  --display:"Barlow Condensed","Arial Narrow",sans-serif;--texto:"Outfit","Segoe UI",sans-serif}
 *{box-sizing:border-box}html,body{margin:0}
 body{width:1800px;font:400 21px/1.35 var(--texto);color:var(--tinta);background:var(--cereja)}
@@ -21,7 +21,7 @@ h2 em{font-style:normal;opacity:.6}
 .tile{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:1}
 .tile svg{position:absolute;inset:0;width:100%;height:100%}
 .tile .rot{position:absolute;left:18px;bottom:14px;font:800 20px/1 var(--display);letter-spacing:.12em;text-transform:uppercase}
-.cartao{background:var(--creme);border-radius:28px;padding:26px 28px 28px;box-shadow:0 14px 32px rgba(42,11,46,.22);color:var(--tinta)}
+.cartao{background:var(--creme);border-radius:28px;padding:26px 28px 28px;box-shadow:0 14px 32px rgba(92,10,36,.22);color:var(--tinta)}
 .mosaico{display:grid;grid-template-columns:repeat(10,1fr);margin-top:44px;border-radius:22px;overflow:hidden}
 .mosaico div{height:150px;padding:12px 12px;font:800 17px/1.1 var(--display);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:flex-end}
 /* controles */
@@ -38,7 +38,7 @@ h2 em{font-style:normal;opacity:.6}
 .tog.off{background:rgba(255,255,255,.45)}.tog.off::after{right:auto;left:5px}
 .fila{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .numero{font:900 150px/.85 var(--display);color:var(--cereja)}.numero small{font-size:62px;margin-left:6px}
-.quadro{position:relative;width:100%;aspect-ratio:9/16;border-radius:24px;overflow:hidden;box-shadow:0 14px 32px rgba(42,11,46,.28)}
+.quadro{position:relative;width:100%;aspect-ratio:9/16;border-radius:24px;overflow:hidden;box-shadow:0 14px 32px rgba(92,10,36,.28)}
 .quadro .tt{position:absolute;left:28px;top:32px;right:28px;font:900 66px/.88 var(--display);text-transform:uppercase}
 .quadro svg{position:absolute;inset:0;width:100%;height:100%}
 .barra5{display:flex;height:24px;border-radius:10px;overflow:hidden}.barra5 i{flex:1}
@@ -47,7 +47,7 @@ h2 em{font-style:normal;opacity:.6}
 
 <!-- 0 · CAPA -->
 <div class="banda" style="background:var(--cereja);color:var(--creme)">
-  <span class="eyebrow">Cartilha visual · v2 · cor, forma, cozinha e movimento</span>
+  <span class="eyebrow">Cartilha visual · v3 · cozinha, computador, dados e layout</span>
   <h1>Comida<em>viva</em></h1>
   <p class="lede">Cores fortes, formas inclinadas e objetos com volume. Tudo é peça fixa: o mesmo desenho, sempre. O que muda é o movimento.</p>
   <div class="mosaico" id="paleta"></div>
@@ -90,9 +90,41 @@ h2 em{font-style:normal;opacity:.6}
   <div id="acoes"></div>
 </div>
 
-<!-- 6 · CONTROLES -->
+<!-- 6 · COMPUTADOR · OBJETOS -->
+<div class="banda" style="background:var(--lilas)">
+  <span class="eyebrow" style="color:var(--cereja)">06 · Computador · peças</span>
+  <h2 style="color:var(--roxo)">Pasta, janela, tabela, chat <em>e fluxo de informação</em></h2>
+  <div class="grade g4" style="margin-top:34px" id="comp"></div>
+</div>
+
+<!-- 7 · COMPUTADOR · AÇÕES -->
 <div class="banda" style="background:var(--roxo);color:var(--creme)">
-  <span class="eyebrow" style="color:var(--roxo)">06 · Controles</span>
+  <span class="eyebrow" style="color:var(--roxo)">07 · Computador · ações</span>
+  <h2>A pasta abre, o terminal digita, o fluxo corre</h2>
+  <div id="acoes-comp"></div>
+</div>
+
+<!-- 8 · DADOS -->
+<div class="banda" style="background:var(--amarelo)">
+  <span class="eyebrow" style="color:var(--cereja)">08 · Dados</span>
+  <h2 style="color:var(--cereja)">Gráficos que se desenham</h2>
+  <div class="grade g3" style="margin-top:34px" id="dados"></div>
+</div>
+
+<!-- 9 · LAYOUT -->
+<div class="banda" style="background:var(--verde);color:var(--creme)">
+  <span class="eyebrow" style="color:var(--verde)">09 · Layout</span>
+  <h2>Chip, painel, polaroid e legenda</h2>
+  <div class="grade g4" style="margin-top:34px;align-items:start">
+    <div style="grid-column: span 2"><div class="tile" style="background:var(--cereja);aspect-ratio:2/1.1" id="chips-demo"></div></div>
+    <div class="quadro" id="layout-demo" style="background:var(--roxo)"></div>
+    <div class="quadro" id="layout-demo2" style="background:var(--cereja)"></div>
+  </div>
+</div>
+
+<!-- 10 · CONTROLES -->
+<div class="banda" style="background:var(--roxo);color:var(--creme)">
+  <span class="eyebrow" style="color:var(--roxo)">10 · Controles</span>
   <h2>Botões, cupom e chaves</h2>
   <div class="grade g3" style="margin-top:30px">
     <div style="background:var(--cereja);border-radius:26px;padding:34px"><p class="nome">Botão sobre cereja</p><div class="fila"><span class="btn">Baixe o app</span><span class="btn fantasma">Depois</span></div></div>
@@ -100,13 +132,13 @@ h2 em{font-style:normal;opacity:.6}
     <div style="background:var(--verde);border-radius:26px;padding:34px"><p class="nome">Botão sobre verde</p><div class="fila"><span class="btn verde">Quero!</span><span class="btn fantasma">Ver mais</span></div></div>
     <div style="background:var(--lilas);border-radius:26px;padding:34px;color:var(--tinta)"><p class="nome">Cupom</p><div class="cupom"><span>#CAFE10</span></div><p class="nota">Borda recortada e costura tracejada, sempre.</p></div>
     <div style="background:var(--laranja);border-radius:26px;padding:34px"><p class="nome">Chips</p><div class="fila" id="chips"></div></div>
-    <div style="background:var(--rosa);border-radius:26px;padding:34px;color:var(--tinta)"><p class="nome">Chaves</p><div class="fila" style="gap:26px"><span class="tog"></span><span class="tog off" style="background:rgba(42,11,46,.25)"></span></div><div class="barra5" style="margin-top:26px" id="barra5"></div></div>
+    <div style="background:var(--rosa);border-radius:26px;padding:34px;color:var(--tinta)"><p class="nome">Chaves</p><div class="fila" style="gap:26px"><span class="tog"></span><span class="tog off" style="background:rgba(92,10,36,.25)"></span></div><div class="barra5" style="margin-top:26px" id="barra5"></div></div>
   </div>
 </div>
 
 <!-- 5 · DADOS -->
 <div class="banda" style="background:var(--laranja)">
-  <span class="eyebrow" style="color:var(--laranja)">07 · Dados</span>
+  <span class="eyebrow" style="color:var(--laranja)">11 · Dados (v1)</span>
   <h2 style="color:var(--creme)">Gráficos em cores fortes</h2>
   <div class="grade g4" style="margin-top:30px">
     <div class="cartao"><p class="nome">Barras</p><svg viewBox="0 0 300 220" id="gbar" style="width:100%"></svg></div>
@@ -118,7 +150,7 @@ h2 em{font-style:normal;opacity:.6}
 
 <!-- 6 · FORMAÇÕES -->
 <div class="banda" style="background:var(--rosa)">
-  <span class="eyebrow" style="color:var(--cereja)">08 · Formações</span>
+  <span class="eyebrow" style="color:var(--cereja)">12 · Formações</span>
   <h2 style="color:var(--cereja)">Peças juntas em tela vertical</h2>
   <div class="grade g4" style="margin-top:34px">
     <div class="quadro" id="q1" style="background:var(--cereja)"></div>
@@ -130,6 +162,9 @@ h2 em{font-style:normal;opacity:.6}
 
 <script src="elementos.js"></script>
 <script src="cozinha.js"></script>
+<script src="layout.js"></script>
+<script src="computador.js"></script>
+<script src="dados.js"></script>
 <script>
 const {C,el,forma,pote,marmita,laranja,abacate,cereja,uva}=EL;
 const $=(id)=>document.getElementById(id);
@@ -138,7 +173,7 @@ const div=(pai,cls,css="")=>{const d=document.createElement("div");d.className=c
 
 // paleta
 [["cereja","#E50145"],["laranja","#F15A22"],["amarelo","#EFD600"],["verde","#0C893E"],["roxo","#962E9D"],["rosa","#FF87A0"],["areia","#F5D69E"],["creme","#FFF9E9"],["menta","#63E578"],["lilás","#FAC7FF"]]
- .forEach(([n,h],i)=>{const d=document.createElement("div");d.style.background=h;d.style.color=["amarelo","rosa","areia","creme","menta","lilás"].includes(n)?"#2A0B2E":"#FFF9E9";d.innerHTML=n+"<br>"+h;$("paleta").appendChild(d)});
+ .forEach(([n,h],i)=>{const d=document.createElement("div");d.style.background=h;d.style.color=["amarelo","rosa","areia","creme","menta","lilás"].includes(n)?"#5C0A24":"#FFF9E9";d.innerHTML=n+"<br>"+h;$("paleta").appendChild(d)});
 
 // objetos: cada um num bloco de cor, saltando de uma forma
 const objs=[
@@ -151,13 +186,13 @@ const objs=[
  ["Uva",C.amarelo,C.roxo,(s)=>{uva(s,{x:200,y:190,s:1.3})}],
  ["Forma sozinha",C.rosa,C.cereja,(s)=>{}],
 ];
-objs.forEach(([n,bg,fm,desenha])=>{const t=div($("objetos"),"tile","background:"+bg);const s=svg(t);forma(s,fm,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.22)"});desenha(s);
-  const r=div(t,"rot");r.textContent=n;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#2A0B2E"});
+objs.forEach(([n,bg,fm,desenha])=>{const t=div($("objetos"),"tile","background:"+bg);const s=svg(t);forma(s,fm,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.22)"});desenha(s);
+  const r=div(t,"rot");r.textContent=n;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#5C0A24"});
 
 // movimento: quadros-chave
-[0,.25,.5,.75,1].forEach((p)=>{const t=div($("m-pote"),"tile","background:var(--lilas)");const s=svg(t);forma(s,C.cereja,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});const o=pote(s,{x:112,y:46,s:1.05});o.set(p,.6+p);
+[0,.25,.5,.75,1].forEach((p)=>{const t=div($("m-pote"),"tile","background:var(--lilas)");const s=svg(t);forma(s,C.cereja,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.2)"});const o=pote(s,{x:112,y:46,s:1.05});o.set(p,.6+p);
   const r=div(t,"rot");r.textContent="p = "+p;r.style.color="#E50145"});
-[0,.2,.4,.65,1].forEach((p)=>{const t=div($("m-marmita"),"tile","background:var(--amarelo)");const s=svg(t);forma(s,C.cereja,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});const o=marmita(s,{x:44,y:110,s:1.05,cor:C.roxo,corEsc:C.roxoEsc});o.set(p,.4+p*2);
+[0,.2,.4,.65,1].forEach((p)=>{const t=div($("m-marmita"),"tile","background:var(--amarelo)");const s=svg(t);forma(s,C.cereja,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.2)"});const o=marmita(s,{x:44,y:110,s:1.05,cor:C.roxo,corEsc:C.roxoEsc});o.set(p,.4+p*2);
   const r=div(t,"rot");r.textContent="p = "+p;r.style.color="#E50145"});
 
 // chips e barra
@@ -165,25 +200,25 @@ objs.forEach(([n,bg,fm,desenha])=>{const t=div($("objetos"),"tile","background:"
 $("barra5").innerHTML=["cereja","laranja","amarelo","verde","roxo"].map(k=>`<i style="background:${C[k]}"></i>`).join("");
 
 // dados
-$("gbar").innerHTML=`<line x1="10" y1="200" x2="290" y2="200" stroke="#2A0B2E" stroke-width="5" stroke-linecap="round"/>`+[["cereja",70],["laranja",120],["amarelo",95],["verde",150],["roxo",180]].map(([k,h],i)=>`<rect x="${22+i*54}" y="${200-h}" width="40" height="${h}" rx="10" fill="${C[k]}"/>`).join("");
+$("gbar").innerHTML=`<line x1="10" y1="200" x2="290" y2="200" stroke="#5C0A24" stroke-width="5" stroke-linecap="round"/>`+[["cereja",70],["laranja",120],["amarelo",95],["verde",150],["roxo",180]].map(([k,h],i)=>`<rect x="${22+i*54}" y="${200-h}" width="40" height="${h}" rx="10" fill="${C[k]}"/>`).join("");
 (()=>{const seg=[["cereja",.38],["laranja",.24],["verde",.22],["roxo",.16]];let a=-90;const R=78,cx=150,cy=108;let s="";seg.forEach(([k,v])=>{const a2=a+v*360;const p=(g)=>[cx+R*Math.cos(g*Math.PI/180),cy+R*Math.sin(g*Math.PI/180)];const [x1,y1]=p(a),[x2,y2]=p(a2);s+=`<path d="M${x1} ${y1}A${R} ${R} 0 ${v>.5?1:0} 1 ${x2} ${y2}" fill="none" stroke="${C[k]}" stroke-width="44"/>`;a=a2});$("grosca").innerHTML=s})();
-(()=>{const pts=[[14,170],[70,140],[120,150],[170,90],[225,100],[284,40]];const d=pts.map((p,i)=>(i?"L":"M")+p[0]+" "+p[1]).join("");$("glinha").innerHTML=`<path d="${d}" fill="none" stroke="${C.cereja}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="10" fill="#FFF9E9" stroke="${C.cereja}" stroke-width="6"/>`).join("")+`<line x1="10" y1="205" x2="290" y2="205" stroke="#2A0B2E" stroke-width="5" stroke-linecap="round"/>`})();
+(()=>{const pts=[[14,170],[70,140],[120,150],[170,90],[225,100],[284,40]];const d=pts.map((p,i)=>(i?"L":"M")+p[0]+" "+p[1]).join("");$("glinha").innerHTML=`<path d="${d}" fill="none" stroke="${C.cereja}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="10" fill="#FFF9E9" stroke="${C.cereja}" stroke-width="6"/>`).join("")+`<line x1="10" y1="205" x2="290" y2="205" stroke="#5C0A24" stroke-width="5" stroke-linecap="round"/>`})();
 
 // formações
 (()=>{ // 1: pote + título + botão
  const q=$("q1");const t=div(q,"tt");t.style.color="#FFF9E9";t.innerHTML="Enche<br><span style='color:#FF87A0'>o pote</span>";
- const s=el("svg",{viewBox:"0 0 270 480"},q);forma(s,C.rosa,{x:-8,y:170,s:1.18,sombra:"rgba(42,11,46,.25)"});const p=pote(s,{x:46,y:160,s:.9});p.set(.8,2);
+ const s=el("svg",{viewBox:"0 0 270 480"},q);forma(s,C.rosa,{x:-8,y:170,s:1.18,sombra:"rgba(92,10,36,.25)"});const p=pote(s,{x:46,y:160,s:.9});p.set(.8,2);
  const b=div(q,"btn","position:absolute;right:20px;bottom:22px;font-size:26px");b.textContent="Siga";
  // 2: marmita
- const q2=$("q2");const t2=div(q2,"tt");t2.style.color="#E50145";t2.innerHTML="Abre e<br><span style='color:#2A0B2E'>é só curtir</span>";
- const s2=el("svg",{viewBox:"0 0 270 480"},q2);forma(s2,C.cereja,{x:-8,y:190,s:1.18,sombra:"rgba(42,11,46,.22)"});const m=marmita(s2,{x:20,y:230,s:.72,cor:C.verde,corEsc:C.verdeEsc});m.set(.9,2);
+ const q2=$("q2");const t2=div(q2,"tt");t2.style.color="#E50145";t2.innerHTML="Abre e<br><span style='color:#5C0A24'>é só curtir</span>";
+ const s2=el("svg",{viewBox:"0 0 270 480"},q2);forma(s2,C.cereja,{x:-8,y:190,s:1.18,sombra:"rgba(92,10,36,.22)"});const m=marmita(s2,{x:20,y:230,s:.72,cor:C.verde,corEsc:C.verdeEsc});m.set(.9,2);
  // 3: laranja + número
  const q3=$("q3");const t3=div(q3,"tt");t3.style.color="#FFF9E9";t3.innerHTML="Vitamina<br><span style='color:#EFD600'>C em dia</span>";
- const s3=el("svg",{viewBox:"0 0 270 480"},q3);forma(s3,C.amarelo,{x:-8,y:170,s:1.18,sombra:"rgba(42,11,46,.25)"});laranja(s3,{x:130,y:290,s:1.1});laranja(s3,{x:60,y:360,s:.55});
+ const s3=el("svg",{viewBox:"0 0 270 480"},q3);forma(s3,C.amarelo,{x:-8,y:170,s:1.18,sombra:"rgba(92,10,36,.25)"});laranja(s3,{x:130,y:290,s:1.1});laranja(s3,{x:60,y:360,s:.55});
  const n=div(q3,"numero","position:absolute;left:24px;bottom:24px;font-size:120px;color:#FFF9E9");n.innerHTML="87<small style='font-size:50px;color:#EFD600'>%</small>";
  // 4: uva + cupom
  const q4=$("q4");const t4=div(q4,"tt");t4.style.color="#962E9D";t4.innerHTML="Use o<br><span style='color:#E50145'>cupom</span>";
- const s4=el("svg",{viewBox:"0 0 270 480"},q4);forma(s4,C.amarelo,{x:-8,y:150,s:1.18,sombra:"rgba(42,11,46,.22)"});uva(s4,{x:130,y:250,s:1.05});
+ const s4=el("svg",{viewBox:"0 0 270 480"},q4);forma(s4,C.amarelo,{x:-8,y:150,s:1.18,sombra:"rgba(92,10,36,.22)"});uva(s4,{x:130,y:250,s:1.05});
  const cp=div(q4,"cupom","position:absolute;left:50%;bottom:34px;transform:translateX(-50%);font-size:30px");cp.innerHTML="<span>#CAFE10</span>";
 })();
 
@@ -194,16 +229,54 @@ const cozObj=[["Garfo",K.garfo,.85,28,0,0],["Faca",K.faca,.85,-24,0,0],["Colher"
  ["Tigela",K.tigela,1.0,0,0,24],["Garrafa de azeite",K.azeite,.9,20,0,0],["Tomate",K.tomate,2.0,0,0,0],["Cenoura",K.cenoura,1.7,-28,0,0],
  ["Brócolis",K.brocolis,2.0,0,0,0],["Banana",K.banana,1.8,-10,0,0],["Ovo",K.ovo,2.4,0,0,0],["Limão",K.limao,2.0,0,0,0]];
 const fundos=[[C.amarelo,C.cereja],[C.verde,C.amarelo],[C.lilas,C.roxo],[C.laranja,C.areia],[C.cereja,C.rosa],[C.roxo,C.lilas],[C.amarelo,C.verde],[C.menta,C.verde]];
-cozObj.forEach(([nome,fn,sc,rot,dx,dy],i)=>{const [bg,fm]=fundos[i%fundos.length];const t=div($("cozinha"),"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});
-  fn(sv,{x:200+dx,y:200+dy,s:sc,rot});const r=div(t,"rot");r.textContent=nome;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#2A0B2E"});
+cozObj.forEach(([nome,fn,sc,rot,dx,dy],i)=>{const [bg,fm]=fundos[i%fundos.length];const t=div($("cozinha"),"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.2)"});
+  fn(sv,{x:200+dx,y:200+dy,s:sc,rot});const r=div(t,"rot");r.textContent=nome;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#5C0A24"});
 
 // ---- cozinha: ações em quadros-chave
 const acoes=[["Serve","servir",[0,.2,.4,.7,1],2.4,200,215,1.0,[C.amarelo,C.cereja]],["Corta","cortar",[0,.2,.4,.7,1],2.6,200,290,1.15,[C.lilas,C.roxo]],
  ["Mexe","mexer",[.1,.1,.1,.1,.1],3.0,190,215,.85,[C.laranja,C.amarelo]],["Tempera","temperar",[0,.3,.5,.7,1],2.6,170,230,.82,[C.verde,C.amarelo]],["Monta","montar",[0,.25,.5,.75,1],2.8,200,260,1.0,[C.amarelo,C.verde]]];
 acoes.forEach(([nome,id,ps,dur,ax,ay,sc,[bg,fm]])=>{const h=document.createElement("p");h.className="nome";h.style.cssText="margin:30px 0 12px";h.textContent=nome+" · "+dur+" s";$("acoes").appendChild(h);
   const row=document.createElement("div");row.className="grade g5";$("acoes").appendChild(row);
-  ps.forEach((p,k)=>{const t=div(row,"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(42,11,46,.2)"});const o=K[id](sv,{x:ax,y:ay,s:sc});o.set(p,id==="mexer"?k*.4:p*dur);
-    const r=div(t,"rot");r.textContent=id==="mexer"?"t = "+(k*.4).toFixed(1):"p = "+p;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#2A0B2E"});});
+  ps.forEach((p,k)=>{const t=div(row,"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.2)"});const o=K[id](sv,{x:ax,y:ay,s:sc});o.set(p,id==="mexer"?k*.4:p*dur);
+    const r=div(t,"rot");r.textContent=id==="mexer"?"t = "+(k*.4).toFixed(1):"p = "+p;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#5C0A24"});});
+
+// ---- computador: peças (estado final) com escala automática pela ficha
+const meta=(id)=>EL.catalogo.find((m)=>m.id===id);
+const esc=(id)=>280/Math.max(meta(id).caixa.w,meta(id).caixa.h);
+const compPecas=[["pasta",{rotulo:"CONTEXTO"},1],["documento",{tipo:"lista"},1],["janela",{titulo:"app",w:520,h:380},null],["terminal",{},1],["tabela",{},1],["imagem",{},1],["cursor",{},1],["balao",{lado:"dir",cor:C.roxo,tc:C.lilas},1],
+ ["nuvem",{},1],["banco",{},1],["engrenagem",{},1],["lupa",{},1],["checklista",{},1],["calendario",{},1],["email",{},1],["fluxo",{},1]];
+const fundosC=[[C.cereja,C.rosa],[C.amarelo,C.roxo],[C.verde,C.menta],[C.laranja,C.areia],[C.roxo,C.lilas],[C.rosa,C.cereja]];
+compPecas.forEach(([id,op,pf],i)=>{const [bg,fm]=fundosC[i%fundosC.length];const t=div($("comp"),"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.2)"});
+  const o=K[id](sv,{x:200,y:200,s:esc(id),...op});if(o.set)o.set(pf==null?0:pf,2.2);
+  const r=div(t,"rot");r.textContent=meta(id).nome;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#5C0A24"});
+// janela com checklist dentro (peça sobre peça)
+(()=>{const t=$("comp").children[2];const sv=t.querySelector("svg");sv.innerHTML="";forma(sv,C.menta,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.2)"});
+  const j=K.janela(sv,{x:200,y:200,s:.52,titulo:"agenda",w:520,h:380,barra:C.verde});const tb=K.checklista(j.conteudo,{x:260,y:140,s:.62,itens:["Ler","Montar","Avisar"]});tb.set(1);})();
+
+// ---- computador: ações em quadros-chave
+const acoesC=[["pasta","Pasta · 1,6 s",[0,.3,.6,1],1.6,{rotulo:"NOTAS"},[C.verde,C.amarelo]],["terminal","Terminal · 2,6 s",[0,.3,.6,1],2.6,{},[C.lilas,C.roxo]],
+ ["tabela","Tabela · 1,8 s",[0,.3,.6,1],1.8,{},[C.rosa,C.cereja]],["balao","Balão de chat · 2,2 s",[0,.25,.55,1],2.2,{lado:"dir",cor:C.cereja,tc:C.rosa},[C.amarelo,C.verde]],
+ ["checklista","Checklist · 2,4 s",[0,.3,.6,1],2.4,{},[C.laranja,C.amarelo]],["fluxo","Fluxo de informação · 3 s",[.1,.4,.7,1],3,{},[C.menta,C.roxo]],["cursor","Cursor · 2 s",[0,.3,.6,1],2,{},[C.lilas,C.cereja]],["email","E-mail · 1,5 s",[0,.3,.6,1],1.5,{},[C.amarelo,C.cereja]]];
+acoesC.forEach(([id,nome,ps,dur,op,[bg,fm]])=>{const h=document.createElement("p");h.className="nome";h.style.cssText="margin:30px 0 12px";h.textContent=nome;$("acoes-comp").appendChild(h);
+  const row=document.createElement("div");row.className="grade g4";$("acoes-comp").appendChild(row);
+  ps.forEach((p)=>{const t=div(row,"tile","background:"+bg);const sv=svg(t);forma(sv,fm,{x:56,y:60,s:1.35,sombra:"rgba(92,10,36,.2)"});
+    const o=K[id](sv,{x:200,y:200,s:esc(id)*(id==="fluxo"?.95:1),...op});o.set(p,p*dur+.3);const r=div(t,"rot");r.textContent="p = "+p;r.style.color=[C.cereja,C.verde,C.roxo,C.laranja].includes(bg)?"#FFF9E9":"#5C0A24"});});
+
+// ---- dados
+const fundosD=[C.lilas,C.rosa,C.menta,C.areia,C.cereja,C.lilas];
+[["barras",{}],["linha",{}],["rosca",{centro:"100%"}],["medidor",{}],["numero",{cartao:true,legenda:"DE DESCONTO"}],["pictograma",{}]].forEach(([id,op],i)=>{const t=div($("dados"),"tile","background:"+fundosD[i]+";aspect-ratio:1.25");
+  const sv=svg(t,"0 0 500 400");const o=K[id](sv,{x:250,y:200,s:id==="pictograma"?.82:.95,...op});o.set(1,1);const r=div(t,"rot");r.textContent=meta(id).nome;r.style.color=fundosD[i]===C.cereja?"#FFF9E9":"#5C0A24"});
+
+// ---- layout: chips e quadros de exemplo
+(()=>{const t=$("chips-demo");const sv=el("svg",{viewBox:"0 0 1000 550"},t);
+  [["Agente de IA",C.creme,C.cereja,60,60,60],["1 · MODELO",C.amarelo,C.tinta,60,190,54],["VOCÊ NO CONTROLE",C.menta,C.tinta,60,310,54],["CLICA PARA CONTINUAR",C.creme,C.roxo,60,420,50]].forEach(([tx,c,tc,x,y,fs])=>K.chip(sv,tx,{x,y,fs,cor:c,tc}));})();
+const mock=(id,bg,pcor)=>{const q=$(id);const sv=el("svg",{viewBox:"0 0 1080 1920"},q);const f=el("g",{},sv),fr=el("g",{},sv);
+  el("rect",{width:1080,height:1920,fill:bg},f);const pn=K.painel(f,{cor:pcor});const g=el("g",{},pn.conteudo);return {f,fr,pn,g,sv}};
+const janelaVazia=(f)=>el("rect",{x:360,y:1360,width:360,height:450,fill:"#B9B2C2",transform:"rotate(-2.5 540 1585)"},f);
+(()=>{const m=mock("layout-demo",C.roxo,C.lilas);forma(m.g,C.cereja,{x:500-120*4.4,y:560-144*4.4,s:4.4,sombra:"rgba(92,10,36,.22)"});const p=K.pasta(m.g,{x:500,y:600,s:2.8,rotulo:"CONTEXTO"});p.set(1);
+  K.chip(m.g,"Pasta: o contexto",{x:40,y:40});K.polaroid(m.fr,m.f,{janela:{x:360,y:1360,w:360,h:450},borda:{lados:20,topo:20,base:60},inclinacao:-2.5});janelaVazia(m.f);})();
+(()=>{const m=mock("layout-demo2",C.cereja,C.amarelo);const j=K.janela(m.g,{x:500,y:560,s:1.7,titulo:"planilha",w:520,h:380,barra:C.roxo});const tb=K.tabela(j.conteudo,{x:260,y:170,s:.8});tb.set(1);
+  K.chip(m.g,"Tabela dentro de uma janela",{x:40,y:40});K.polaroid(m.fr,m.f,{janela:{x:360,y:1360,w:360,h:450},borda:{lados:20,topo:20,base:60},inclinacao:-2.5});janelaVazia(m.f);})();
 document.fonts.ready.then(()=>{window._pronto=true});
 </script>
 </body>

@@ -22,7 +22,7 @@ const cena=[
 const bg=el("rect",{width:1080,height:1920,fill:cena[0].bg},tela);
 cena.forEach((c)=>{
   c.g=el("g",{},tela);
-  c.f=el("g",{},c.g); forma(c.f,c.fm,{x:0,y:0,s:4.4,sombra:"rgba(42,11,46,.25)"});
+  c.f=el("g",{},c.g); forma(c.f,c.fm,{x:0,y:0,s:4.4,sombra:"rgba(92,10,36,.25)"});
   c.t1=el("text",{x:70,y:250,"font-size":200,fill:c.ca},c.g); c.t1.textContent=c.a;
   c.t2=el("text",{x:70,y:430,"font-size":170,fill:c.cb},c.g); c.t2.textContent=c.b;
   c.o=el("g",{},c.g); c.obj=EL[c.id](c.o,{x:0,y:0,s:c.s});

@@ -1,10 +1,13 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.2.0",
+  "versao": "0.3.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
-    "cozinha.js"
+    "cozinha.js",
+    "layout.js",
+    "computador.js",
+    "dados.js"
   ],
   "aviso": "GERADO pelas fichas das peças (tools/manifesto.py). Não edite à mão: mude a ficha na peça e gere de novo.",
   "camadas": [
@@ -44,13 +47,20 @@
       "menta": "#63E578",
       "roxo": "#962E9D",
       "lilas": "#FAC7FF",
-      "tinta": "#2A0B2E"
+      "tinta": "#5C0A24"
     },
     "fontes": {
       "display": "Barlow Condensed (provisória; alvo: Amsi Pro Condensed)",
       "texto": "Outfit"
     }
   },
+  "regras_de_cor": [
+    "O cereja (#E50145) é a cor institucional e domina: cerca de metade dos fundos de cena e dos blocos grandes.",
+    "Rosa e as claras (creme, lilás, areia, menta) preenchem painéis e fundos de respiro; nunca em rodízio de arco-íris.",
+    "Amarelo, verde, roxo e laranja são acentos: objetos, chips e destaques. Não são fundo de cena em sequência.",
+    "Texto sobre claro: cereja ou vinho (tinta). Texto sobre cor: creme. Preto puro nunca; a 'tinta' é um vinho da família do cereja.",
+    "Duas cenas seguidas não repetem o mesmo fundo (a cortina de Forma precisa ter cor para varrer)."
+  ],
   "regras": [
     "A peça é fixa: o modelo só escolhe qual, onde e quando; nunca redesenha.",
     "Sem contorno preto: formas chapadas, luz e sombra dura deslocada.",
@@ -64,7 +74,10 @@
     "ingrediente": 10,
     "talher": 3,
     "utensilio": 4,
-    "louca": 3
+    "louca": 3,
+    "layout": 4,
+    "computador": 16,
+    "dados": 6
   },
   "pecas": [
     {
@@ -978,6 +991,1165 @@
         "duracao_s": 2.8,
         "descricao": "quatro ingredientes entram em arco, um após o outro, e a tigela dá uma achatadinha a cada pouso",
         "usa_t": true
+      }
+    },
+    {
+      "id": "chip",
+      "nome": "Chip (rótulo)",
+      "familia": "layout",
+      "tipo": "layout",
+      "serve_para": "rótulo, título de painel, botão, palavra-chave que aparece na hora em que é dita",
+      "nao_usar_quando": "o texto passa de ~40 letras: não cabe, encurte ou quebre em dois chips",
+      "camada": "frente",
+      "caixa": {
+        "w": 520,
+        "h": 80
+      },
+      "parametros": [
+        {
+          "nome": "txt",
+          "padrao": ""
+        },
+        {
+          "nome": "fs",
+          "padrao": 54
+        },
+        {
+          "nome": "cor",
+          "padrao": "creme"
+        },
+        {
+          "nome": "tc",
+          "padrao": "cereja"
+        },
+        {
+          "nome": "x|cx",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "t - t0",
+        "duracao_s": 0.45,
+        "descricao": "entra com pop (escala de .5 a 1 com leve passada), opacidade em .15 s",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "painel",
+      "nome": "Painel de movimento",
+      "familia": "layout",
+      "tipo": "layout",
+      "serve_para": "a janela grande onde acontece a animação; fica acima do apresentador",
+      "nao_usar_quando": "o reel não tem apresentador (use a tela inteira)",
+      "camada": "fundo",
+      "caixa": {
+        "w": 1000,
+        "h": 1180
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 40
+        },
+        {
+          "nome": "y",
+          "padrao": 110
+        },
+        {
+          "nome": "w",
+          "padrao": 1000
+        },
+        {
+          "nome": "h",
+          "padrao": 1180
+        },
+        {
+          "nome": "cor",
+          "padrao": "lilas"
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "polaroid",
+      "nome": "Polaroid do apresentador",
+      "familia": "layout",
+      "tipo": "layout",
+      "serve_para": "moldura do vídeo da pessoa, inclinada, com sombra dura; a janela é vazada",
+      "nao_usar_quando": "o apresentador é um avatar ou não há vídeo da pessoa",
+      "camada": "frente",
+      "caixa": {
+        "w": 400,
+        "h": 530
+      },
+      "parametros": [
+        {
+          "nome": "janela",
+          "padrao": "{x:360,y:1360,w:360,h:450}"
+        },
+        {
+          "nome": "borda",
+          "padrao": "{lados:20,topo:20,base:60}"
+        },
+        {
+          "nome": "inclinacao",
+          "padrao": -2.5
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "legenda",
+      "nome": "Legenda por palavra",
+      "familia": "layout",
+      "tipo": "layout",
+      "serve_para": "legenda falada: grupos de até 3 palavras, a palavra do momento em destaque amarelo",
+      "nao_usar_quando": "o vídeo não tem fala",
+      "camada": "frente",
+      "caixa": {
+        "w": 900,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "palavras",
+          "padrao": "[{texto,ini,fim}]"
+        },
+        {
+          "nome": "top",
+          "padrao": 1690
+        },
+        {
+          "nome": "fs",
+          "padrao": 96
+        }
+      ],
+      "movimento": {
+        "param": "t",
+        "duracao_s": null,
+        "descricao": "troca de grupo a cada 3 palavras; o grupo entra com pop; a palavra ativa muda no tempo da fala",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "pasta",
+      "nome": "Pasta",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "guardar e abrir informação: arquivos, contexto, 'second brain', projetos",
+      "nao_usar_quando": "o assunto é comida ou não envolve guardar informação",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 230
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cor",
+          "padrao": "amarelo"
+        },
+        {
+          "nome": "rotulo",
+          "padrao": ""
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a frente da pasta se abre e três folhas sobem em leque",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "documento",
+      "nome": "Documento",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "um texto, nota, ata, relatório ou lista; as linhas se escrevem uma a uma",
+      "nao_usar_quando": "o assunto é imagem ou número (use imagem ou tabela)",
+      "camada": "meio",
+      "caixa": {
+        "w": 180,
+        "h": 230
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "acento",
+          "padrao": "cereja"
+        },
+        {
+          "nome": "tipo",
+          "padrao": "texto|lista"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.4,
+        "descricao": "as seis linhas aparecem da esquerda para a direita, em sequência",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "janela",
+      "nome": "Janela de aplicativo",
+      "familia": "computador",
+      "tipo": "objeto",
+      "serve_para": "um aplicativo ou site; recebe outra peça dentro (tabela, gráfico, texto)",
+      "nao_usar_quando": "o assunto é físico, sem tela",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 380
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "w",
+          "padrao": 520
+        },
+        {
+          "nome": "h",
+          "padrao": 380
+        },
+        {
+          "nome": "titulo",
+          "padrao": ""
+        },
+        {
+          "nome": "barra",
+          "padrao": "roxo"
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "terminal",
+      "nome": "Terminal",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "código, comando, 'o agente executa'; as linhas são digitadas",
+      "nao_usar_quando": "o público não é técnico e o assunto não tem código",
+      "camada": "meio",
+      "caixa": {
+        "w": 540,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "linhas",
+          "padrao": "lista de textos; '$' vira verde"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "as linhas são digitadas letra a letra e o cursor pisca",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "tabela",
+      "nome": "Tabela",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "dados organizados em linhas e colunas; uma linha pode ficar em destaque",
+      "nao_usar_quando": "são mais de 6 linhas ou 4 colunas (não cabe legível)",
+      "camada": "meio",
+      "caixa": {
+        "w": 560,
+        "h": 286
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "colunas",
+          "padrao": "lista de títulos"
+        },
+        {
+          "nome": "linhas",
+          "padrao": "matriz de textos"
+        },
+        {
+          "nome": "destaque",
+          "padrao": 1
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o cabeçalho aparece e as linhas entram da esquerda, uma a uma",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "imagem",
+      "nome": "Imagem (cartão de foto)",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "representar uma foto, ilustração ou captura; marca o lugar de uma imagem real",
+      "nao_usar_quando": "você tem a imagem real: use ela no lugar",
+      "camada": "meio",
+      "caixa": {
+        "w": 324,
+        "h": 244
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "w",
+          "padrao": 300
+        },
+        {
+          "nome": "h",
+          "padrao": 220
+        },
+        {
+          "nome": "ceu",
+          "padrao": "areia"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o sol nasce atrás das colinas e uma nuvem atravessa o céu (loop em t)",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cursor",
+      "nome": "Cursor do mouse",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "mostrar uma ação do usuário: clicar, arrastar, escolher; anda por uma rota e clica no fim de cada trecho",
+      "nao_usar_quando": "o assunto não é digital",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rota",
+          "padrao": "lista de pontos [x,y]"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "a seta anda de ponto em ponto e dá um clique com anel que se abre",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "balao",
+      "nome": "Balão de chat",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "conversa com uma IA ou pessoa: pontinhos de 'digitando' e depois o texto; lado esq (cinza claro) ou dir (colorido)",
+      "nao_usar_quando": "o assunto não é conversa",
+      "camada": "meio",
+      "caixa": {
+        "w": 340,
+        "h": 190
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "lado",
+          "padrao": "esq|dir"
+        },
+        {
+          "nome": "cor",
+          "padrao": "creme"
+        },
+        {
+          "nome": "linhas",
+          "padrao": 3
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "três pontos pulam (digitando) e depois as linhas do texto aparecem",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "nuvem",
+      "nome": "Nuvem",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "nuvem de internet, armazenamento online, 'na nuvem'",
+      "nao_usar_quando": "o assunto é local (tudo no computador): use pasta ou banco",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 140
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cor",
+          "padrao": "creme"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "flutua para cima e para baixo (loop em t)",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "banco",
+      "nome": "Banco de dados",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "onde a informação fica guardada: banco, base, histórico",
+      "nao_usar_quando": "o assunto é uma pasta de arquivos simples (use pasta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 180,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cor",
+          "padrao": "roxo"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "duas luzinhas piscam (loop em t)",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "engrenagem",
+      "nome": "Engrenagem",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "processo, automação, 'trabalhando'; gira em loop e fica mais rápida com p",
+      "nao_usar_quando": "o assunto é parado ou manual",
+      "camada": "meio",
+      "caixa": {
+        "w": 140,
+        "h": 140
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cor",
+          "padrao": "laranja"
+        },
+        {
+          "nome": "dentes",
+          "padrao": 9
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "gira em loop; p (0 a 1) controla a velocidade",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "lupa",
+      "nome": "Lupa",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "buscar, procurar, investigar, 'ler a pasta'",
+      "nao_usar_quando": "o assunto não é busca",
+      "camada": "meio",
+      "caixa": {
+        "w": 150,
+        "h": 150
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.5,
+        "descricao": "balança procurando (loop em t)",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "checklista",
+      "nome": "Checklist",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "tarefas, passos, lista de afazeres; cada item é marcado e riscado em sequência",
+      "nao_usar_quando": "são mais de 5 itens",
+      "camada": "meio",
+      "caixa": {
+        "w": 420,
+        "h": 304
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "itens",
+          "padrao": "lista de textos"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "cada caixa ganha um check desenhado e o item é riscado, um após o outro",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "calendario",
+      "nome": "Calendário",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "datas, agenda, prazos, rotina; os dias marcados se acendem e o 'hoje' vem por último",
+      "nao_usar_quando": "o assunto não é tempo ou agenda",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "marcados",
+          "padrao": "lista de dias"
+        },
+        {
+          "nome": "hoje",
+          "padrao": 12
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "os dias marcados se acendem em amarelo e o dia de hoje pula em cereja",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "email",
+      "nome": "E-mail",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "mensagem, aviso, newsletter, 'chegou uma carta'",
+      "nao_usar_quando": "o assunto é conversa instantânea (use balão)",
+      "camada": "meio",
+      "caixa": {
+        "w": 240,
+        "h": 160
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cor",
+          "padrao": "creme"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.5,
+        "descricao": "a aba do envelope abre e a carta sobe",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "fluxo",
+      "nome": "Fluxo de informação",
+      "familia": "computador",
+      "tipo": "acao",
+      "serve_para": "dados indo de um lugar a outro: origem, processo, destino; quadradinhos viajam pelas setas",
+      "nao_usar_quando": "são mais de 4 etapas (não cabe) ou o processo é um ciclo (use ciclo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 640,
+        "h": 140
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "nos",
+          "padrao": "pasta|engrenagem|documento|nuvem|banco|lupa|email|calendario"
+        },
+        {
+          "nome": "cores",
+          "padrao": "lista de cores"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "pacotes viajam do primeiro ao último nó em loop; p (0 a 1) liga os trechos um a um",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "barras",
+      "nome": "Gráfico de barras",
+      "familia": "dados",
+      "tipo": "grafico",
+      "serve_para": "comparar valores entre categorias; as barras crescem uma após a outra",
+      "nao_usar_quando": "são mais de 7 categorias",
+      "camada": "meio",
+      "caixa": {
+        "w": 480,
+        "h": 360
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        },
+        {
+          "nome": "valores",
+          "padrao": "lista de números"
+        },
+        {
+          "nome": "rotulos",
+          "padrao": "lista de textos"
+        },
+        {
+          "nome": "max",
+          "padrao": 100
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "cada barra sobe com desaceleração e o número aparece no topo",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "linha",
+      "nome": "Gráfico de linha",
+      "familia": "dados",
+      "tipo": "grafico",
+      "serve_para": "evolução no tempo, crescimento, tendência; a linha se desenha e os pontos pulam",
+      "nao_usar_quando": "são menos de 3 pontos (use número)",
+      "camada": "meio",
+      "caixa": {
+        "w": 480,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        },
+        {
+          "nome": "pontos",
+          "padrao": "lista de números 0-100"
+        },
+        {
+          "nome": "cor",
+          "padrao": "cereja"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a linha se desenha da esquerda para a direita, a área aparece e cada ponto pula quando a linha passa",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "rosca",
+      "nome": "Gráfico de rosca",
+      "familia": "dados",
+      "tipo": "grafico",
+      "serve_para": "partes de um todo (porcentagens); as fatias se abrem em sequência",
+      "nao_usar_quando": "são mais de 5 fatias",
+      "camada": "meio",
+      "caixa": {
+        "w": 400,
+        "h": 400
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        },
+        {
+          "nome": "fatias",
+          "padrao": "[[cor, fração], ...] somando 1"
+        },
+        {
+          "nome": "centro",
+          "padrao": "100%"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "cada fatia varre seu arco, em sequência, e o texto do centro aparece",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "medidor",
+      "nome": "Medidor",
+      "familia": "dados",
+      "tipo": "grafico",
+      "serve_para": "nível ou meta atingida; o ponteiro sobe até o valor com leve passada",
+      "nao_usar_quando": "o valor não é uma proporção entre 0 e 1",
+      "camada": "meio",
+      "caixa": {
+        "w": 440,
+        "h": 320
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        },
+        {
+          "nome": "valor",
+          "padrao": 0.72
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "Meta"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o ponteiro gira do início até o valor, passando um pouco e voltando",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "numero",
+      "nome": "Número que conta",
+      "familia": "dados",
+      "tipo": "grafico",
+      "serve_para": "um dado em destaque (percentual, total, resultado); sobe de 0 até o valor",
+      "nao_usar_quando": "o número tem mais de 5 dígitos",
+      "camada": "meio",
+      "caixa": {
+        "w": 460,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        },
+        {
+          "nome": "valor",
+          "padrao": 87
+        },
+        {
+          "nome": "sufixo",
+          "padrao": "%"
+        },
+        {
+          "nome": "cor",
+          "padrao": "cereja"
+        },
+        {
+          "nome": "fs",
+          "padrao": 220
+        },
+        {
+          "nome": "legenda",
+          "padrao": ""
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o número sobe de 0 até o valor com desaceleração",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "pictograma",
+      "nome": "Pictograma",
+      "familia": "dados",
+      "tipo": "grafico",
+      "serve_para": "'X de cada 10': círculos que se preenchem com check, um por vez",
+      "nao_usar_quando": "o total é diferente de 10 ou 12",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        },
+        {
+          "nome": "total",
+          "padrao": 10
+        },
+        {
+          "nome": "cheios",
+          "padrao": 7
+        },
+        {
+          "nome": "cor",
+          "padrao": "verde"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "os círculos marcados ganham um check, da esquerda para a direita",
+        "usa_t": false
       }
     }
   ]

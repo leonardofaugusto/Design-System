@@ -16,7 +16,7 @@ const lim=(x)=>clamp(x,0,1);
 
 // ---- cena A: pote (lilás, forma cereja)
 const A=el("g",{},tela);
-const fA=el("g",{},A); forma(fA,C.cereja,{x:0,y:0,s:4.4,sombra:"rgba(42,11,46,.25)"});
+const fA=el("g",{},A); forma(fA,C.cereja,{x:0,y:0,s:4.4,sombra:"rgba(92,10,36,.25)"});
 const tA1=el("text",{x:70,y:250,"font-size":200,fill:C.cereja},A); tA1.textContent="Enche";
 const tA2=el("text",{x:70,y:430,"font-size":200,fill:C.roxo},A); tA2.textContent="o pote";
 const gP=el("g",{},A); const P=pote(gP,{x:0,y:0,s:3.2});
@@ -26,7 +26,7 @@ const cort=el("g",{},tela); forma(cort,C.verde,{x:0,y:0,s:14});
 
 // ---- cena B: marmita (verde, forma amarela)
 const B=el("g",{},tela);
-const fB=el("g",{},B); forma(fB,C.amarelo,{x:0,y:0,s:4.4,sombra:"rgba(42,11,46,.25)"});
+const fB=el("g",{},B); forma(fB,C.amarelo,{x:0,y:0,s:4.4,sombra:"rgba(92,10,36,.25)"});
 const tB1=el("text",{x:70,y:250,"font-size":200,fill:C.creme},B); tB1.textContent="Abre a";
 const tB2=el("text",{x:70,y:430,"font-size":200,fill:C.amarelo},B); tB2.textContent="marmita";
 const gM=el("g",{},B); const M=marmita(gM,{x:0,y:0,s:2.7,cor:C.roxo,corEsc:C.roxoEsc});
