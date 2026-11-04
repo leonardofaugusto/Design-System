@@ -196,5 +196,49 @@
     [{ nome: "estilo", padrao: "barras | podio | pistas" }, { nome: "dados", padrao: "[{rotulo, de, valor}]: de = valor inicial (opcional, padrão 0), valor = final; podio usa só os 3 maiores valores e mostra a POSIÇÃO (valores em texto)" }, { nome: "max", padrao: 100 }, { nome: "cartao", padrao: true }],
     "os valores vão de `de` até `valor`; nas barras, quem passa troca de lugar suavemente; nas pistas as motos correm; no pódio os degraus sobem e a estrela cai no 1º", false, 2.8);
 
-  Object.assign(EL, { progresso, barras_comida: barrasComida, tabela_viva: tabelaViva, moto, linha_viva: linhaViva, corrida });
+  // =============== ANTES E DEPOIS: dois valores e a variação em um selo. Barras, dois potes ou roleta do número.
+  const selo = (pai, texto, cor, fs) => {
+    const w = texto.length * fs * .5 + fs * .9, h = fs * 1.3, g = el("g", {}, pai), a = el("g", {}, g), r = fs * .12;
+    el("rect", { x: -w / 2 + 8, y: -h / 2 + 7, width: w, height: h, rx: r, fill: "none", stroke: C.tinta, "stroke-opacity": .24, "stroke-width": fs * .08 }, a); el("rect", { x: -w / 2, y: -h / 2, width: w, height: h, rx: r, fill: C.creme, stroke: cor, "stroke-width": fs * .08 }, a);
+    el("rect", { x: -w / 2 + fs * .12, y: -h / 2 + fs * .12, width: w - fs * .24, height: h - fs * .24, rx: r * .6, fill: "none", stroke: cor, "stroke-width": fs * .025 }, a); txt(a, 0, fs * .34, texto, fs, cor, DISP);
+    return { g, set(q) { const u = lim(q / .55), sc = u < 1 ? 2.4 - 1.4 * u * u : 1, tr = u < 1 ? 0 : (1 - lim((q - .55) / .4)) * Math.sin(q * 80) * 8; a.setAttribute("opacity", lim(u * 4)); a.setAttribute("transform", `translate(${tr} 0) scale(${sc})`); } };
+  };
+  const antesDepois = (pai, { x, y, s, rot, cartao: ct = true, estilo = "barras", antes = 48, depois = 33, rotulos = ["Antes", "Depois"], unidade = "min", bom = "descer" } = {}) => {
+    const g = nova(pai, x, y, s, rot), w = 520, h = 420; cartao(g, w, h, ct);
+    const pct = antes ? Math.round((depois - antes) / antes * 100) : 0, ok = (pct > 0 && bom === "subir") || (pct < 0 && bom === "descer") || pct === 0, mx = Math.max(antes, depois, 1);
+    const sel = selo(g, (pct > 0 ? "+" : pct < 0 ? "-" : "") + Math.abs(pct) + "%", ok ? C.verde : C.cereja, estilo === "potes" ? 50 : estilo === "roleta" ? 60 : 62), cdest = ok ? C.verde : C.cereja;
+    const fmt = (v) => v + (unidade ? " " + unidade : "");
+    if (estilo === "potes") {
+      const jarro = (cx, cor) => { const jg = el("g", { transform: `translate(${cx} 20) scale(.6)` }, g), id = clip(jg, { x: -96, y: -136, width: 192, height: 232, rx: 30 });
+        el("rect", { x: -110 + 14, y: -150 + 12, width: 220, height: 260, rx: 40, ...SOMBRA }, jg); el("rect", { x: -110, y: -150, width: 220, height: 260, rx: 40, fill: C.lilas }, jg); el("rect", { x: -96, y: -136, width: 192, height: 232, rx: 30, fill: "#fff", "fill-opacity": .6 }, jg);
+        const lq = el("g", { "clip-path": `url(#${id})` }, jg), on = el("path", { fill: cor }, lq); el("rect", { x: -100, y: -192, width: 200, height: 50, rx: 16, fill: C.laranja }, jg);
+        return (v, t) => { const top = 96 - 232 * v * .92; let d = "M-100 100"; for (let xx = -100; xx <= 100; xx += 8) d += `L${xx} ${top + 7 * Math.sin(xx * .07 + t * 3)}`; on.setAttribute("d", d + "L100 100Z"); }; };
+      const ja = jarro(-130, C.laranja), jd = jarro(130, cdest === C.verde ? C.verde : C.cereja);
+      txt(g, -130, 142, rotulos[0], 22, C.tinta, UI).setAttribute("fill-opacity", .7); txt(g, 130, 142, rotulos[1], 22, C.tinta, UI).setAttribute("fill-opacity", .7);
+      const na = txt(g, -130, 184, "0", 40, C.tinta, DISP), nd = txt(g, 130, 184, "0", 40, C.tinta, DISP);
+      const seta = el("path", { d: "M-50 10Q0 -30 50 10M32 -8L50 10L26 18", fill: "none", stroke: C.tinta, "stroke-width": 10, "stroke-linecap": "round", "stroke-linejoin": "round" }, g), SL = 130; seta.setAttribute("stroke-dasharray", SL);
+      sel.g.setAttribute("transform", "translate(0 -158)");
+      return { g, set(p, t = 0) { const ua = ease(lim(p / .45)), ud = ease(lim((p - .12) / .45)); ja(antes / mx * ua, t); jd(depois / mx * ud, t); na.textContent = fmt(Math.round(antes * ua)); nd.textContent = fmt(Math.round(depois * ud));
+        seta.setAttribute("stroke-dashoffset", SL * (1 - ease(lim((p - .45) / .2)))); sel.set(lim((p - .6) / .4)); } };
+    }
+    if (estilo === "roleta") {
+      const wy = -30, id = clip(g, { x: -170, y: wy - 80, width: 340, height: 160, rx: 26 }); el("rect", { x: -170 + 10, y: wy - 80 + 9, width: 340, height: 160, rx: 26, ...SOMBRA }, g); el("rect", { x: -170, y: wy - 80, width: 340, height: 160, rx: 26, fill: C.cereja }, g);
+      const jan = el("g", { "clip-path": `url(#${id})` }, g), v = txt(jan, 0, wy + 38, fmt(antes), 110, C.creme, DISP), n = txt(jan, 0, wy + 38, fmt(depois), 110, C.creme, DISP);
+      const ant = txt(g, 0, -148, rotulos[0] + ": " + fmt(antes), 34, C.tinta, UI), rk = el("rect", { x: -100, y: -160, width: 200, height: 6, rx: 3, fill: cdest }, g); const dep = txt(g, 0, 92, rotulos[1], 26, C.tinta, UI); dep.setAttribute("fill-opacity", .7);
+      sel.g.setAttribute("transform", "translate(0 152)");
+      return { g, set(p) { const m = back(lim((p - .3) / .4)); v.setAttribute("transform", `translate(0 ${-m * 190})`); n.setAttribute("transform", `translate(0 ${(1 - m) * 190})`); ant.setAttribute("opacity", lim(p / .15));
+        const r = ease(lim((p - .15) / .2)); rk.setAttribute("width", Math.max(200 * r, .1)); rk.setAttribute("x", -100); rk.setAttribute("opacity", r > 0 ? 1 : 0); dep.setAttribute("opacity", lim((p - .5) / .2) * .7); sel.set(lim((p - .65) / .35)); } };
+    }
+    const base = 110, alt = 148, bw = 130, ca = -100, cd = 100, ba = el("rect", { x: ca - bw / 2, width: bw, rx: 14, fill: C.areia }, g), bd = el("rect", { x: cd - bw / 2, width: bw, rx: 14, fill: C.cereja }, g);
+    el("line", { x1: -w / 2 + 28, x2: w / 2 - 28, y1: base, y2: base, stroke: C.tinta, "stroke-width": 5, "stroke-linecap": "round" }, g); bd.setAttribute("fill", cdest);
+    txt(g, ca, base + 38, rotulos[0], 24, C.tinta, UI).setAttribute("fill-opacity", .7); txt(g, cd, base + 38, rotulos[1], 24, C.tinta, UI).setAttribute("fill-opacity", .7);
+    const va = txt(g, ca, 0, "0", 40, C.tinta, DISP), vd = txt(g, cd, 0, "0", 40, C.tinta, DISP); sel.g.setAttribute("transform", "translate(0 -160)");
+    return { g, set(p) { [[ba, va, antes, 0, ca], [bd, vd, depois, .15, cd]].forEach(([b, vt, v, at]) => { const u = ease(lim((p - at) / .45)), hh = alt * v / mx * u; b.setAttribute("y", base - hh); b.setAttribute("height", Math.max(hh, .1)); vt.setAttribute("y", base - hh - 14); vt.textContent = fmt(Math.round(v * u)); });
+      sel.set(lim((p - .6) / .4)); } };
+  };
+  ficha("antes_depois", "Antes e depois", "mostrar uma MUDANÇA entre dois valores: o selo mostra a variação (verde se foi bom, cereja se foi ruim). Barras, dois potes com seta, ou roleta do número", "são mais de dois momentos (use linha_viva) ou o antes é zero", { w: 520, h: 420 },
+    [{ nome: "estilo", padrao: "barras | potes | roleta" }, { nome: "antes", padrao: 48 }, { nome: "depois", padrao: 33 }, { nome: "rotulos", padrao: "[\"Antes\",\"Depois\"]" }, { nome: "unidade", padrao: "min" }, { nome: "bom", padrao: "descer | subir (quando a variação é boa)" }, { nome: "cartao", padrao: true }],
+    "os dois valores crescem a partir do zero (ou rolam) e o selo com a variação percentual bate na tela; verde se foi bom, cereja se foi ruim", false, 2.4);
+
+  Object.assign(EL, { progresso, barras_comida: barrasComida, tabela_viva: tabelaViva, moto, linha_viva: linhaViva, corrida, antes_depois: antesDepois });
 })();

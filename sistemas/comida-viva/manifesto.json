@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.6.0",
+  "versao": "0.7.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -78,7 +78,7 @@
     "layout": 4,
     "computador": 16,
     "dados": 6,
-    "graficos": 5,
+    "graficos": 6,
     "texto": 8,
     "fundos": 6,
     "transicoes": 5
@@ -2426,6 +2426,71 @@
         "param": "p",
         "duracao_s": 2.8,
         "descricao": "os valores vão de `de` até `valor`; nas barras, quem passa troca de lugar suavemente; nas pistas as motos correm; no pódio os degraus sobem e a estrela cai no 1º",
+        "usa_t": false
+      }
+    },
+    {
+      "id": "antes_depois",
+      "nome": "Antes e depois",
+      "familia": "graficos",
+      "tipo": "grafico",
+      "serve_para": "mostrar uma MUDANÇA entre dois valores: o selo mostra a variação (verde se foi bom, cereja se foi ruim). Barras, dois potes com seta, ou roleta do número",
+      "nao_usar_quando": "são mais de dois momentos (use linha_viva) ou o antes é zero",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "estilo",
+          "padrao": "barras | potes | roleta"
+        },
+        {
+          "nome": "antes",
+          "padrao": 48
+        },
+        {
+          "nome": "depois",
+          "padrao": 33
+        },
+        {
+          "nome": "rotulos",
+          "padrao": "[\"Antes\",\"Depois\"]"
+        },
+        {
+          "nome": "unidade",
+          "padrao": "min"
+        },
+        {
+          "nome": "bom",
+          "padrao": "descer | subir (quando a variação é boa)"
+        },
+        {
+          "nome": "cartao",
+          "padrao": true
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "os dois valores crescem a partir do zero (ou rolam) e o selo com a variação percentual bate na tela; verde se foi bom, cereja se foi ruim",
         "usa_t": false
       }
     },
