@@ -1,0 +1,10 @@
+{
+  "sistemas": [
+    {
+      "id": "reels",
+      "caminho": "sistemas/reels",
+      "versao_vigente": null,
+      "estado": "rascunho"
+    }
+  ]
+}

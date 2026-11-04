@@ -1,0 +1,14 @@
+{
+  "kit": "reels",
+  "versao": "0.0.0",
+  "estado": "rascunho: nasce da prova manual, nada aqui foi aprovado",
+  "camadas": ["fundo", "meio", "frente"],
+  "tela": {
+    "ig": [1080, 1920],
+    "yt": [1920, 1080],
+    "quadrado": [1080, 1080],
+    "zona_segura": { "topo": null, "base": null, "lados": null }
+  },
+  "tokens": { "cores": {}, "fontes": {}, "borda": "", "sombra": "" },
+  "pecas": []
+}

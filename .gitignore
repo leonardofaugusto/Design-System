@@ -1,0 +1,12 @@
+# mídia e material sensível nunca entram aqui
+*.mov
+*.mp4
+*.m4a
+*.wav
+*.mp3
+*.webm
+*.mkv
+# ambiente
+.venv/
+__pycache__/
+.env
