@@ -2,7 +2,7 @@
 <html lang="pt-BR" data-fundo="auto">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Comida Viva · Design System</title>
+<title>Comida Viva</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800;900&family=Outfit:wght@400;600;800&display=block" rel="stylesheet">
 <style>
 :root{--cereja:#E50145;--rosa:#FF87A0;--laranja:#F15A22;--areia:#F5D69E;--amarelo:#EFD600;--creme:#FFF9E9;--verde:#0C893E;--menta:#63E578;--roxo:#962E9D;--lilas:#FAC7FF;--tinta:#5C0A24;
@@ -19,7 +19,7 @@ header.capa p{max-width:760px;font-size:20px;margin:22px 0 0}
 .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .meta span{font:800 15px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;background:var(--tinta);color:var(--creme);border-radius:999px;padding:9px 14px 7px}
 /* barra fixa */
-nav.barra{position:sticky;top:0;z-index:20;background:var(--tinta);color:var(--creme);display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:11px 6vw;box-shadow:0 6px 0 rgba(92,10,36,.25)}
+nav.barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--tinta);color:var(--creme);display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:11px 6vw;box-shadow:0 6px 0 rgba(92,10,36,.25)}
 nav.barra a{color:var(--creme);text-decoration:none;font:800 14px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px 5px;border-radius:999px;background:rgba(255,249,233,.12)}
 nav.barra a:hover{background:var(--creme);color:var(--cereja)}
 nav.barra .sep{flex:1}
@@ -86,6 +86,7 @@ html[data-fundo=roxo] .tile:not(.fixo){background:var(--roxo)}
 .cam b{display:block;font:900 24px/1 var(--display);text-transform:uppercase;color:var(--cereja);margin-bottom:4px}
 footer{padding:36px 6vw 60px;color:var(--creme);font-size:14px;opacity:.9}
 .vazio{display:none;color:var(--creme);font:800 24px var(--display);letter-spacing:.1em;text-transform:uppercase;padding:30px 6vw}
+@media (max-width:700px){nav.barra{position:static}nav.barra input{width:100%}}
 @media (max-width:640px){.cam{grid-template-columns:1fr}.tile{height:210px}}
 </style>
 <body>
@@ -4689,6 +4690,7 @@ window.MANIFESTO = {
 </script>
 <script>
 (() => {
+document.documentElement.dataset.fundo = document.documentElement.dataset.fundo || "auto";
 const M = window.MANIFESTO, K = window.EL, { C, el, clamp, back } = K;
 const lim = (x) => clamp(x, 0, 1);
 const CHAVE = { "colher-de-pau": "colherPau", "garrafa-azeite": "azeite" };

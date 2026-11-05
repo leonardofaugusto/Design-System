@@ -15,3 +15,11 @@ html = html.replace("/*@@MANIFESTO@@*/", manifesto).replace("/*@@JS@@*/", js)
 saida = pasta / "design-system.html"
 saida.write_text(html, encoding="utf-8")
 print(f"ok: {saida} ({saida.stat().st_size/1024:.0f} KB, {len(scripts)} scripts)")
+
+# versão para publicar como Artifact: sem doctype/html/body (o esqueleto do Artifact traz os dele)
+art = html
+for trecho in ("<!doctype html>", '<html lang="pt-BR" data-fundo="auto">', '<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">', "<body>", "</body>", "</html>"):
+    art = art.replace(trecho, "")
+(pasta / "design-system.artifact.html").write_text(art.lstrip(), encoding="utf-8")
+print("ok: design-system.artifact.html")
