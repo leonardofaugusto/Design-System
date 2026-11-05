@@ -8,12 +8,12 @@ Referência de direção: o brandbook público "Universo Visual Liv Up" (Behance
 
 | Arquivo | O que é |
 |---|---|
-| `elementos.js`, `cozinha.js` | os objetos de comida e as ações da cozinha (pote, marmita, frutas, talheres, servir, cortar, mexer...) |
+| `elementos.js`, `cozinha.js` | os objetos de comida e as ações da cozinha (pote, marmita, frutas, frango, talheres, servir, cortar, mexer...) |
 | `layout.js`, `computador.js`, `dados.js` | chip, painel, polaroid, legenda; pasta, janela, terminal, tabela, fluxo...; barras, linha, rosca, medidor... |
 | `texto.js` | **texto em movimento:** letras, palavras que sobem, contorno que enche, carimbo, faixa que rola, roleta, riscado, marca-texto |
 | `fundos.js` | **fundos** que andam devagar: xadrez, listras, formas, horta, raios, ondas |
 | `transicoes.js` | **transições** de cena (p=0,5 é a tela coberta): cortina de Forma, fatias, cascata, íris, onda |
-| `manifesto.json` | GERADO das fichas das peças (73 peças, 12 famílias); nunca editar à mão |
+| `manifesto.json` | GERADO das fichas das peças (80 peças, 13 famílias); nunca editar à mão |
 | `movimento-*.html` | cenas de demonstração de cada família |
 
 ## Regras de ouro

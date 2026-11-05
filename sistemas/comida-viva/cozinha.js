@@ -86,6 +86,32 @@
       el("circle", { r: 46, fill: grad(g, [[0, "#FF4B6E"], [.55, C.cereja], [1, C.cerejaEsc]], { radial: true }) }, g);
       el("ellipse", { cx: -18, cy: -18, rx: 9, ry: 6, fill: "#fff", "fill-opacity": .7, transform: "rotate(-35 -18 -18)" }, g);
       const c = el("g", { transform: "translate(0 -40)" }, g); [0, 72, 144, 216, 288].forEach((a) => el("ellipse", { cx: 0, cy: -7, rx: 5, ry: 12, fill: C.verde, transform: `rotate(${a})` }, c)); return g; });
+  // FRANGO: personagem, de corpo inteiro, de perfil olhando à direita, com cara de confuso (sobrancelha torta)
+  const frango = objeto("frango", "Frango", "ingrediente", "ingrediente e personagem: proteína, frango, o insumo que atravessa a operação; aceita etiquetas e balões em volta", "fundo cereja ou rosa sem forma contrastante (a crista some)", { w: 360, h: 370 },
+    (pai, { x = 0, y = 0, s = 1, rot = 0, sombra = true } = {}) => { const g = nova(pai, x, y, s, rot), k = el("g", { transform: "translate(-205 -232)" }, g);
+      const AREIA_ESC = "#E9C27E";
+      if (sombra) { const sh = el("g", { transform: "translate(16 14)" }, k);
+        [["ellipse", { cx: 80, cy: 215, rx: 34, ry: 62, transform: "rotate(-35 80 215)" }], ["ellipse", { cx: 200, cy: 270, rx: 135, ry: 102 }], ["ellipse", { cx: 258, cy: 205, rx: 62, ry: 78 }], ["circle", { cx: 278, cy: 140, r: 64 }]]
+          .forEach(([t, a]) => el(t, { ...a, ...SOMBRA }, sh)); }
+      el("ellipse", { cx: 62, cy: 190, rx: 26, ry: 56, fill: C.areia, transform: "rotate(-50 62 190)" }, k);
+      el("ellipse", { cx: 80, cy: 215, rx: 34, ry: 62, fill: C.areia, transform: "rotate(-35 80 215)" }, k);
+      el("ellipse", { cx: 72, cy: 250, rx: 26, ry: 52, fill: AREIA_ESC, transform: "rotate(-15 72 250)" }, k);
+      [168, 226].forEach((px) => { el("rect", { x: px, y: 350, width: 16, height: 52, rx: 8, fill: C.laranja }, k); el("path", { d: `M${px - 18} 404Q${px + 8} 392 ${px + 32} 404Z`, fill: C.laranja }, k); });
+      el("ellipse", { cx: 200, cy: 270, rx: 135, ry: 102, fill: C.creme }, k);
+      el("path", { d: "M75 290Q200 400 330 290Q300 372 200 372Q100 372 75 290Z", fill: C.areia, "fill-opacity": .7 }, k);
+      el("ellipse", { cx: 258, cy: 205, rx: 62, ry: 78, fill: C.creme }, k);
+      el("circle", { cx: 278, cy: 140, r: 64, fill: C.creme }, k);
+      el("ellipse", { cx: 160, cy: 200, rx: 58, ry: 22, fill: "#fff", "fill-opacity": .7, transform: "rotate(-12 160 200)" }, k);
+      el("ellipse", { cx: 182, cy: 268, rx: 78, ry: 48, fill: C.areia, transform: "rotate(-14 182 268)" }, k);
+      ["M118 262Q170 300 240 262", "M128 284Q175 316 232 286"].forEach((d) => el("path", { d, fill: "none", stroke: AREIA_ESC, "stroke-width": 7, "stroke-linecap": "round" }, k));
+      [[252, 82, 22], [278, 70, 25], [304, 82, 20]].forEach(([cx, cy, r]) => el("circle", { cx, cy, r, fill: C.cereja }, k));
+      el("circle", { cx: 272, cy: 64, r: 7, fill: C.rosa }, k);
+      el("path", { d: "M336 132L376 150L336 166Z", fill: C.amarelo }, k); el("path", { d: "M336 150L376 150L336 166Z", fill: C.laranja }, k);
+      el("ellipse", { cx: 330, cy: 188, rx: 12, ry: 20, fill: C.cereja }, k);
+      el("circle", { cx: 306, cy: 126, r: 11, fill: C.tinta }, k); el("circle", { cx: 310, cy: 122, r: 4, fill: "#fff" }, k);
+      el("circle", { cx: 296, cy: 160, r: 12, fill: C.rosa, "fill-opacity": .75 }, k);
+      el("path", { d: "M290 104Q304 96 318 104", fill: "none", stroke: C.tinta, "stroke-width": 5, "stroke-linecap": "round" }, k);
+      return g; });
   const cenoura = objeto("cenoura", "Cenoura", "ingrediente", "ingrediente: legume, vitamina A, colheita", "o assunto é doce ou fruta", { w: 70, h: 150 },
     (pai, { x = 0, y = 0, s = 1, rot = 0, sombra = true } = {}) => { const g = nova(pai, x, y, s, rot);
       const d = "M-18 -56Q0 -66 18 -56L24 -6Q10 56 0 76Q-10 56 -24 -6Z";
@@ -228,5 +254,5 @@
         tg.setAttribute("transform", `translate(0 ${sq * 4}) scale(${1 + sq * .03} ${1 - sq * .05})`);
       } }; });
 
-  Object.assign(EL, { garfo, faca, colher, colherPau, concha, tabua, prato, panela, tigela, azeite, tomate, cenoura, brocolis, banana, ovo, limao, servir, cortar, mexer, temperar, montar });
+  Object.assign(EL, { garfo, faca, colher, colherPau, concha, tabua, prato, panela, tigela, azeite, tomate, frango, cenoura, brocolis, banana, ovo, limao, servir, cortar, mexer, temperar, montar });
 })();

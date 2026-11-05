@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.7.0",
+  "versao": "0.8.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -71,7 +71,7 @@
   "familias": {
     "forma": 1,
     "cozinha": 7,
-    "ingrediente": 10,
+    "ingrediente": 11,
     "talher": 3,
     "utensilio": 4,
     "louca": 3,
@@ -631,6 +631,38 @@
       "caixa": {
         "w": 100,
         "h": 100
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "frango",
+      "nome": "Frango",
+      "familia": "ingrediente",
+      "tipo": "objeto",
+      "serve_para": "ingrediente e personagem: proteína, frango, o insumo que atravessa a operação; aceita etiquetas e balões em volta",
+      "nao_usar_quando": "fundo cereja ou rosa sem forma contrastante (a crista some)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 370
       },
       "parametros": [
         {
