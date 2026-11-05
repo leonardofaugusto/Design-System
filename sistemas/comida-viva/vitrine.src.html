@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR" data-fundo="auto">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comida Viva · Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800;900&family=Outfit:wght@400;600;800&display=block" rel="stylesheet">
+<style>
+:root{--cereja:#E50145;--rosa:#FF87A0;--laranja:#F15A22;--areia:#F5D69E;--amarelo:#EFD600;--creme:#FFF9E9;--verde:#0C893E;--menta:#63E578;--roxo:#962E9D;--lilas:#FAC7FF;--tinta:#5C0A24;
+ --display:"Barlow Condensed","Arial Narrow",sans-serif;--texto:"Outfit","Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
+body{margin:0;background:var(--cereja);color:var(--tinta);font:400 16px/1.4 var(--texto)}
+.eyebrow{display:inline-block;font:800 14px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;background:var(--creme);color:var(--cereja);border-radius:7px;padding:8px 11px 6px;box-shadow:4px 4px 0 var(--tinta)}
+/* topo */
+header.capa{padding:56px 6vw 40px;color:var(--creme)}
+header.capa h1{font:900 clamp(72px,13vw,190px)/.84 var(--display);text-transform:uppercase;margin:20px 0 0}
+header.capa h1 em{font-style:normal;color:var(--rosa);display:block}
+header.capa p{max-width:760px;font-size:20px;margin:22px 0 0}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.meta span{font:800 15px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;background:var(--tinta);color:var(--creme);border-radius:999px;padding:9px 14px 7px}
+/* barra fixa */
+nav.barra{position:sticky;top:0;z-index:20;background:var(--tinta);color:var(--creme);display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:11px 6vw;box-shadow:0 6px 0 rgba(92,10,36,.25)}
+nav.barra a{color:var(--creme);text-decoration:none;font:800 14px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px 5px;border-radius:999px;background:rgba(255,249,233,.12)}
+nav.barra a:hover{background:var(--creme);color:var(--cereja)}
+nav.barra .sep{flex:1}
+nav.barra input{font:600 15px var(--texto);border:0;border-radius:999px;padding:8px 14px;width:190px;background:var(--creme);color:var(--tinta);outline:none}
+nav.barra button,nav.barra select{font:800 14px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;border:0;border-radius:999px;padding:8px 13px 6px;background:var(--amarelo);color:var(--tinta);cursor:pointer}
+.chipfundo{display:inline-flex;gap:5px;align-items:center;font:800 13px/1 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.chipfundo i{width:20px;height:20px;border-radius:50%;border:2px solid var(--creme);cursor:pointer;display:inline-block}
+.chipfundo i.on{outline:3px solid var(--amarelo);outline-offset:1px}
+/* faixas de conteúdo */
+section.bloco{padding:46px 6vw 20px}
+section.bloco.claro{background:var(--creme)}
+section.bloco.rosa{background:var(--rosa)}
+.bloco h2{font:900 clamp(44px,7vw,88px)/.9 var(--display);text-transform:uppercase;margin:14px 0 6px;color:var(--creme)}
+.bloco.claro h2,.bloco.rosa h2{color:var(--cereja)}
+.bloco h2 small{font:800 22px/1 var(--display);letter-spacing:.14em;opacity:.7;margin-left:12px}
+.lede{max-width:820px;font-size:18px;margin:6px 0 26px;color:var(--creme);opacity:.95}
+.bloco.claro .lede,.bloco.rosa .lede{color:var(--tinta)}
+.grade{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.grade.vert{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.grade.larga{grid-template-columns:repeat(auto-fill,minmax(440px,1fr))}
+/* cartão da peça */
+.card{background:var(--creme);border-radius:24px;overflow:hidden;box-shadow:6px 7px 0 rgba(92,10,36,.28);display:flex;flex-direction:column;color:var(--tinta)}
+.vars{display:grid;gap:3px;background:var(--tinta);grid-template-columns:1fr}
+.vars.n2{grid-template-columns:1fr 1fr}.vars.n3{grid-template-columns:repeat(3,1fr)}
+.tile{position:relative;height:270px;background:var(--rosa);overflow:hidden}
+.tile.alto{height:380px}
+.tile.baixo{height:150px}
+.tile svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tile .rot{position:absolute;left:10px;bottom:8px;font:800 13px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;background:var(--creme);color:var(--tinta);padding:5px 8px 3px;border-radius:6px;z-index:2}
+.tile.tleg{height:100px}
+.legwrap{position:absolute;left:0;top:0;transform-origin:0 0;width:1080px;height:300px}
+.legwrap .leg{position:absolute!important}
+.tile .erro{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 13px var(--texto);padding:16px;color:var(--creme);text-align:center}
+html[data-fundo=cereja] .tile:not(.fixo){background:var(--cereja)}
+html[data-fundo=rosa] .tile:not(.fixo){background:var(--rosa)}
+html[data-fundo=creme] .tile:not(.fixo){background:var(--creme)}
+html[data-fundo=lilas] .tile:not(.fixo){background:var(--lilas)}
+html[data-fundo=verde] .tile:not(.fixo){background:var(--verde)}
+html[data-fundo=amarelo] .tile:not(.fixo){background:var(--amarelo)}
+html[data-fundo=roxo] .tile:not(.fixo){background:var(--roxo)}
+.info{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.info h3{margin:0;font:900 30px/.95 var(--display);text-transform:uppercase;color:var(--cereja)}
+.info code{font:600 13px/1 ui-monospace,Consolas,monospace;background:rgba(92,10,36,.09);padding:3px 6px;border-radius:5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag{font:800 12px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:5px 8px 3px;border-radius:999px;background:var(--tinta);color:var(--creme)}
+.tag.c{background:var(--cereja)}.tag.v{background:var(--verde)}.tag.r{background:var(--roxo)}
+.info p{margin:0;font-size:14px}
+.info p b{font:800 12px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:2px;opacity:.65}
+.info p.nao b{color:var(--cereja);opacity:1}
+.params{display:flex;flex-wrap:wrap;gap:5px}
+.params span{font:600 12px/1 ui-monospace,Consolas,monospace;background:rgba(92,10,36,.07);padding:4px 6px;border-radius:5px}
+.params span i{font-style:normal;opacity:.55}
+.mov{font-size:13px;border-top:2px dashed rgba(92,10,36,.25);padding-top:8px;margin-top:auto}
+/* cores e regras */
+.cores{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:10px 0 26px}
+.cor{border-radius:18px;padding:16px 14px 12px;height:120px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:5px 6px 0 rgba(92,10,36,.25)}
+.cor b{font:900 24px/1 var(--display);text-transform:uppercase;letter-spacing:.04em}
+.cor span{font:600 12px/1.2 ui-monospace,Consolas,monospace;opacity:.85}
+.regras{columns:2 380px;column-gap:34px;padding-left:20px;margin:6px 0 26px;font-size:16px;color:var(--creme)}
+.regras li{margin-bottom:9px;break-inside:avoid}
+.bloco.claro .regras{color:var(--tinta)}
+.cam{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:6px 0 26px}
+.cam div{background:var(--creme);color:var(--tinta);border-radius:16px;padding:14px 16px;font-size:14px;box-shadow:4px 5px 0 rgba(92,10,36,.25)}
+.cam b{display:block;font:900 24px/1 var(--display);text-transform:uppercase;color:var(--cereja);margin-bottom:4px}
+footer{padding:36px 6vw 60px;color:var(--creme);font-size:14px;opacity:.9}
+.vazio{display:none;color:var(--creme);font:800 24px var(--display);letter-spacing:.1em;text-transform:uppercase;padding:30px 6vw}
+@media (max-width:640px){.cam{grid-template-columns:1fr}.tile{height:210px}}
+</style>
+<body>
+
+<header class="capa">
+  <span class="eyebrow" id="eyebrow">Design system · versão</span>
+  <h1>Comida<em>viva</em></h1>
+  <p>Todas as peças fixas do sistema numa página só. Cada uma aparece em movimento do jeito que será usada nos reels. O modelo só escolhe qual peça, onde e quando: nunca redesenha.</p>
+  <div class="meta" id="meta"></div>
+</header>
+
+<nav class="barra" id="barra"></nav>
+
+<section class="bloco" id="fundamentos">
+  <span class="eyebrow">Fundamentos</span>
+  <h2>Cores <small>e regras</small></h2>
+  <div class="cores" id="cores"></div>
+  <ul class="regras" id="regrasCor"></ul>
+  <h2 style="font-size:46px;margin-top:10px">Regras de ouro</h2>
+  <ul class="regras" id="regras"></ul>
+  <div class="cam" id="camadas"></div>
+</section>
+
+<div id="familias"></div>
+<div class="vazio" id="vazio">Nenhuma peça com esse filtro.</div>
+
+<footer id="rodape"></footer>
+
+<script>
+/*@@MANIFESTO@@*/
+</script>
+<script>
+/*@@JS@@*/
+</script>
+<script>
+(() => {
+const M = window.MANIFESTO, K = window.EL, { C, el, clamp, back } = K;
+const lim = (x) => clamp(x, 0, 1);
+const CHAVE = { "colher-de-pau": "colherPau", "garrafa-azeite": "azeite" };
+const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", fundos: "Fundos", transicoes: "Transições" };
+const LEDE = {
+  forma: "A assinatura visual: o recorte que abriga um objeto, um número ou um título.",
+  cozinha: "Cenas de cozinha que se montam sozinhas: o pote enche, a marmita fecha, o prato é servido.",
+  ingrediente: "Frutas e legumes chapados, com luz e sombra dura deslocada. Nunca com contorno preto.",
+  talher: "Garfo, faca e colher: objetos de apoio.",
+  utensilio: "Colher de pau, concha, tábua e garrafa de azeite.",
+  louca: "Prato, panela e tigela para receber a comida.",
+  layout: "As peças que montam a tela de um reel com apresentador: chip, painel, polaroid e legenda.",
+  computador: "Metáforas de computador para explicar agentes e IA: pasta, terminal, nuvem, fluxo, calendário.",
+  dados: "Gráficos simples e honestos: escala sempre a partir do zero, número sempre em texto.",
+  graficos: "Gráficos e tabelas com personalidade da comida. Cada peça tem 3 estilos que usam os mesmos dados.",
+  texto: "Texto que entra, bate, risca e rola. Para títulos curtos e palavras-chave.",
+  fundos: "Padrões de fundo contínuos, em duas cores, que se movem em loop. Formato 9:16.",
+  transicoes: "Cortinas entre cenas: em p=0,5 a tela está coberta e é aí que a cena troca. Formato 9:16."
+};
+const VERT = new Set(["fundos", "transicoes"]);
+const LARGA = new Set(["graficos", "computador", "dados"]);
+
+// ---------- demos: argumentos para peças que precisam de dados
+const DEMO = {
+  terminal: { linhas: ["$ ler pasta", "> 12 notas lidas", "$ atualizar", "> 3 notas novas"] },
+  fluxo: { nos: ["pasta", "engrenagem", "documento", "nuvem"], cores: [C.amarelo, C.laranja, C.cereja, C.roxo] },
+  cursor: { rota: [[110, 70], [-90, 20]] },
+  balao: { lado: "esq", linhas: 3 },
+  checklista: { itens: ["Ler a pasta", "Processar", "Conferir", "Enviar"] },
+  calendario: { marcados: [3, 8, 12, 19], hoje: 12 },
+  pasta: { rotulo: "CONTEXTO" },
+  janela: { titulo: "Janela" },
+  tabela: { cor: C.roxo },
+  progresso: { valor: .72, rotulo: "Meta do mês" },
+  antes_depois: { antes: 48, depois: 33, unidade: "min", bom: "descer" }
+};
+const VARIANTES = {
+  progresso: ["pote", "bag", "marmita"].map((e) => ({ rot: e, args: { estilo: e } })),
+  barras_comida: ["frutas", "marmitas", "reguas"].map((e) => ({ rot: e, args: { estilo: e } })),
+  tabela_viva: ["deslizar", "cartoes", "celula"].map((e) => ({ rot: e, args: { estilo: e } })),
+  linha_viva: ["pin", "moto", "broto"].map((e) => ({ rot: e, args: { estilo: e } })),
+  corrida: ["barras", "podio", "pistas"].map((e) => ({ rot: e, args: { estilo: e } })),
+  antes_depois: ["barras", "potes", "roleta"].map((e) => ({ rot: e, args: { estilo: e } })),
+  documento: [{ rot: "texto", args: { tipo: "texto" } }, { rot: "lista", args: { tipo: "lista" } }],
+  balao: [{ rot: "esquerda", args: { lado: "esq", linhas: 3 } }, { rot: "direita", args: { lado: "dir", cor: C.roxo, tc: C.lilas, linhas: 3 } }]
+};
+const FUNDO_CORES = { xadrez: [C.rosa, C.creme], listras: [C.cereja, C.cerejaEsc], formas: [C.lilas, C.roxo], horta: [C.creme, C.verde], raios: [C.cereja, C.cerejaEsc], ondas: [C.cereja, C.rosa] };
+const TRANS_COR = { cortina_forma: [C.lilas, C.amarelo], fatias: [C.creme, C.cereja], cascata: [C.verde, C.menta], iris: [C.amarelo, C.cereja], onda: [C.roxo, C.lilas] };
+const FUNDO_DO_TEXTO = "cereja";
+const PALAVRAS = (() => { const f = "a comida de verdade chega fresca no seu dia".split(" "); return f.map((t, i) => ({ texto: t, ini: i * .5, fim: i * .5 + .45 })); })();
+
+// ---------- construtores: devolvem { set(tt), vb? }
+const loopP = (F, tt, off = 0) => { const d = (F.movimento && F.movimento.duracao_s) || 2; return lim(((tt + off) % (d + 1.1)) / d); };
+
+function montarPadrao(F, svg, args) {
+  const g = el("g", {}, svg), fn = K[CHAVE[F.id] || F.id];
+  const o = fn(g, Object.assign({ x: 0, y: 0, s: 1 }, DEMO[F.id] || {}, args || {})) || {};
+  const set = typeof o.set === "function" ? o.set : null;
+  const ani = !!(F.movimento && set);
+  return { g, passo: (tt) => { if (!set) return; if (ani) { if (F.movimento.param === "t" && F.id === "faixa") set(1, tt); else set(loopP(F, tt), tt); } else set(1, tt); }, amostra: [0, .5, 1], setP: (p) => { if (set) set(p, p * 2); } };
+}
+function montarChip(F, svg) {
+  const g = el("g", {}, svg), c = K.chip(g, "CONFERE", { fs: 58, cx: 0, y: -42 });
+  return { g, passo: (tt) => { const p = back(lim(((tt % 2.4)) / .45)), o = lim(((tt % 2.4)) / .15); g.setAttribute("opacity", o); g.setAttribute("transform", `translate(0 0) scale(${.5 + .5 * p})`); }, amostra: [1], setP: () => {} };
+}
+function montarPainel(F, svg) {
+  const g = el("g", {}, svg), pn = K.painel(g, { x: -300, y: -210, w: 600, h: 420, cor: C.lilas });
+  const pt = el("g", {}, pn.conteudo), p = K.pote(pt, { x: 300, y: 230, s: 1.15 }), c = K.chip(pn.conteudo, "PAINEL", { fs: 40, x: 26, y: 26, cor: C.cereja, tc: C.creme });
+  return { g, passo: (tt) => p.set(loopP(F, tt, 0) , tt), amostra: [1], setP: (v) => p.set(v, 1) };
+}
+function montarPolaroid(F, svg) {
+  const g = el("g", {}, svg), fundo = el("g", {}, g), pessoa = el("g", {}, g), frente = el("g", {}, g);
+  const J = { x: -150, y: -200, w: 300, h: 380 };
+  el("rect", { x: J.x, y: J.y, width: J.w, height: J.h, fill: C.menta }, pessoa);
+  el("circle", { cx: 0, cy: -50, r: 62, fill: C.areia }, pessoa);
+  el("path", { d: "M-130 180 C-130 70 -70 20 0 20 C70 20 130 70 130 180 Z", fill: C.cereja }, pessoa);
+  const cl = el("clipPath", { id: "cpol" }, el("defs", {}, g)); el("rect", { x: J.x, y: J.y, width: J.w, height: J.h }, cl); pessoa.setAttribute("clip-path", "url(#cpol)");
+  K.polaroid(frente, fundo, { janela: J, borda: { lados: 20, topo: 20, base: 60 }, inclinacao: -2.5 });
+  return { g, passo: () => {}, amostra: [1], setP: () => {} };
+}
+function montarFundo(F, svg) {
+  const [a, b] = FUNDO_CORES[F.id], g = el("g", {}, svg), o = K[F.id](g, { cor: a, cor2: b });
+  return { g, passo: (tt) => o.set(tt), vb: [0, 0, 1080, 1920], amostra: [], setP: () => {} };
+}
+function montarTransicao(F, svg) {
+  const [cor, cor2] = TRANS_COR[F.id], g = el("g", {}, svg);
+  const bg = el("rect", { width: 1080, height: 1920, fill: C.rosa }, g);
+  const tx = el("text", { x: 540, y: 1030, "text-anchor": "middle", "font-size": 330, fill: C.cereja, style: 'font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase' }, g);
+  const tr = K[F.id](g, { cor, cor2 });
+  return { g, passo: (tt) => { const d = .7, u = (tt % (d + 1.3)) / d, p = lim(u); tr.set(p); const dep = p >= .5; bg.setAttribute("fill", dep ? cor : C.rosa); tx.setAttribute("fill", dep ? (cor === C.creme || cor === C.amarelo || cor === C.menta ? C.cereja : C.creme) : C.cereja); tx.textContent = dep ? "CENA 2" : "CENA 1"; }, vb: [0, 0, 1080, 1920], amostra: [], setP: () => {} };
+}
+
+const montadores = { chip: montarChip, painel: montarPainel, polaroid: montarPolaroid };
+
+// ---------- legenda (DOM)
+function montarLegenda(tile) {
+  tile.classList.add("tleg");
+  const w = document.createElement("div"); w.className = "legwrap"; tile.appendChild(w);
+  const L = K.legenda(w, PALAVRAS, { top: 50, left: 90, width: 900, height: 200, fs: 110 });
+  const ajusta = () => { const k = (tile.clientWidth || 330) / 1080; w.style.transform = `scale(${k})`; tile.style.height = Math.round(300 * k) + "px"; };
+  new ResizeObserver(ajusta).observe(tile); ajusta(); setTimeout(ajusta, 50);
+  return { passo: (tt) => L.set(tt % 5) };
+}
+
+// ---------- página
+const tiles = [];   // {tile, obj, vis}
+const io = new IntersectionObserver((es) => es.forEach((e) => { const t = tiles.find((x) => x.tile === e.target); if (t) t.vis = e.isIntersecting; }), { rootMargin: "120px" });
+
+function fazTile(F, v, familia) {
+  const tile = document.createElement("div"); tile.className = "tile";
+  if (VERT.has(familia)) tile.classList.add("alto", "fixo");
+  if (v && v.rot) { const r = document.createElement("div"); r.className = "rot"; r.textContent = v.rot; tile.appendChild(r); }
+  let obj = null;
+  if (F.id === "legenda") { obj = montarLegenda(tile); tile.classList.add("fixo"); tile.style.background = "var(--cereja)"; }
+  else {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); tile.appendChild(svg);
+    const tipo = montadores[F.id] || (familia === "fundos" ? montarFundo : familia === "transicoes" ? montarTransicao : (f, s) => montarPadrao(f, s, v && v.args));
+    if (familia === "texto") tile.style.setProperty("--auto", "cereja");
+    tiles.push({ tile, vis: false, F, svg, tipo, obj: null });
+  }
+  if (obj) tiles.push({ tile, vis: false, F, obj });
+  return tile;
+}
+
+function construirTudo() {
+  const cont = document.getElementById("familias"); cont.innerHTML = "";
+  tiles.length = 0;
+  const ordem = Object.keys(M.familias);
+  ordem.forEach((fam, i) => {
+    const sec = document.createElement("section"); sec.className = "bloco " + (i % 2 ? "" : ""); sec.id = "f-" + fam;
+    sec.innerHTML = `<span class="eyebrow">Família · ${M.familias[fam]} ${M.familias[fam] === 1 ? "peça" : "peças"}</span><h2>${ROTULO[fam]}</h2><p class="lede">${LEDE[fam] || ""}</p>`;
+    const grade = document.createElement("div"); grade.className = "grade" + (VERT.has(fam) ? " vert" : LARGA.has(fam) ? " larga" : "");
+    M.pecas.filter((p) => p.familia === fam).forEach((F) => {
+      const card = document.createElement("article"); card.className = "card"; card.dataset.busca = (F.id + " " + F.nome + " " + F.serve_para + " " + F.tipo + " " + F.camada).toLowerCase();
+      const vs = VARIANTES[F.id] || [{}];
+      const vars = document.createElement("div"); vars.className = "vars" + (vs.length === 2 ? " n2" : vs.length === 3 ? " n3" : "");
+      vs.forEach((v) => vars.appendChild(fazTile(F, v, fam)));
+      card.appendChild(vars);
+      const mv = F.movimento ? `${F.movimento.descricao}${F.movimento.duracao_s ? " · " + String(F.movimento.duracao_s).replace(".", ",") + " s" : " · contínuo"}` : "Peça estática.";
+      const ps = F.parametros.map((p) => `<span>${p.nome}</span>`).join("");
+      const info = document.createElement("div"); info.className = "info";
+      info.innerHTML = `<h3>${F.nome}</h3>
+        <div class="tags"><code>${F.id}</code><span class="tag c">${F.tipo}</span><span class="tag">${F.camada}</span>${F.caixa ? `<span class="tag r">${F.caixa.w}×${F.caixa.h}</span>` : ""}</div>
+        <p><b>Serve para</b>${F.serve_para}</p>
+        <p class="nao"><b>Não usar quando</b>${F.nao_usar_quando}</p>
+        <div class="params">${ps}</div>
+        <div class="mov"><b style="font:800 12px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;opacity:.65">Movimento</b><br>${mv}</div>`;
+      card.appendChild(info);
+      grade.appendChild(card);
+    });
+    sec.appendChild(grade); cont.appendChild(sec);
+  });
+  // ajusta tiles: cartões de texto sobre cereja
+  document.querySelectorAll("#f-texto .tile").forEach((t) => t.dataset.auto = "cereja");
+  document.querySelectorAll("#f-layout .tile").forEach((t) => { t.dataset.auto = "rosa"; });
+  tiles.forEach((o) => { if (o.svg) { try { const b = o.tipo(o.F, o.svg); Object.assign(o, b); ajustaVB(o); } catch (e) { const d = document.createElement("div"); d.className = "erro"; d.textContent = o.F.id + ": " + e.message; o.tile.appendChild(d); o.erro = true; console.error(o.F.id, e); } } io.observe(o.tile); });
+}
+
+const VB_FIXO = { faixa: [-300, -85, 600, 170], chip: [-200, -70, 400, 140], painel: [-330, -240, 660, 480], polaroid: [-230, -290, 460, 540] };
+function ajustaVB(o) {
+  if (o.vb) { o.svg.setAttribute("viewBox", o.vb.join(" ")); o.svg.setAttribute("preserveAspectRatio", "xMidYMid slice"); return; }
+  if (VB_FIXO[o.F.id]) { o.svg.setAttribute("viewBox", VB_FIXO[o.F.id].join(" ")); return; }
+  const c = o.F.caixa || { w: 300, h: 300 }, m = Math.max(c.w, c.h) * (o.F.familia === "graficos" ? .05 : .1);
+  let w = c.w + 2 * m, h = c.h + 2 * m;
+  const ar = (o.F.familia === "graficos" ? 215 : 330) / 250; if (w / h < ar) w = h * ar; else h = w / ar;
+  o.svg.setAttribute("viewBox", `${-w / 2} ${-h / 2} ${w} ${h}`);
+}
+
+// ---------- topo: cores, regras, camadas, navegação
+function topo() {
+  document.getElementById("eyebrow").textContent = `Design system · versão ${M.versao}`;
+  const meta = document.getElementById("meta"), n = M.pecas.length, nf = Object.keys(M.familias).length;
+  [`${n} peças`, `${nf} famílias`, `Reels ${M.tela.ig[0]}×${M.tela.ig[1]}`, "Barlow Condensed + Outfit"].forEach((t) => { const s = document.createElement("span"); s.textContent = t; meta.appendChild(s); });
+  const cores = document.getElementById("cores");
+  const claras = new Set(["creme", "amarelo", "areia", "menta", "lilas", "rosa"]);
+  Object.entries(M.tokens.cores).forEach(([nome, hex]) => { const d = document.createElement("div"); d.className = "cor"; d.style.background = hex; d.style.color = claras.has(nome) ? "#5C0A24" : "#FFF9E9"; d.innerHTML = `<b>${nome}</b><span>${hex}</span>`; cores.appendChild(d); });
+  document.getElementById("regrasCor").innerHTML = M.regras_de_cor.map((r) => `<li>${r}</li>`).join("");
+  document.getElementById("regras").innerHTML = M.regras.map((r) => `<li>${r}</li>`).join("");
+  document.getElementById("camadas").innerHTML = [["fundo", "o que fica atrás de tudo: painéis, fundos de cena, formas gigantes."], ["meio", "o conteúdo: objetos, gráficos, ações. É onde a história acontece."], ["frente", "o que vem por cima: texto, chips, legenda, transições."]].map(([a, b]) => `<div><b>${a}</b>${b}</div>`).join("");
+  const barra = document.getElementById("barra");
+  barra.innerHTML = `<a href="#fundamentos">Cores</a>` + Object.keys(M.familias).map((f) => `<a href="#f-${f}">${ROTULO[f]} <span style="opacity:.6">${M.familias[f]}</span></a>`).join("") +
+    `<span class="sep"></span><input id="busca" placeholder="Buscar peça…" type="search"><span class="chipfundo">fundo:<i data-f="auto" style="background:conic-gradient(var(--cereja),var(--rosa),var(--lilas),var(--cereja))" class="on"></i><i data-f="cereja" style="background:var(--cereja)"></i><i data-f="rosa" style="background:var(--rosa)"></i><i data-f="creme" style="background:var(--creme)"></i><i data-f="lilas" style="background:var(--lilas)"></i><i data-f="verde" style="background:var(--verde)"></i><i data-f="amarelo" style="background:var(--amarelo)"></i></span><button id="pausa">Pausar</button>`;
+  barra.querySelectorAll("[data-f]").forEach((i) => i.addEventListener("click", () => { document.documentElement.dataset.fundo = i.dataset.f; barra.querySelectorAll("[data-f]").forEach((x) => x.classList.toggle("on", x === i)); }));
+  const busca = document.getElementById("busca");
+  busca.addEventListener("input", () => { const q = busca.value.trim().toLowerCase(); let alguma = false;
+    document.querySelectorAll(".card").forEach((c) => { const ok = !q || c.dataset.busca.includes(q); c.style.display = ok ? "" : "none"; if (ok) alguma = true; });
+    document.querySelectorAll("section.bloco[id^=f-]").forEach((s) => { s.style.display = [...s.querySelectorAll(".card")].some((c) => c.style.display !== "none") ? "" : "none"; });
+    document.getElementById("vazio").style.display = alguma ? "none" : "block"; });
+  let pausado = false; const bt = document.getElementById("pausa");
+  bt.addEventListener("click", () => { pausado = !pausado; bt.textContent = pausado ? "Tocar" : "Pausar"; window._pausado = pausado; });
+  document.getElementById("rodape").innerHTML = `Gerado do manifesto ${M.sistema} v${M.versao}. As peças são as mesmas que renderizam os reels (SVG puro, função do tempo). Fonte de exemplo: Barlow Condensed (provisória; alvo Amsi Pro). Dados dos gráficos são inventados.`;
+}
+
+// ---------- fundo automático e laço de animação
+const css = document.createElement("style");
+css.textContent = `html[data-fundo=auto] #f-texto .tile:not(.fixo){background:var(--cereja)}html[data-fundo=auto] #f-layout .tile:not(.fixo){background:var(--rosa)}html[data-fundo=auto] #f-forma .tile,html[data-fundo=auto] #f-ingrediente .tile{background:var(--lilas)}html[data-fundo=auto] #f-talher .tile,html[data-fundo=auto] #f-utensilio .tile,html[data-fundo=auto] #f-louca .tile{background:var(--creme)}html[data-fundo=auto] #f-cozinha .tile{background:var(--rosa)}`;
+document.head.appendChild(css);
+
+let t0 = performance.now(), pausadoEm = 0, deslocado = 0;
+function laco(agora) {
+  if (window._pausado) { if (!pausadoEm) pausadoEm = agora; } else { if (pausadoEm) { deslocado += agora - pausadoEm; pausadoEm = 0; } }
+  const tt = ((window._pausado ? pausadoEm : agora) - t0 - deslocado) / 1000;
+  tiles.forEach((o) => { if (o.vis && !o.erro && o.passo) { try { o.passo(tt); } catch (e) { o.erro = true; console.error(o.F.id, e); } } });
+  requestAnimationFrame(laco);
+}
+
+topo();
+const arranca = () => { construirTudo(); requestAnimationFrame(laco); window._pronto = true; };
+const f1 = document.fonts.load('900 40px "Barlow Condensed"'), f2 = document.fonts.load('600 20px "Outfit"');
+Promise.race([Promise.all([f1, f2]).then(() => document.fonts.ready), new Promise((r) => setTimeout(r, 2500))]).then(arranca);
+})();
+</script>
+</body>
+</html>
