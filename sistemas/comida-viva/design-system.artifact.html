@@ -39,7 +39,7 @@ section.bloco.rosa{background:var(--rosa)}
 /* cartão da peça */
 .card{background:var(--creme);border-radius:24px;overflow:hidden;box-shadow:6px 7px 0 rgba(92,10,36,.28);display:flex;flex-direction:column;color:var(--tinta)}
 .vars{display:grid;gap:3px;background:var(--tinta);grid-template-columns:1fr}
-.vars.n2{grid-template-columns:1fr 1fr}.vars.n3{grid-template-columns:repeat(3,1fr)}
+.vars.n2{grid-template-columns:1fr 1fr}.vars.n3,.vars.n6{grid-template-columns:repeat(3,1fr)}.vars.n6 .tile{height:210px}
 .tile{position:relative;height:270px;background:var(--rosa);overflow:hidden}
 .tile.alto{height:380px}
 .tile.baixo{height:150px}
@@ -114,7 +114,7 @@ footer{padding:36px 6vw 60px;color:var(--creme);font-size:14px;opacity:.9}
 <script>
 window.MANIFESTO = {
   "sistema": "comida-viva",
-  "versao": "0.8.0",
+  "versao": "0.9.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -196,6 +196,9 @@ window.MANIFESTO = {
     "texto": 8,
     "fundos": 6,
     "entrega": 7,
+    "navegacao": 7,
+    "feedback": 8,
+    "maos": 6,
     "transicoes": 5
   },
   "pecas": [
@@ -3524,6 +3527,860 @@ window.MANIFESTO = {
       "movimento": null
     },
     {
+      "id": "seta",
+      "nome": "Seta",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "apontar para um número, uma peça ou o próximo passo; a seta se desenha e a ponta pulsa",
+      "nao_usar_quando": "o ponto já está óbvio na tela, ou há mais de duas setas juntas",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 170
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cor",
+          "padrao": "#EFD600"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o traço se desenha da base até a ponta, a ponta abre e pulsa duas vezes",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "botao",
+      "nome": "Botão",
+      "familia": "navegacao",
+      "tipo": "botao",
+      "serve_para": "chamar para uma ação ('começar', 'baixar', 'enviar'); o botão afunda no clique e solta uma onda",
+      "nao_usar_quando": "o reel não pede uma ação; o texto tem mais de 14 letras",
+      "camada": "meio",
+      "caixa": {
+        "w": 320,
+        "h": 120
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "COMEÇAR"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#EFD600"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o botão afunda, uma onda abre a partir do toque e ele volta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "abas",
+      "nome": "Abas",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "mostrar que o assunto muda de seção ('hoje', 'semana', 'mês'); o destaque desliza de uma aba à outra",
+      "nao_usar_quando": "há só uma seção, ou mais de 4 abas",
+      "camada": "meio",
+      "caixa": {
+        "w": 410,
+        "h": 90
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "itens",
+          "padrao": [
+            "Hoje",
+            "Semana",
+            "Mês"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o destaque desliza pelas abas em ordem e o texto da aba ativa acende",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "menu",
+      "nome": "Menu",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "abrir e fechar o menu de um app ou site; as três barras viram um X",
+      "nao_usar_quando": "o assunto não é uma tela com menu",
+      "camada": "meio",
+      "caixa": {
+        "w": 150,
+        "h": 150
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "as três barras viram um X, ficam um instante e voltam",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "toggle",
+      "nome": "Interruptor",
+      "familia": "navegacao",
+      "tipo": "botao",
+      "serve_para": "mostrar uma opção ligada ou desligada ('automático', 'notificações'); o botão desliza e a cor muda",
+      "nao_usar_quando": "não há nada para ligar ou desligar",
+      "camada": "meio",
+      "caixa": {
+        "w": 210,
+        "h": 110
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o botão desliza para ligar, a trilha fica verde, e depois desliga",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "rolagem",
+      "nome": "Rolagem",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "convidar a rolar a tela ou continuar lendo; a bolinha desce e as setas piscam em onda",
+      "nao_usar_quando": "o conteúdo cabe numa tela só",
+      "camada": "meio",
+      "caixa": {
+        "w": 110,
+        "h": 280
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a bolinha desce dentro da cápsula e três setas piscam uma depois da outra, em loop",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "pontos",
+      "nome": "Pontos de página",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "mostrar a posição numa sequência (passo 2 de 5, slide, carrossel); o ponto ativo estica e anda",
+      "nao_usar_quando": "são mais de 7 passos, ou o passo atual não importa",
+      "camada": "meio",
+      "caixa": {
+        "w": 280,
+        "h": 40
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "n",
+          "padrao": 5
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o ponto ativo estica e desliza pelos pontos até o último",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "certo",
+      "nome": "Certo",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "dizer que deu certo, que a etapa passou ou que algo foi confirmado; o selo estoura e o visto se desenha",
+      "nao_usar_quando": "o resultado é incerto ou parcial (use alerta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o selo verde estoura, o visto se desenha e uma onda abre",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "erro",
+      "nome": "Erro",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "dizer que algo falhou ou foi recusado; o selo treme de lado a lado",
+      "nao_usar_quando": "o problema é pequeno ou já foi resolvido",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o selo aparece, treme de lado a lado e se acalma",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "alerta",
+      "nome": "Alerta",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "chamar atenção para um cuidado, um prazo ou uma exceção; o triângulo balança e pulsa",
+      "nao_usar_quando": "o aviso é uma boa notícia (use certo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 180
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o triângulo entra, balança de um lado ao outro e pulsa duas vezes",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "carregando",
+      "nome": "Carregando",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "dizer 'aguarde': o agente está lendo, pensando ou processando; oito pontos giram em loop",
+      "nao_usar_quando": "a espera é curta demais para merecer aviso (menos de 1 s)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.2,
+        "descricao": "oito pontos giram, o da frente é amarelo e maior, e os de trás apagam",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "estrelas",
+      "nome": "Estrelas",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "mostrar nota ou avaliação (4 de 5); as estrelas acendem uma a uma",
+      "nao_usar_quando": "o número exato importa mais que a sensação (use numero)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 110
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "nota",
+          "padrao": 4
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "as estrelas pulam em sequência até a nota",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "coracao",
+      "nome": "Coração",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "curtir, gostar, 'feito com carinho'; o coração pula e solta faíscas",
+      "nao_usar_quando": "o assunto é saúde ou ritmo cardíaco",
+      "camada": "meio",
+      "caixa": {
+        "w": 240,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o coração pula duas vezes e solta seis faíscas",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "sino",
+      "nome": "Sino",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "avisar, notificar, 'chegou algo novo'; o sino balança e o número do aviso aparece",
+      "nao_usar_quando": "não há aviso para dar",
+      "camada": "meio",
+      "caixa": {
+        "w": 210,
+        "h": 230
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "n",
+          "padrao": 3
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o sino balança de um lado ao outro, diminuindo, e a bolinha com o número aparece",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "confete",
+      "nome": "Confete",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "comemorar uma entrega, uma meta batida ou uma estreia; o confete estoura do centro e cai",
+      "nao_usar_quando": "o assunto é sério ou o resultado não é bom",
+      "camada": "meio",
+      "caixa": {
+        "w": 440,
+        "h": 440
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "o confete estoura do centro, abre em leque, gira e cai com a gravidade",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "aceno",
+      "nome": "Aceno",
+      "familia": "maos",
+      "tipo": "acao",
+      "serve_para": "cumprimentar, abrir o reel ('oi'), despedir; a palma aberta balança de um lado ao outro",
+      "nao_usar_quando": "o assunto é sério ou há mais de uma pessoa na cena (use grupo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 190,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#962E9D"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "a mão aparece e balança três vezes, pivotando no pulso",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "mao_aponta",
+      "nome": "Mão que aponta",
+      "familia": "maos",
+      "tipo": "acao",
+      "serve_para": "mostrar onde clicar ou tocar ('aqui'); o dedo desce, toca e solta uma onda",
+      "nao_usar_quando": "o ponto já está óbvio, ou o assunto não é uma tela",
+      "camada": "meio",
+      "caixa": {
+        "w": 190,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#962E9D"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o dedo desce até a tela, toca, uma onda abre na ponta e a mão volta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "joinha",
+      "nome": "Joinha",
+      "familia": "maos",
+      "tipo": "acao",
+      "serve_para": "aprovar, 'deu certo', 'recomendo'; o polegar sobe com um quique e três riscos de brilho",
+      "nao_usar_quando": "o assunto é negativo ou delicado",
+      "camada": "meio",
+      "caixa": {
+        "w": 190,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#962E9D"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a mão quica para dentro da tela e três riscos de brilho abrem perto do polegar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "avatar",
+      "nome": "Avatar",
+      "familia": "maos",
+      "tipo": "objeto",
+      "serve_para": "representar uma pessoa sem rosto ('o cliente', 'você', 'o time'); 6 penteados (curto, longo, coque, cacheado, careca, lenço) e cores de pele e roupa à escolha",
+      "nao_usar_quando": "a cena exige uma pessoa específica; sem rosto, não identifica ninguém",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cabelo",
+          "padrao": "curto | longo | coque | cacheado | careca | lenco"
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "roupa",
+          "padrao": "#962E9D"
+        },
+        {
+          "nome": "cor_cabelo",
+          "padrao": "#5C0A24"
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "grupo",
+      "nome": "Grupo",
+      "familia": "maos",
+      "tipo": "objeto",
+      "serve_para": "representar um time, uma comunidade ou 'todo mundo'; três avatares lado a lado, o do meio à frente",
+      "nao_usar_quando": "o assunto é uma pessoa só (use avatar)",
+      "camada": "meio",
+      "caixa": {
+        "w": 470,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "peles",
+          "padrao": [
+            "#F5D69E",
+            "#FF87A0",
+            "#F15A22"
+          ]
+        },
+        {
+          "nome": "roupas",
+          "padrao": [
+            "#0C893E",
+            "#E50145",
+            "#962E9D"
+          ]
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "chef",
+      "nome": "Chef",
+      "familia": "maos",
+      "tipo": "objeto",
+      "serve_para": "representar quem cozinha ou prepara ('o chef', 'a nutri', 'feito por gente'); avatar com toque branco e jaleco",
+      "nao_usar_quando": "o assunto não é preparo de comida",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 390
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        }
+      ],
+      "movimento": null
+    },
+    {
       "id": "cortina_forma",
       "nome": "Cortina de Forma",
       "familia": "transicoes",
@@ -5112,6 +5969,438 @@ window.MANIFESTO = {
   Object.assign(EL, { bag, broto, celular, pin, moto, floco, geladeira });
 })();
 
+// ===== navegacao.js =====
+// Família NAVEGAÇÃO: seta, botão, abas, menu, interruptor, rolagem e pontos de página.
+// As peças que o reel usa para dizer "clique aqui", "troque de aba", "role para baixo", "passe para o próximo".
+// Mesmo estilo do resto: formas chapadas com luz e sombra dura (sem contorno preto, sem blur).
+// Origem das coordenadas: o CENTRO de cada peça. Todas animam em p (0..1) e t (segundos).
+(() => {
+  const { C, el, clamp, ease, back, reg } = EL;
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const mover = (g, x, y, s = 1, rot = 0) => g.setAttribute("transform", `translate(${x} ${y}) rotate(${rot}) scale(${s})`);
+  const nova = (pai, x, y, s, rot) => { const g = el("g", {}, pai); mover(g, x, y, s, rot); return g; };
+  const mix = (a, b, u) => { const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16)), pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16)); return "#" + pa.map((v, i) => Math.round(lerp(v, pb[i], u)).toString(16).padStart(2, "0")).join(""); };
+  const UI = 'font-family:Outfit,"Segoe UI",sans-serif;font-weight:700;text-transform:none';
+  const DISP = 'font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase';
+  const txt = (pai, x, y, t, fs, fill, estilo = UI, anchor = "middle") => { const e = el("text", { x, y, "font-size": fs, fill, "text-anchor": anchor, style: estilo }, pai); e.textContent = t; return e; };
+  const P3 = [{ nome: "x", padrao: 0 }, { nome: "y", padrao: 0 }, { nome: "s", padrao: 1 }, { nome: "rot", padrao: 0 }];
+  const A = (flat) => ({
+    flat,
+    f: (c) => ({ fill: flat ? C.tinta : c }),
+    s: (c, w) => ({ fill: "none", stroke: flat ? C.tinta : c, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round" }),
+  });
+  const montar = (pai, o = {}, build) => {
+    const { x = 0, y = 0, s = 1, rot = 0, sombra = true } = o;
+    const g = nova(pai, x, y, s, rot);
+    const sh = sombra ? el("g", { transform: "translate(14 12)", opacity: .24 }, g) : null;
+    const ss = sh ? build(sh, A(true), o) : null, ms = build(g, A(false), o);
+    return { g, set: (p = 0, t = 0) => { if (ss) ss(p, t); ms(p, t); } };
+  };
+  const acao = (id, nome, tipo, serve_para, nao_usar_quando, caixa, duracao_s, descricao, extras, build) => {
+    reg({ id, nome, familia: "navegacao", tipo, serve_para, nao_usar_quando, camada: "meio", caixa, parametros: [...P3, ...extras], movimento: { param: "p", duracao_s, descricao, usa_t: true } });
+    return (pai, o = {}) => montar(pai, o, build);
+  };
+
+  // ============ SETA: aponta para o que importa ============
+  const seta = acao("seta", "Seta", "navegacao", "apontar para um número, uma peça ou o próximo passo; a seta se desenha e a ponta pulsa", "o ponto já está óbvio na tela, ou há mais de duas setas juntas", { w: 300, h: 170 }, 1.8,
+    "o traço se desenha da base até a ponta, a ponta abre e pulsa duas vezes", [{ nome: "cor", padrao: C.amarelo }], (g, a, o) => {
+      const cor = o.cor || C.amarelo;
+      const d = "M-130 55C-70 -55 30 -65 100 -22";
+      const tr = el("path", { d, pathLength: 1, ...a.s(cor, 26) }, g);
+      const ponta = el("g", {}, g); el("path", { d: "M0 -34L58 0L0 34Z", ...a.f(cor), stroke: a.flat ? C.tinta : cor, "stroke-width": 12, "stroke-linejoin": "round" }, ponta);
+      const ang = Math.atan2(43, 70) * 180 / Math.PI;
+      return (p) => {
+        const u = ease(clamp(p / .5));
+        tr.setAttribute("stroke-dasharray", "1 1"); tr.setAttribute("stroke-dashoffset", 1 - u); tr.setAttribute("opacity", p > 0 ? 1 : 0);
+        const k = Math.max(0, back(clamp((p - .45) / .2))), pulso = 1 + .12 * Math.max(0, Math.sin(Math.PI * clamp((p - .7) / .3) * 2));
+        mover(ponta, 100, -22, k * pulso, ang);
+      };
+    });
+
+  // ============ BOTÃO: o clique ============
+  const botao = acao("botao", "Botão", "botao", "chamar para uma ação ('começar', 'baixar', 'enviar'); o botão afunda no clique e solta uma onda", "o reel não pede uma ação; o texto tem mais de 14 letras", { w: 320, h: 120 }, 1.8,
+    "o botão afunda, uma onda abre a partir do toque e ele volta", [{ nome: "rotulo", padrao: "COMEÇAR" }, { nome: "cor", padrao: C.amarelo }], (g, a, o) => {
+      const rot = String(o.rotulo || "COMEÇAR").toUpperCase(), cor = o.cor || C.amarelo;
+      const w = clamp(rot.length * 30 + 90, 230, 520);
+      el("rect", { x: -w / 2, y: -38 + 12, width: w, height: 92, rx: 46, ...a.f(mix(cor, C.tinta, .35)) }, g);
+      const face = el("g", {}, g);
+      el("rect", { x: -w / 2, y: -46, width: w, height: 92, rx: 46, ...a.f(cor) }, face);
+      let onda = null;
+      if (!a.flat) {
+        el("path", { d: `M${-w / 2 + 34} -26H${w / 2 - 34}`, ...a.s("#fff", 6), "stroke-opacity": .45 }, face);
+        txt(face, 0, 14, rot, 52, C.tinta, DISP);
+        onda = el("rect", { x: 0, y: 0, width: 0, height: 0, rx: 0, fill: "none", stroke: C.creme, "stroke-width": 6, opacity: 0 }, g);
+      }
+      return (p) => {
+        const d = Math.sin(Math.PI * clamp((p - .3) / .22));
+        face.setAttribute("transform", `translate(0 ${10 * d})`);
+        if (onda) { const q = clamp((p - .42) / .5), e = ease(q), ww = w + 70 * e, hh = 92 + 70 * e; onda.setAttribute("x", -ww / 2); onda.setAttribute("y", -46 + 6 - (hh - 92) / 2 + 40 - 40); onda.setAttribute("width", ww); onda.setAttribute("height", hh); onda.setAttribute("rx", hh / 2); onda.setAttribute("opacity", q > 0 && q < 1 ? .8 * (1 - q) : 0); }
+      };
+    });
+
+  // ============ ABAS: troca de seção ============
+  const abas = acao("abas", "Abas", "navegacao", "mostrar que o assunto muda de seção ('hoje', 'semana', 'mês'); o destaque desliza de uma aba à outra", "há só uma seção, ou mais de 4 abas", { w: 410, h: 90 }, 3,
+    "o destaque desliza pelas abas em ordem e o texto da aba ativa acende", [{ nome: "itens", padrao: ["Hoje", "Semana", "Mês"] }], (g, a, o) => {
+      const itens = o.itens || ["Hoje", "Semana", "Mês"], n = itens.length, tw = 132, W = tw * n + 14;
+      el("rect", { x: -W / 2, y: -42, width: W, height: 84, rx: 42, ...a.f("#fff") }, g);
+      const ind = el("rect", { x: 0, y: -35, width: tw, height: 70, rx: 35, ...a.f(C.cereja) }, g);
+      const ts = a.flat ? [] : itens.map((it, i) => txt(g, -W / 2 + 7 + tw * i + tw / 2, 11, it, 32, C.tinta, UI));
+      return (p) => {
+        const f = clamp((p - .12) / .76) * (n - 1), i = Math.min(n - 2, Math.floor(f)), fr = f - i;
+        const pos = n === 1 ? 0 : i + ease(clamp((fr - .45) / .55));
+        ind.setAttribute("x", -W / 2 + 7 + tw * pos);
+        ts.forEach((t, k) => t.setAttribute("fill", Math.abs(k - pos) < .5 ? C.creme : C.tinta));
+      };
+    });
+
+  // ============ MENU: hambúrguer que vira X ============
+  const menu = acao("menu", "Menu", "navegacao", "abrir e fechar o menu de um app ou site; as três barras viram um X", "o assunto não é uma tela com menu", { w: 150, h: 150 }, 2.4,
+    "as três barras viram um X, ficam um instante e voltam", [], (g, a) => {
+      el("circle", { r: 72, ...a.f(C.creme) }, g);
+      const barras = [-1, 0, 1].map(() => { const b = el("g", {}, g); el("rect", { x: -34, y: -6, width: 68, height: 12, rx: 6, ...a.f(C.tinta) }, b); return b; });
+      return (p) => {
+        const u = ease(clamp((p - .12) / .28)) * (1 - ease(clamp((p - .58) / .28)));
+        mover(barras[0], 0, -22 * (1 - u), 1, 45 * u);
+        mover(barras[1], 0, 0, 1 - u, 0); barras[1].setAttribute("opacity", 1 - u);
+        mover(barras[2], 0, 22 * (1 - u), 1, -45 * u);
+      };
+    });
+
+  // ============ INTERRUPTOR: liga e desliga ============
+  const toggle = acao("toggle", "Interruptor", "botao", "mostrar uma opção ligada ou desligada ('automático', 'notificações'); o botão desliza e a cor muda", "não há nada para ligar ou desligar", { w: 210, h: 110 }, 2.6,
+    "o botão desliza para ligar, a trilha fica verde, e depois desliga", [], (g, a) => {
+      const tr = el("rect", { x: -100, y: -50, width: 200, height: 100, rx: 50, ...a.f("#CFC6D6") }, g);
+      const bt = el("g", {}, g);
+      el("circle", { r: 40, ...a.f("#fff") }, bt);
+      let mk = null;
+      if (!a.flat) { el("path", { d: "M-12 2L-3 12L14 -10", ...a.s(C.verde, 8), opacity: 0 }, bt); mk = bt.lastChild; }
+      return (p) => {
+        const u = ease(clamp((p - .15) / .25)) * (1 - ease(clamp((p - .6) / .25)));
+        const sq = Math.sin(Math.PI * clamp((p - .15) / .25)) + Math.sin(Math.PI * clamp((p - .6) / .25));
+        mover(bt, lerp(-50, 50, u), 0, 1); bt.firstChild.setAttribute("rx", 40); bt.firstChild.setAttribute("transform", `scale(${1 + .18 * sq} ${1 - .06 * sq})`);
+        if (!a.flat) tr.setAttribute("fill", mix("#CFC6D6", C.verde, u));
+        if (mk) mk.setAttribute("opacity", u > .6 ? 1 : 0);
+      };
+    });
+
+  // ============ ROLAGEM: 'role para baixo' ============
+  const rolagem = acao("rolagem", "Rolagem", "navegacao", "convidar a rolar a tela ou continuar lendo; a bolinha desce e as setas piscam em onda", "o conteúdo cabe numa tela só", { w: 110, h: 280 }, 1.6,
+    "a bolinha desce dentro da cápsula e três setas piscam uma depois da outra, em loop", [], (g, a) => {
+      el("rect", { x: -45, y: -130, width: 90, height: 150, rx: 45, ...a.s(C.creme, 10) }, g);
+      const bola = el("circle", { cx: 0, cy: -90, r: 11, ...a.f(C.creme) }, g);
+      const ch = [0, 1, 2].map((i) => el("path", { d: "M-28 0L0 24L28 0", ...a.s(C.creme, 10), transform: `translate(0 ${64 + i * 32})` }, g));
+      return (p) => {
+        const u = ease((p * 1.25) % 1);
+        bola.setAttribute("cy", lerp(-92, -18, u)); bola.setAttribute("opacity", Math.sin(Math.PI * clamp(u * 1.05)));
+        ch.forEach((c, i) => c.setAttribute("opacity", .25 + .75 * Math.max(0, Math.sin(Math.PI * (((p * 1.25 + (2 - i) * .22) % 1))))));
+      };
+    });
+
+  // ============ PONTOS: página 1 de 5 ============
+  const pontos = acao("pontos", "Pontos de página", "navegacao", "mostrar a posição numa sequência (passo 2 de 5, slide, carrossel); o ponto ativo estica e anda", "são mais de 7 passos, ou o passo atual não importa", { w: 280, h: 40 }, 3,
+    "o ponto ativo estica e desliza pelos pontos até o último", [{ nome: "n", padrao: 5 }], (g, a, o) => {
+      const n = clamp(Math.round(o.n || 5), 2, 7), gap = 48, x0 = -gap * (n - 1) / 2;
+      for (let i = 0; i < n; i++) el("circle", { cx: x0 + gap * i, cy: 0, r: 12, ...a.f(C.creme), "fill-opacity": a.flat ? 1 : .55 }, g);
+      const at = el("rect", { x: 0, y: -12, width: 56, height: 24, rx: 12, ...a.f(C.amarelo) }, g);
+      return (p) => {
+        const f = clamp((p - .1) / .8) * (n - 1), i = Math.min(n - 2, Math.floor(f)), fr = f - i;
+        const pos = i + ease(clamp((fr - .35) / .65)), esticar = Math.sin(Math.PI * clamp((fr - .35) / .65));
+        at.setAttribute("x", x0 + gap * pos - 12 - 14 * esticar * 0); at.setAttribute("width", 24 + 32 * esticar);
+      };
+    });
+
+  Object.assign(EL, { seta, botao, abas, menu, toggle, rolagem, pontos });
+})();
+
+// ===== feedback.js =====
+// Família FEEDBACK: certo, erro, alerta, carregando, estrelas, coração, sino e confete.
+// O que o reel mostra para dizer "deu certo", "deu errado", "atenção", "aguarde", "nota", "curti", "avisou" e "comemora".
+// Mesmo estilo do resto: formas chapadas com luz e sombra dura (sem contorno preto, sem blur).
+// Origem das coordenadas: o CENTRO de cada peça. Todas animam em p (0..1) e t (segundos).
+(() => {
+  const { C, el, clamp, ease, back, reg } = EL;
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const mover = (g, x, y, s = 1, rot = 0) => g.setAttribute("transform", `translate(${x} ${y}) rotate(${rot}) scale(${s})`);
+  const nova = (pai, x, y, s, rot) => { const g = el("g", {}, pai); mover(g, x, y, s, rot); return g; };
+  const UI = 'font-family:Outfit,"Segoe UI",sans-serif;font-weight:700;text-transform:none';
+  const DISP = 'font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase';
+  const txt = (pai, x, y, t, fs, fill, estilo = UI, anchor = "middle") => { const e = el("text", { x, y, "font-size": fs, fill, "text-anchor": anchor, style: estilo }, pai); e.textContent = t; return e; };
+  const P3 = [{ nome: "x", padrao: 0 }, { nome: "y", padrao: 0 }, { nome: "s", padrao: 1 }, { nome: "rot", padrao: 0 }];
+  const A = (flat) => ({
+    flat,
+    f: (c) => ({ fill: flat ? C.tinta : c }),
+    s: (c, w) => ({ fill: "none", stroke: flat ? C.tinta : c, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round" }),
+  });
+  const montar = (pai, o = {}, build) => {
+    const { x = 0, y = 0, s = 1, rot = 0, sombra = true } = o;
+    const g = nova(pai, x, y, s, rot);
+    const sh = sombra ? el("g", { transform: "translate(14 12)", opacity: .24 }, g) : null;
+    const ss = sh ? build(sh, A(true), o) : null, ms = build(g, A(false), o);
+    return { g, set: (p = 0, t = 0) => { if (ss) ss(p, t); ms(p, t); } };
+  };
+  const acao = (id, nome, serve_para, nao_usar_quando, caixa, duracao_s, descricao, extras, build) => {
+    reg({ id, nome, familia: "feedback", tipo: "feedback", serve_para, nao_usar_quando, camada: "meio", caixa, parametros: [...P3, ...extras], movimento: { param: "p", duracao_s, descricao, usa_t: true } });
+    return (pai, o = {}) => montar(pai, o, build);
+  };
+  const pop = (p, u0, u1) => Math.max(0, back(clamp((p - u0) / (u1 - u0))));
+  const estrelaPts = (r, ri) => Array.from({ length: 10 }, (_, i) => { const a = -Math.PI / 2 + i * Math.PI / 5, q = i % 2 ? ri : r; return `${(Math.cos(a) * q).toFixed(1)},${(Math.sin(a) * q).toFixed(1)}`; }).join(" ");
+
+  // ============ CERTO ============
+  const certo = acao("certo", "Certo", "dizer que deu certo, que a etapa passou ou que algo foi confirmado; o selo estoura e o visto se desenha", "o resultado é incerto ou parcial (use alerta)", { w: 200, h: 200 }, 1.6,
+    "o selo verde estoura, o visto se desenha e uma onda abre", [], (g, a) => {
+      const onda = a.flat ? null : el("circle", { r: 90, ...a.s(C.creme, 6), opacity: 0 }, g);
+      const sel = el("g", {}, g);
+      el("circle", { r: 90, ...a.f(C.verde) }, sel);
+      let vi = null;
+      if (!a.flat) { el("path", { d: "M-38 4L-10 32L42 -28", pathLength: 1, ...a.s(C.creme, 18) }, sel); vi = sel.lastChild; el("circle", { r: 90, ...a.s(C.creme, 8) }, sel); el("path", { d: "M-60 -46A74 74 0 0 1 -22 -72", ...a.s("#fff", 7), "stroke-opacity": .5 }, sel); }
+      return (p) => {
+        mover(sel, 0, 0, pop(p, 0, .3));
+        if (vi) { const u = ease(clamp((p - .22) / .28)); vi.setAttribute("stroke-dasharray", "1 1"); vi.setAttribute("stroke-dashoffset", 1 - u); vi.setAttribute("opacity", u > 0 ? 1 : 0); }
+        if (onda) { const q = clamp((p - .3) / .5); onda.setAttribute("r", lerp(90, 150, ease(q))); onda.setAttribute("opacity", q > 0 && q < 1 ? .7 * (1 - q) : 0); }
+      };
+    });
+
+  // ============ ERRO ============
+  const erro = acao("erro", "Erro", "dizer que algo falhou ou foi recusado; o selo treme de lado a lado", "o problema é pequeno ou já foi resolvido", { w: 200, h: 200 }, 1.6,
+    "o selo aparece, treme de lado a lado e se acalma", [], (g, a) => {
+      const sel = el("g", {}, g);
+      el("circle", { r: 90, ...a.f(C.cerejaEsc) }, sel);
+      if (!a.flat) { el("circle", { r: 90, ...a.s(C.creme, 8) }, sel); el("path", { d: "M-34 -34L34 34M34 -34L-34 34", ...a.s(C.creme, 18) }, sel); el("path", { d: "M-60 -46A74 74 0 0 1 -22 -72", ...a.s("#fff", 7), "stroke-opacity": .35 }, sel); }
+      return (p) => { const tr = Math.sin(p * Math.PI * 12) * 16 * clamp((p - .25) / .1) * (1 - clamp((p - .35) / .45)); mover(sel, tr, 0, pop(p, 0, .25)); };
+    });
+
+  // ============ ALERTA ============
+  const alerta = acao("alerta", "Alerta", "chamar atenção para um cuidado, um prazo ou uma exceção; o triângulo balança e pulsa", "o aviso é uma boa notícia (use certo)", { w: 200, h: 180 }, 1.8,
+    "o triângulo entra, balança de um lado ao outro e pulsa duas vezes", [], (g, a) => {
+      const sel = el("g", {}, g);
+      el("path", { d: "M0 -76L88 74H-88Z", ...a.f(C.amarelo), stroke: a.flat ? C.tinta : C.amarelo, "stroke-width": 26, "stroke-linejoin": "round" }, sel);
+      if (!a.flat) { el("path", { d: "M0 -26V24", ...a.s(C.tinta, 17) }, sel); el("circle", { cy: 50, r: 10, ...a.f(C.tinta) }, sel); el("path", { d: "M-34 -2L-8 -46", ...a.s("#fff", 7), "stroke-opacity": .55 }, sel); }
+      return (p) => {
+        const ba = Math.sin(p * Math.PI * 6) * 9 * clamp((p - .2) / .1) * (1 - clamp((p - .45) / .45));
+        const pu = 1 + .08 * Math.max(0, Math.sin(Math.PI * clamp((p - .55) / .4) * 2));
+        mover(sel, 0, 8, pop(p, 0, .22) * pu, ba);
+      };
+    });
+
+  // ============ CARREGANDO ============
+  const carregando = acao("carregando", "Carregando", "dizer 'aguarde': o agente está lendo, pensando ou processando; oito pontos giram em loop", "a espera é curta demais para merecer aviso (menos de 1 s)", { w: 200, h: 200 }, 1.2,
+    "oito pontos giram, o da frente é amarelo e maior, e os de trás apagam", [], (g, a) => {
+      const ps = Array.from({ length: 8 }, (_, i) => { const an = i * Math.PI / 4 - Math.PI / 2; return el("circle", { cx: Math.cos(an) * 74, cy: Math.sin(an) * 74, r: 18, ...a.f(C.creme) }, g); });
+      return (p) => ps.forEach((c, i) => {
+        const d = ((p * 8 - i) % 8 + 8) % 8, v = 1 - d / 8, forte = d < 1.2;
+        c.setAttribute("opacity", a.flat ? 1 : .25 + .75 * v); c.setAttribute("r", 11 + 9 * v);
+        if (!a.flat) c.setAttribute("fill", forte ? C.amarelo : C.creme);
+      });
+    });
+
+  // ============ ESTRELAS ============
+  const estrelas = acao("estrelas", "Estrelas", "mostrar nota ou avaliação (4 de 5); as estrelas acendem uma a uma", "o número exato importa mais que a sensação (use numero)", { w: 520, h: 110 }, 2,
+    "as estrelas pulam em sequência até a nota", [{ nome: "nota", padrao: 4 }], (g, a, o) => {
+      const nota = clamp(o.nota == null ? 4 : o.nota, 0, 5), gap = 104;
+      const es = [0, 1, 2, 3, 4].map((i) => {
+        const e = el("g", {}, g); mover(e, (i - 2) * gap, 0);
+        el("polygon", { points: estrelaPts(52, 24), ...a.f(C.creme), "fill-opacity": a.flat ? 1 : .3, stroke: a.flat ? C.tinta : C.creme, "stroke-opacity": a.flat ? 1 : .3, "stroke-width": 10, "stroke-linejoin": "round" }, e);
+        const c = el("g", {}, e);
+        el("polygon", { points: estrelaPts(52, 24), ...a.f(C.amarelo), stroke: a.flat ? C.tinta : C.amarelo, "stroke-width": 10, "stroke-linejoin": "round" }, c);
+        if (!a.flat) el("path", { d: "M-18 -24L-6 -42", ...a.s("#fff", 6), "stroke-opacity": .7 }, c);
+        return { e, c, x: (i - 2) * gap };
+      });
+      return (p) => es.forEach(({ e, c, x }, i) => {
+        const cheia = i < Math.floor(nota), u = pop(p, .1 + i * .13, .1 + i * .13 + .22);
+        mover(e, x, -10 * Math.sin(Math.PI * clamp((p - .1 - i * .13) / .22)) * (cheia ? 1 : 0));
+        mover(c, 0, 0, cheia ? u : 0);
+      });
+    });
+
+  // ============ CORAÇÃO ============
+  const coracao = acao("coracao", "Coração", "curtir, gostar, 'feito com carinho'; o coração pula e solta faíscas", "o assunto é saúde ou ritmo cardíaco", { w: 240, h: 240 }, 1.6,
+    "o coração pula duas vezes e solta seis faíscas", [], (g, a) => {
+      const fa = a.flat ? [] : Array.from({ length: 6 }, (_, i) => { const r = el("rect", { x: -4, y: -22, width: 8, height: 24, rx: 4, ...a.f(i % 2 ? C.amarelo : C.creme) }, g); return { r, an: i * 60 - 90 }; });
+      const co = el("g", {}, g);
+      el("path", { d: "M0 70C-96 4 -84 -80 -38 -78C-16 -76 0 -58 0 -44C0 -58 16 -76 38 -78C84 -80 96 4 0 70Z", ...a.f(C.cereja), stroke: a.flat ? C.tinta : C.creme, "stroke-width": 9, "stroke-linejoin": "round" }, co);
+      if (!a.flat) el("path", { d: "M-62 -34C-70 -52 -54 -66 -38 -62", ...a.s("#fff", 8), "stroke-opacity": .55 }, co);
+      return (p) => {
+        const b = Math.max(0, Math.sin(Math.PI * clamp((p - .15) / .2))) + .7 * Math.max(0, Math.sin(Math.PI * clamp((p - .4) / .2)));
+        mover(co, 0, 4, pop(p, 0, .16) * (1 + .14 * b));
+        fa.forEach(({ r, an }) => { const q = clamp((p - .16) / .55), d = lerp(70, 118, ease(q)); mover(r, Math.cos(an * Math.PI / 180) * d, Math.sin(an * Math.PI / 180) * d, 1, an + 90); r.setAttribute("opacity", q > 0 && q < 1 ? 1 - q : 0); });
+      };
+    });
+
+  // ============ SINO ============
+  const sino = acao("sino", "Sino", "avisar, notificar, 'chegou algo novo'; o sino balança e o número do aviso aparece", "não há aviso para dar", { w: 210, h: 230 }, 1.8,
+    "o sino balança de um lado ao outro, diminuindo, e a bolinha com o número aparece", [{ nome: "n", padrao: 3 }], (g, a, o) => {
+      const sw = el("g", {}, g);
+      el("circle", { cy: -102, r: 13, ...a.f(C.amarelo) }, sw);
+      el("path", { d: "M0 -92C-52 -92 -66 -42 -66 0C-66 40 -92 56 -92 72H92C92 56 66 40 66 0C66 -42 52 -92 0 -92Z", ...a.f(C.amarelo) }, sw);
+      el("circle", { cy: 90, r: 20, ...a.f(C.laranja) }, sw);
+      if (!a.flat) { el("path", { d: "M-44 -34C-50 -14 -48 8 -48 20", ...a.s("#fff", 8), "stroke-opacity": .6 }, sw); el("path", { d: "M-90 72H90", ...a.s(C.laranja, 10) }, sw); }
+      const bd = el("g", {}, g); let nt = null;
+      el("circle", { cx: 62, cy: -66, r: 34, ...a.f(C.cereja), stroke: a.flat ? C.tinta : C.creme, "stroke-width": 8 }, bd);
+      if (!a.flat) nt = txt(bd, 62, -52, String(o.n == null ? 3 : o.n), 40, C.creme, DISP);
+      return (p) => {
+        const an = Math.sin(p * Math.PI * 7) * 20 * Math.exp(-3 * clamp((p - .05) / .8)) * clamp(p / .05);
+        sw.setAttribute("transform", `rotate(${an} 0 -102)`);
+        mover(bd, 0, 0, pop(p, .25, .5));
+      };
+    });
+
+  // ============ CONFETE ============
+  const CF = [C.amarelo, C.creme, C.laranja, C.menta, C.lilas, C.rosa];
+  const confete = acao("confete", "Confete", "comemorar uma entrega, uma meta batida ou uma estreia; o confete estoura do centro e cai", "o assunto é sério ou o resultado não é bom", { w: 440, h: 440 }, 2.2,
+    "o confete estoura do centro, abre em leque, gira e cai com a gravidade", [], (g, a) => {
+      if (a.flat) return () => {};
+      const ps = Array.from({ length: 22 }, (_, i) => {
+        const an = (i * 360 / 22 + (i % 3) * 7) * Math.PI / 180, v = 130 + (i * 37 % 90), tipo = i % 3, cor = CF[i % CF.length];
+        const e = tipo === 0 ? el("rect", { x: -9, y: -5, width: 18, height: 10, rx: 3, fill: cor }, g) : tipo === 1 ? el("circle", { r: 7, fill: cor }, g) : el("path", { d: "M-9 6L0 -8L9 6Z", fill: cor, "stroke-linejoin": "round" }, g);
+        return { e, an, v, r0: i * 53 };
+      });
+      return (p) => ps.forEach(({ e, an, v, r0 }) => {
+        const q = clamp((p - .06) / .88), ex = ease(clamp(q / .5));
+        mover(e, Math.cos(an) * v * ex, Math.sin(an) * v * ex + 240 * q * q, 1, r0 + q * 500);
+        e.setAttribute("opacity", q > 0 && q < 1 ? Math.min(1, (1 - q) * 3) : 0);
+      });
+    });
+
+  Object.assign(EL, { certo, erro, alerta, carregando, estrelas, coracao, sino, confete });
+})();
+
+// ===== maos.js =====
+// Família MÃOS E PESSOAS: mão que aponta, joinha, aceno, avatar (6 penteados), grupo e chef.
+// Formas chapadas e sem rosto, no mesmo estilo do resto: luz e sombra dura, sem contorno preto, sem blur.
+// As cores de pele são PARÂMETRO e vêm da paleta (areia, rosa, laranja, lilás, menta...), nunca de um tom 'realista':
+// o reel escolhe a cor, e a mesma peça serve a qualquer pessoa. Origem das coordenadas: o CENTRO de cada peça.
+(() => {
+  const { C, el, clamp, ease, back, reg } = EL;
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const mover = (g, x, y, s = 1, rot = 0) => g.setAttribute("transform", `translate(${x} ${y}) rotate(${rot}) scale(${s})`);
+  const nova = (pai, x, y, s, rot) => { const g = el("g", {}, pai); mover(g, x, y, s, rot); return g; };
+  const mix = (a, b, u) => { const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16)), pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16)); return "#" + pa.map((v, i) => Math.round(lerp(v, pb[i], u)).toString(16).padStart(2, "0")).join(""); };
+  const P3 = [{ nome: "x", padrao: 0 }, { nome: "y", padrao: 0 }, { nome: "s", padrao: 1 }, { nome: "rot", padrao: 0 }];
+  const A = (flat) => ({
+    flat,
+    f: (c) => ({ fill: flat ? C.tinta : c }),
+    s: (c, w) => ({ fill: "none", stroke: flat ? C.tinta : c, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round" }),
+  });
+  const montar = (pai, o = {}, build) => {
+    const { x = 0, y = 0, s = 1, rot = 0, sombra = true } = o;
+    const g = nova(pai, x, y, s, rot);
+    const sh = sombra ? el("g", { transform: "translate(14 12)", opacity: .24 }, g) : null;
+    const ss = sh ? build(sh, A(true), o) : null, ms = build(g, A(false), o);
+    return { g, set: (p = 0, t = 0) => { if (ss) ss(p, t); ms(p, t); } };
+  };
+  const PELE = { nome: "pele", padrao: C.areia }, MANGA = { nome: "manga", padrao: C.roxo };
+  const objeto = (id, nome, tipo, serve_para, nao_usar_quando, caixa, extras, build) => {
+    reg({ id, nome, familia: "maos", tipo, serve_para, nao_usar_quando, camada: "meio", caixa, parametros: [...P3, ...extras], movimento: null });
+    return (pai, o = {}) => { const m = montar(pai, o, build); m.set(0, 0); return m.g; };
+  };
+  const acao = (id, nome, serve_para, nao_usar_quando, caixa, duracao_s, descricao, extras, build) => {
+    reg({ id, nome, familia: "maos", tipo: "acao", serve_para, nao_usar_quando, camada: "meio", caixa, parametros: [...P3, ...extras], movimento: { param: "p", duracao_s, descricao, usa_t: true } });
+    return (pai, o = {}) => montar(pai, o, build);
+  };
+  const pop = (p, u0, u1) => Math.max(0, back(clamp((p - u0) / (u1 - u0))));
+
+  // ---------- partes de mão ----------
+  const manga = (g, a, o) => { el("rect", { x: -58, y: 112, width: 116, height: 58, rx: 14, ...a.f(o.manga || C.roxo) }, g); if (!a.flat) el("path", { d: "M-44 124V158", ...a.s("#fff", 6), "stroke-opacity": .3 }, g); };
+  const vinco = (g, a, pele, d) => { if (!a.flat) g.appendChild(Object.assign(el("path", { d, ...a.s(mix(pele, C.tinta, .22), 5), "stroke-opacity": .8 }), {})); };
+
+  // ============ ACENO: a palma aberta ============
+  const aceno = acao("aceno", "Aceno", "cumprimentar, abrir o reel ('oi'), despedir; a palma aberta balança de um lado ao outro", "o assunto é sério ou há mais de uma pessoa na cena (use grupo)", { w: 190, h: 330 }, 1.8,
+    "a mão aparece e balança três vezes, pivotando no pulso", [PELE, MANGA], (g, a, o) => {
+      const pele = o.pele || C.areia, todo = el("g", {}, g), mao = el("g", {}, todo);
+      [[-42, -112], [-14, -144], [14, -134], [42, -100]].forEach(([x, y]) => el("rect", { x: x - 14, y, width: 28, height: 150, rx: 14, ...a.f(pele) }, mao));
+      el("rect", { x: -56, y: -14, width: 112, height: 134, rx: 46, ...a.f(pele) }, mao);
+      const po = el("g", {}, mao); mover(po, -50, 66, 1, -52); el("rect", { x: -16, y: -96, width: 32, height: 118, rx: 16, ...a.f(pele) }, po);
+      if (!a.flat) { vinco(mao, a, pele, "M-30 70C-8 84 22 84 44 66"); vinco(mao, a, pele, "M-14 -80V-26M14 -72V-26M-40 -56V-26"); el("path", { d: "M-50 -2C-52 20 -50 40 -46 56", ...a.s("#fff", 7), "stroke-opacity": .45 }, mao); }
+      manga(todo, a, o);
+      return (p) => {
+        const ba = Math.sin(p * Math.PI * 6) * 16 * clamp((p - .15) / .1) * (1 - clamp((p - .7) / .3));
+        mao.setAttribute("transform", `rotate(${ba} 0 112)`);
+        mover(todo, 0, 0, Math.max(.001, pop(p, 0, .2)));
+      };
+    });
+
+  // ============ MÃO QUE APONTA: o toque ============
+  const aponta = acao("mao_aponta", "Mão que aponta", "mostrar onde clicar ou tocar ('aqui'); o dedo desce, toca e solta uma onda", "o ponto já está óbvio, ou o assunto não é uma tela", { w: 190, h: 330 }, 1.8,
+    "o dedo desce até a tela, toca, uma onda abre na ponta e a mão volta", [PELE, MANGA], (g, a, o) => {
+      const pele = o.pele || C.areia, onda = a.flat ? null : el("circle", { cx: -28, cy: -128, r: 20, ...a.s(C.creme, 6), opacity: 0 }, g);
+      const mao = el("g", {}, g);
+      el("path", { d: "M-28 -10V-112", ...a.s(pele, 34) }, mao);
+      el("rect", { x: -62, y: -28, width: 124, height: 140, rx: 44, ...a.f(pele) }, mao);
+      el("path", { d: "M-60 56L-12 26", ...a.s(pele, 32) }, mao);
+      if (!a.flat) { vinco(mao, a, pele, "M-4 8H48M-4 38H48M-4 68H44"); vinco(mao, a, pele, "M-62 52L-30 34"); el("path", { d: "M-42 -100V-40", ...a.s("#fff", 6), "stroke-opacity": .5 }, mao); }
+      manga(g, a, o);
+      return (p) => {
+        const d = Math.sin(Math.PI * clamp((p - .3) / .3)), tap = Math.sin(Math.PI * clamp((p - .3) / .3)) > .85;
+        mover(mao, 0, -26 * d + lerp(40, 0, ease(clamp(p / .2))), 1);
+        if (onda) { const q = clamp((p - .5) / .45); onda.setAttribute("r", lerp(20, 64, ease(q))); onda.setAttribute("opacity", q > 0 && q < 1 ? .85 * (1 - q) : 0); }
+      };
+    });
+
+  // ============ JOINHA ============
+  const joinha = acao("joinha", "Joinha", "aprovar, 'deu certo', 'recomendo'; o polegar sobe com um quique e três riscos de brilho", "o assunto é negativo ou delicado", { w: 190, h: 330 }, 1.6,
+    "a mão quica para dentro da tela e três riscos de brilho abrem perto do polegar", [PELE, MANGA], (g, a, o) => {
+      const pele = o.pele || C.areia, mao = el("g", {}, g);
+      // polegar para cima e quatro dedos dobrados à direita (a leitura de 'joinha' vem dessa pilha de dedos)
+      el("rect", { x: -76, y: -6, width: 152, height: 126, rx: 44, ...a.f(pele) }, mao);
+      [0, 1, 2, 3].forEach((i) => el("rect", { x: -20, y: -2 + i * 30, width: 100, height: 32, rx: 16, ...a.f(pele) }, mao));
+      el("path", { d: "M-46 8V-98", ...a.s(pele, 44) }, mao);
+      if (!a.flat) { vinco(mao, a, pele, "M-4 28H70M-4 58H70M-4 88H66"); el("path", { d: "M-58 -86V-40", ...a.s("#fff", 7), "stroke-opacity": .5 }, mao); }
+      manga(g, a, o);
+      const ri = a.flat ? [] : [-40, 0, 40].map((an) => { const r = el("rect", { x: -4, y: -20, width: 8, height: 28, rx: 4, ...a.f(C.amarelo) }, g); return { r, an }; });
+      return (p) => {
+        mover(mao, 0, 0, pop(p, 0, .3), (1 - clamp(p / .3)) * -12);
+        ri.forEach(({ r, an }) => { const q = clamp((p - .35) / .45), d = lerp(40, 74, ease(q)), t0 = (an - 20) * Math.PI / 180; mover(r, -46 + Math.sin(an * Math.PI / 180) * d, -128 - Math.cos(an * Math.PI / 180) * d, 1, an); r.setAttribute("opacity", q > 0 && q < 1 ? 1 - q : 0); });
+      };
+    });
+
+  // ============ AVATAR: pessoa sem rosto, 6 penteados ============
+  const HAIR = ["curto", "longo", "coque", "cacheado", "careca", "lenco"];
+  const bust = (g, a, o) => {
+    const pele = o.pele || C.areia, roupa = o.roupa || C.roxo, cab = o.cor_cabelo || C.tinta, h = o.cabelo || "curto";
+    const topo = "M-60 -50C-64 -116 64 -116 60 -50C40 -76 -40 -76 -60 -50Z";
+    if (h === "longo") el("path", { d: "M-68 -46C-74 -122 74 -122 68 -46L76 54H-76Z", ...a.f(cab) }, g);
+    if (h === "cacheado") [[-60, -44], [-52, -84], [-24, -108], [24, -108], [52, -84], [60, -44], [0, -116]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 30, ...a.f(cab) }, g));
+    el("path", { d: "M-112 150C-112 74 -62 44 0 44C62 44 112 74 112 150Z", ...a.f(roupa) }, g);
+    el("rect", { x: -20, y: 6, width: 40, height: 46, rx: 14, ...a.f(a.flat ? C.tinta : mix(pele, C.tinta, .18)) }, g);
+    el("circle", { cx: 0, cy: -44, r: 58, ...a.f(pele) }, g);
+    if (!a.flat) { el("path", { d: "M-34 56C-20 82 20 82 34 56", ...a.s(mix(roupa, C.tinta, .25), 8) }, g); el("path", { d: "M-44 -62C-50 -50 -50 -34 -44 -22", ...a.s("#fff", 6), "stroke-opacity": .4 }, g); }
+    if (h === "curto" || h === "coque" || h === "longo") el("path", { d: topo, ...a.f(cab) }, g);
+    if (h === "coque") el("circle", { cx: 0, cy: -128, r: 28, ...a.f(cab) }, g);
+    if (h === "cacheado") el("path", { d: "M-52 -66C-30 -84 30 -84 52 -66C34 -72 -34 -72 -52 -66Z", ...a.f(cab) }, g);
+    if (h === "lenco") { el("path", { d: topo, ...a.f(C.amarelo) }, g); el("circle", { cx: 52, cy: -88, r: 22, ...a.f(C.amarelo) }, g); if (!a.flat) { el("path", { d: "M-56 -66C-20 -82 30 -80 56 -62", ...a.s(C.laranja, 8) }, g); } }
+  };
+  const avatar = objeto("avatar", "Avatar", "objeto", "representar uma pessoa sem rosto ('o cliente', 'você', 'o time'); 6 penteados (curto, longo, coque, cacheado, careca, lenço) e cores de pele e roupa à escolha", "a cena exige uma pessoa específica; sem rosto, não identifica ninguém", { w: 230, h: 290 },
+    [{ nome: "cabelo", padrao: "curto | longo | coque | cacheado | careca | lenco" }, PELE, { nome: "roupa", padrao: C.roxo }, { nome: "cor_cabelo", padrao: C.tinta }], (g, a, o) => { bust(g, a, o); return () => {}; });
+
+  // ============ GRUPO: o time ============
+  const grupo = objeto("grupo", "Grupo", "objeto", "representar um time, uma comunidade ou 'todo mundo'; três avatares lado a lado, o do meio à frente", "o assunto é uma pessoa só (use avatar)", { w: 470, h: 290 },
+    [{ nome: "peles", padrao: [C.areia, C.rosa, C.laranja] }, { nome: "roupas", padrao: [C.verde, C.cereja, C.roxo] }], (g, a, o) => {
+      const pe = o.peles || [C.areia, C.rosa, C.laranja], ro = o.roupas || [C.verde, C.cereja, C.roxo];
+      [[-150, 22, .84, "longo", 1], [150, 22, .84, "coque", 2], [0, 0, 1, "cacheado", 0]].forEach(([x, y, s, cabelo, i]) => bust(nova(g, x, y, s, 0), a, { cabelo, pele: pe[i % pe.length], roupa: ro[i % ro.length], cor_cabelo: i === 2 ? C.tinta : C.cerejaEsc }));
+      return () => {};
+    });
+
+  // ============ CHEF: o toque de cozinheiro ============
+  const chef = objeto("chef", "Chef", "objeto", "representar quem cozinha ou prepara ('o chef', 'a nutri', 'feito por gente'); avatar com toque branco e jaleco", "o assunto não é preparo de comida", { w: 230, h: 390 },
+    [PELE], (g, a, o) => {
+      const pele = o.pele || C.areia;
+      el("path", { d: "M-112 190C-112 114 -62 84 0 84C62 84 112 114 112 190Z", ...a.f("#fff") }, g);
+      el("rect", { x: -20, y: 46, width: 40, height: 46, rx: 14, ...a.f(a.flat ? C.tinta : mix(pele, C.tinta, .18)) }, g);
+      el("circle", { cx: 0, cy: -4, r: 58, ...a.f(pele) }, g);
+      el("path", { d: "M-60 -10C-64 -76 64 -76 60 -10C40 -36 -40 -36 -60 -10Z", ...a.f(C.tinta) }, g);
+      [[-36, -108, 34], [0, -126, 40], [36, -108, 34]].forEach(([x, y, r]) => el("circle", { cx: x, cy: y, r, ...a.f("#fff") }, g));
+      el("rect", { x: -54, y: -88, width: 108, height: 40, rx: 8, ...a.f("#fff") }, g);
+      if (!a.flat) {
+        el("path", { d: "M-46 -66H46", ...a.s("#EEE8F3", 6) }, g); el("path", { d: "M-18 -128C-12 -140 4 -142 14 -134", ...a.s("#EEE8F3", 6) }, g);
+        el("circle", { cx: -18, cy: 130, r: 7, ...a.f(C.cereja) }, g); el("circle", { cx: -18, cy: 160, r: 7, ...a.f(C.cereja) }, g);
+        el("path", { d: "M0 92V190", ...a.s("#EEE8F3", 5) }, g); el("path", { d: "M-34 100L0 132L34 100", ...a.s(C.amarelo, 10) }, g);
+      }
+      return () => {};
+    });
+
+  Object.assign(EL, { aceno, mao_aponta: aponta, joinha, avatar, grupo, chef });
+})();
+
 // ===== transicoes.js =====
 // Família TRANSIÇÕES: o que cobre a tela para trocar de cena. Todas seguem o MESMO contrato:
 //   set(p): p = 0 tela limpa · p = 0,5 tela totalmente coberta (é aqui que se troca a cena) · p = 1 tela limpa de novo.
@@ -5175,7 +6464,7 @@ document.documentElement.dataset.fundo = document.documentElement.dataset.fundo 
 const M = window.MANIFESTO, K = window.EL, { C, el, clamp, back } = K;
 const lim = (x) => clamp(x, 0, 1);
 const CHAVE = { "colher-de-pau": "colherPau", "garrafa-azeite": "azeite" };
-const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", fundos: "Fundos", transicoes: "Transições" };
+const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", navegacao: "Navegação", feedback: "Feedback", maos: "Mãos e pessoas", fundos: "Fundos", transicoes: "Transições" };
 const LEDE = {
   forma: "A assinatura visual: o recorte que abriga um objeto, um número ou um título.",
   cozinha: "Cenas de cozinha que se montam sozinhas: o pote enche, a marmita fecha, o prato é servido.",
@@ -5189,6 +6478,9 @@ const LEDE = {
   graficos: "Gráficos e tabelas com personalidade da comida. Cada peça tem 3 estilos que usam os mesmos dados.",
   texto: "Texto que entra, bate, risca e rola. Para títulos curtos e palavras-chave.",
   entrega: "Da plantação à porta: bag térmica, broto, celular, pin de mapa, moto, floco e geladeira.",
+  navegacao: "Para dizer 'clique aqui', 'troque de aba', 'role para baixo': seta, botão, abas, menu, interruptor, rolagem e pontos de página.",
+  feedback: "Para dizer 'deu certo', 'deu errado', 'atenção', 'aguarde', 'nota', 'curti', 'avisou' e 'comemora'.",
+  maos: "Mãos e pessoas sem rosto. A cor da pele é parâmetro da paleta, para a mesma peça servir a qualquer pessoa.",
   fundos: "Padrões de fundo contínuos, em duas cores, que se movem em loop. Formato 9:16.",
   transicoes: "Cortinas entre cenas: em p=0,5 a tela está coberta e é aí que a cena troca. Formato 9:16."
 };
@@ -5216,6 +6508,8 @@ const VARIANTES = {
   linha_viva: ["pin", "moto", "broto"].map((e) => ({ rot: e, args: { estilo: e } })),
   corrida: ["barras", "podio", "pistas"].map((e) => ({ rot: e, args: { estilo: e } })),
   antes_depois: ["barras", "potes", "roleta"].map((e) => ({ rot: e, args: { estilo: e } })),
+  avatar: [["curto", C.areia, C.roxo], ["longo", C.laranja, C.verde], ["coque", C.rosa, C.cereja], ["cacheado", C.areia, C.laranja], ["careca", C.laranja, C.roxo], ["lenco", C.rosa, C.verde]].map(([c, pele, roupa]) => ({ rot: c, args: { cabelo: c, pele, roupa } })),
+  botao: ["COMEÇAR", "BAIXAR", "ENVIAR"].map((r) => ({ rot: r.toLowerCase(), args: { rotulo: r } })),
   documento: [{ rot: "texto", args: { tipo: "texto" } }, { rot: "lista", args: { tipo: "lista" } }],
   balao: [{ rot: "esquerda", args: { lado: "esq", linhas: 3 } }, { rot: "direita", args: { lado: "dir", cor: C.roxo, tc: C.lilas, linhas: 3 } }]
 };
@@ -5308,7 +6602,7 @@ function construirTudo() {
     M.pecas.filter((p) => p.familia === fam).forEach((F) => {
       const card = document.createElement("article"); card.className = "card"; card.dataset.busca = (F.id + " " + F.nome + " " + F.serve_para + " " + F.tipo + " " + F.camada).toLowerCase();
       const vs = VARIANTES[F.id] || [{}];
-      const vars = document.createElement("div"); vars.className = "vars" + (vs.length === 2 ? " n2" : vs.length === 3 ? " n3" : "");
+      const vars = document.createElement("div"); vars.className = "vars" + (vs.length === 2 ? " n2" : vs.length === 3 ? " n3" : vs.length === 6 ? " n6" : "");
       vs.forEach((v) => vars.appendChild(fazTile(F, v, fam)));
       card.appendChild(vars);
       const mv = F.movimento ? `${F.movimento.descricao}${F.movimento.duracao_s ? " · " + String(F.movimento.duracao_s).replace(".", ",") + " s" : " · contínuo"}` : "Peça estática.";

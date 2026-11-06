@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.8.0",
+  "versao": "0.9.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -82,6 +82,9 @@
     "texto": 8,
     "fundos": 6,
     "entrega": 7,
+    "navegacao": 7,
+    "feedback": 8,
+    "maos": 6,
     "transicoes": 5
   },
   "pecas": [
@@ -3405,6 +3408,860 @@
         {
           "nome": "rot",
           "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "seta",
+      "nome": "Seta",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "apontar para um número, uma peça ou o próximo passo; a seta se desenha e a ponta pulsa",
+      "nao_usar_quando": "o ponto já está óbvio na tela, ou há mais de duas setas juntas",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 170
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cor",
+          "padrao": "#EFD600"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o traço se desenha da base até a ponta, a ponta abre e pulsa duas vezes",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "botao",
+      "nome": "Botão",
+      "familia": "navegacao",
+      "tipo": "botao",
+      "serve_para": "chamar para uma ação ('começar', 'baixar', 'enviar'); o botão afunda no clique e solta uma onda",
+      "nao_usar_quando": "o reel não pede uma ação; o texto tem mais de 14 letras",
+      "camada": "meio",
+      "caixa": {
+        "w": 320,
+        "h": 120
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "COMEÇAR"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#EFD600"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o botão afunda, uma onda abre a partir do toque e ele volta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "abas",
+      "nome": "Abas",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "mostrar que o assunto muda de seção ('hoje', 'semana', 'mês'); o destaque desliza de uma aba à outra",
+      "nao_usar_quando": "há só uma seção, ou mais de 4 abas",
+      "camada": "meio",
+      "caixa": {
+        "w": 410,
+        "h": 90
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "itens",
+          "padrao": [
+            "Hoje",
+            "Semana",
+            "Mês"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o destaque desliza pelas abas em ordem e o texto da aba ativa acende",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "menu",
+      "nome": "Menu",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "abrir e fechar o menu de um app ou site; as três barras viram um X",
+      "nao_usar_quando": "o assunto não é uma tela com menu",
+      "camada": "meio",
+      "caixa": {
+        "w": 150,
+        "h": 150
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "as três barras viram um X, ficam um instante e voltam",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "toggle",
+      "nome": "Interruptor",
+      "familia": "navegacao",
+      "tipo": "botao",
+      "serve_para": "mostrar uma opção ligada ou desligada ('automático', 'notificações'); o botão desliza e a cor muda",
+      "nao_usar_quando": "não há nada para ligar ou desligar",
+      "camada": "meio",
+      "caixa": {
+        "w": 210,
+        "h": 110
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o botão desliza para ligar, a trilha fica verde, e depois desliga",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "rolagem",
+      "nome": "Rolagem",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "convidar a rolar a tela ou continuar lendo; a bolinha desce e as setas piscam em onda",
+      "nao_usar_quando": "o conteúdo cabe numa tela só",
+      "camada": "meio",
+      "caixa": {
+        "w": 110,
+        "h": 280
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a bolinha desce dentro da cápsula e três setas piscam uma depois da outra, em loop",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "pontos",
+      "nome": "Pontos de página",
+      "familia": "navegacao",
+      "tipo": "navegacao",
+      "serve_para": "mostrar a posição numa sequência (passo 2 de 5, slide, carrossel); o ponto ativo estica e anda",
+      "nao_usar_quando": "são mais de 7 passos, ou o passo atual não importa",
+      "camada": "meio",
+      "caixa": {
+        "w": 280,
+        "h": 40
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "n",
+          "padrao": 5
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o ponto ativo estica e desliza pelos pontos até o último",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "certo",
+      "nome": "Certo",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "dizer que deu certo, que a etapa passou ou que algo foi confirmado; o selo estoura e o visto se desenha",
+      "nao_usar_quando": "o resultado é incerto ou parcial (use alerta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o selo verde estoura, o visto se desenha e uma onda abre",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "erro",
+      "nome": "Erro",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "dizer que algo falhou ou foi recusado; o selo treme de lado a lado",
+      "nao_usar_quando": "o problema é pequeno ou já foi resolvido",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o selo aparece, treme de lado a lado e se acalma",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "alerta",
+      "nome": "Alerta",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "chamar atenção para um cuidado, um prazo ou uma exceção; o triângulo balança e pulsa",
+      "nao_usar_quando": "o aviso é uma boa notícia (use certo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 180
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o triângulo entra, balança de um lado ao outro e pulsa duas vezes",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "carregando",
+      "nome": "Carregando",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "dizer 'aguarde': o agente está lendo, pensando ou processando; oito pontos giram em loop",
+      "nao_usar_quando": "a espera é curta demais para merecer aviso (menos de 1 s)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 200
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.2,
+        "descricao": "oito pontos giram, o da frente é amarelo e maior, e os de trás apagam",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "estrelas",
+      "nome": "Estrelas",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "mostrar nota ou avaliação (4 de 5); as estrelas acendem uma a uma",
+      "nao_usar_quando": "o número exato importa mais que a sensação (use numero)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 110
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "nota",
+          "padrao": 4
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "as estrelas pulam em sequência até a nota",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "coracao",
+      "nome": "Coração",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "curtir, gostar, 'feito com carinho'; o coração pula e solta faíscas",
+      "nao_usar_quando": "o assunto é saúde ou ritmo cardíaco",
+      "camada": "meio",
+      "caixa": {
+        "w": 240,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "o coração pula duas vezes e solta seis faíscas",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "sino",
+      "nome": "Sino",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "avisar, notificar, 'chegou algo novo'; o sino balança e o número do aviso aparece",
+      "nao_usar_quando": "não há aviso para dar",
+      "camada": "meio",
+      "caixa": {
+        "w": 210,
+        "h": 230
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "n",
+          "padrao": 3
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o sino balança de um lado ao outro, diminuindo, e a bolinha com o número aparece",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "confete",
+      "nome": "Confete",
+      "familia": "feedback",
+      "tipo": "feedback",
+      "serve_para": "comemorar uma entrega, uma meta batida ou uma estreia; o confete estoura do centro e cai",
+      "nao_usar_quando": "o assunto é sério ou o resultado não é bom",
+      "camada": "meio",
+      "caixa": {
+        "w": 440,
+        "h": 440
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "o confete estoura do centro, abre em leque, gira e cai com a gravidade",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "aceno",
+      "nome": "Aceno",
+      "familia": "maos",
+      "tipo": "acao",
+      "serve_para": "cumprimentar, abrir o reel ('oi'), despedir; a palma aberta balança de um lado ao outro",
+      "nao_usar_quando": "o assunto é sério ou há mais de uma pessoa na cena (use grupo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 190,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#962E9D"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "a mão aparece e balança três vezes, pivotando no pulso",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "mao_aponta",
+      "nome": "Mão que aponta",
+      "familia": "maos",
+      "tipo": "acao",
+      "serve_para": "mostrar onde clicar ou tocar ('aqui'); o dedo desce, toca e solta uma onda",
+      "nao_usar_quando": "o ponto já está óbvio, ou o assunto não é uma tela",
+      "camada": "meio",
+      "caixa": {
+        "w": 190,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#962E9D"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o dedo desce até a tela, toca, uma onda abre na ponta e a mão volta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "joinha",
+      "nome": "Joinha",
+      "familia": "maos",
+      "tipo": "acao",
+      "serve_para": "aprovar, 'deu certo', 'recomendo'; o polegar sobe com um quique e três riscos de brilho",
+      "nao_usar_quando": "o assunto é negativo ou delicado",
+      "camada": "meio",
+      "caixa": {
+        "w": 190,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#962E9D"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a mão quica para dentro da tela e três riscos de brilho abrem perto do polegar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "avatar",
+      "nome": "Avatar",
+      "familia": "maos",
+      "tipo": "objeto",
+      "serve_para": "representar uma pessoa sem rosto ('o cliente', 'você', 'o time'); 6 penteados (curto, longo, coque, cacheado, careca, lenço) e cores de pele e roupa à escolha",
+      "nao_usar_quando": "a cena exige uma pessoa específica; sem rosto, não identifica ninguém",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "cabelo",
+          "padrao": "curto | longo | coque | cacheado | careca | lenco"
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "roupa",
+          "padrao": "#962E9D"
+        },
+        {
+          "nome": "cor_cabelo",
+          "padrao": "#5C0A24"
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "grupo",
+      "nome": "Grupo",
+      "familia": "maos",
+      "tipo": "objeto",
+      "serve_para": "representar um time, uma comunidade ou 'todo mundo'; três avatares lado a lado, o do meio à frente",
+      "nao_usar_quando": "o assunto é uma pessoa só (use avatar)",
+      "camada": "meio",
+      "caixa": {
+        "w": 470,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "peles",
+          "padrao": [
+            "#F5D69E",
+            "#FF87A0",
+            "#F15A22"
+          ]
+        },
+        {
+          "nome": "roupas",
+          "padrao": [
+            "#0C893E",
+            "#E50145",
+            "#962E9D"
+          ]
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "chef",
+      "nome": "Chef",
+      "familia": "maos",
+      "tipo": "objeto",
+      "serve_para": "representar quem cozinha ou prepara ('o chef', 'a nutri', 'feito por gente'); avatar com toque branco e jaleco",
+      "nao_usar_quando": "o assunto não é preparo de comida",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 390
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
         }
       ],
       "movimento": null

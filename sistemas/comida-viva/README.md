@@ -12,6 +12,9 @@ Referência de direção: o brandbook público "Universo Visual Liv Up" (Behance
 | `layout.js`, `computador.js`, `dados.js` | chip, painel, polaroid, legenda; pasta, janela, terminal, tabela, fluxo...; barras, linha, rosca, medidor... |
 | `texto.js` | **texto em movimento:** letras, palavras que sobem, contorno que enche, carimbo, faixa que rola, roleta, riscado, marca-texto |
 | `entrega.js` | **entrega**: bag térmica, broto, celular, pin de mapa, moto, floco, geladeira |
+| `navegacao.js` | **navegação**: seta, botão, abas, menu, interruptor, rolagem, pontos de página |
+| `feedback.js` | **feedback**: certo, erro, alerta, carregando, estrelas, coração, sino, confete |
+| `maos.js` | **mãos e pessoas**: aceno, mão que aponta, joinha, avatar (6 penteados), grupo, chef |
 | `fundos.js` | **fundos** que andam devagar: xadrez, listras, formas, horta, raios, ondas |
 | `transicoes.js` | **transições** de cena (p=0,5 é a tela coberta): cortina de Forma, fatias, cascata, íris, onda |
 | `manifesto.json` | GERADO das fichas das peças (80 peças, 13 famílias); nunca editar à mão |

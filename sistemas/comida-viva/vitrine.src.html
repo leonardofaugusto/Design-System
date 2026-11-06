@@ -43,7 +43,7 @@ section.bloco.rosa{background:var(--rosa)}
 /* cartão da peça */
 .card{background:var(--creme);border-radius:24px;overflow:hidden;box-shadow:6px 7px 0 rgba(92,10,36,.28);display:flex;flex-direction:column;color:var(--tinta)}
 .vars{display:grid;gap:3px;background:var(--tinta);grid-template-columns:1fr}
-.vars.n2{grid-template-columns:1fr 1fr}.vars.n3{grid-template-columns:repeat(3,1fr)}
+.vars.n2{grid-template-columns:1fr 1fr}.vars.n3,.vars.n6{grid-template-columns:repeat(3,1fr)}.vars.n6 .tile{height:210px}
 .tile{position:relative;height:270px;background:var(--rosa);overflow:hidden}
 .tile.alto{height:380px}
 .tile.baixo{height:150px}
@@ -127,7 +127,7 @@ document.documentElement.dataset.fundo = document.documentElement.dataset.fundo 
 const M = window.MANIFESTO, K = window.EL, { C, el, clamp, back } = K;
 const lim = (x) => clamp(x, 0, 1);
 const CHAVE = { "colher-de-pau": "colherPau", "garrafa-azeite": "azeite" };
-const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", fundos: "Fundos", transicoes: "Transições" };
+const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", navegacao: "Navegação", feedback: "Feedback", maos: "Mãos e pessoas", fundos: "Fundos", transicoes: "Transições" };
 const LEDE = {
   forma: "A assinatura visual: o recorte que abriga um objeto, um número ou um título.",
   cozinha: "Cenas de cozinha que se montam sozinhas: o pote enche, a marmita fecha, o prato é servido.",
@@ -141,6 +141,9 @@ const LEDE = {
   graficos: "Gráficos e tabelas com personalidade da comida. Cada peça tem 3 estilos que usam os mesmos dados.",
   texto: "Texto que entra, bate, risca e rola. Para títulos curtos e palavras-chave.",
   entrega: "Da plantação à porta: bag térmica, broto, celular, pin de mapa, moto, floco e geladeira.",
+  navegacao: "Para dizer 'clique aqui', 'troque de aba', 'role para baixo': seta, botão, abas, menu, interruptor, rolagem e pontos de página.",
+  feedback: "Para dizer 'deu certo', 'deu errado', 'atenção', 'aguarde', 'nota', 'curti', 'avisou' e 'comemora'.",
+  maos: "Mãos e pessoas sem rosto. A cor da pele é parâmetro da paleta, para a mesma peça servir a qualquer pessoa.",
   fundos: "Padrões de fundo contínuos, em duas cores, que se movem em loop. Formato 9:16.",
   transicoes: "Cortinas entre cenas: em p=0,5 a tela está coberta e é aí que a cena troca. Formato 9:16."
 };
@@ -168,6 +171,8 @@ const VARIANTES = {
   linha_viva: ["pin", "moto", "broto"].map((e) => ({ rot: e, args: { estilo: e } })),
   corrida: ["barras", "podio", "pistas"].map((e) => ({ rot: e, args: { estilo: e } })),
   antes_depois: ["barras", "potes", "roleta"].map((e) => ({ rot: e, args: { estilo: e } })),
+  avatar: [["curto", C.areia, C.roxo], ["longo", C.laranja, C.verde], ["coque", C.rosa, C.cereja], ["cacheado", C.areia, C.laranja], ["careca", C.laranja, C.roxo], ["lenco", C.rosa, C.verde]].map(([c, pele, roupa]) => ({ rot: c, args: { cabelo: c, pele, roupa } })),
+  botao: ["COMEÇAR", "BAIXAR", "ENVIAR"].map((r) => ({ rot: r.toLowerCase(), args: { rotulo: r } })),
   documento: [{ rot: "texto", args: { tipo: "texto" } }, { rot: "lista", args: { tipo: "lista" } }],
   balao: [{ rot: "esquerda", args: { lado: "esq", linhas: 3 } }, { rot: "direita", args: { lado: "dir", cor: C.roxo, tc: C.lilas, linhas: 3 } }]
 };
@@ -260,7 +265,7 @@ function construirTudo() {
     M.pecas.filter((p) => p.familia === fam).forEach((F) => {
       const card = document.createElement("article"); card.className = "card"; card.dataset.busca = (F.id + " " + F.nome + " " + F.serve_para + " " + F.tipo + " " + F.camada).toLowerCase();
       const vs = VARIANTES[F.id] || [{}];
-      const vars = document.createElement("div"); vars.className = "vars" + (vs.length === 2 ? " n2" : vs.length === 3 ? " n3" : "");
+      const vars = document.createElement("div"); vars.className = "vars" + (vs.length === 2 ? " n2" : vs.length === 3 ? " n3" : vs.length === 6 ? " n6" : "");
       vs.forEach((v) => vars.appendChild(fazTile(F, v, fam)));
       card.appendChild(vars);
       const mv = F.movimento ? `${F.movimento.descricao}${F.movimento.duracao_s ? " · " + String(F.movimento.duracao_s).replace(".", ",") + " s" : " · contínuo"}` : "Peça estática.";
