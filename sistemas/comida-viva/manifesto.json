@@ -81,6 +81,7 @@
     "graficos": 6,
     "texto": 8,
     "fundos": 6,
+    "entrega": 7,
     "transicoes": 5
   },
   "pecas": [
@@ -3163,6 +3164,250 @@
         "descricao": "as faixas ondulam e correm em sentidos alternados",
         "usa_t": true
       }
+    },
+    {
+      "id": "bag",
+      "nome": "Bag térmica",
+      "familia": "entrega",
+      "tipo": "objeto",
+      "serve_para": "entrega, delivery, 'chega fresquinho'; a mochila do entregador, de pé",
+      "nao_usar_quando": "o assunto não envolve entrega ou transporte de comida",
+      "camada": "meio",
+      "caixa": {
+        "w": 260,
+        "h": 262
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "broto",
+      "nome": "Broto",
+      "familia": "entrega",
+      "tipo": "acao",
+      "serve_para": "crescimento, origem do ingrediente, 'plantado com cuidado'; a planta nasce do vaso e balança",
+      "nao_usar_quando": "o assunto não tem relação com comida, origem ou crescimento",
+      "camada": "meio",
+      "caixa": {
+        "w": 180,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "o caule sobe, as folhas abrem em sequência e a planta fica balançando de leve",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "celular",
+      "nome": "Celular",
+      "familia": "entrega",
+      "tipo": "objeto",
+      "serve_para": "app, pedido, notificação de entrega; aparelho em pé com a tela de confirmação",
+      "nao_usar_quando": "o assunto é computador ou terminal (use janela ou terminal)",
+      "camada": "meio",
+      "caixa": {
+        "w": 150,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
+    },
+    {
+      "id": "pin",
+      "nome": "Pin de mapa",
+      "familia": "entrega",
+      "tipo": "acao",
+      "serve_para": "local, endereço, 'chegou aqui'; o pin cai no ponto, quica e solta uma onda",
+      "nao_usar_quando": "o assunto não é um lugar",
+      "camada": "meio",
+      "caixa": {
+        "w": 140,
+        "h": 210
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o pin cai de cima, quica uma vez e uma onda abre no chão",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "moto",
+      "nome": "Moto de entrega",
+      "familia": "entrega",
+      "tipo": "acao",
+      "serve_para": "entrega rápida, rota, 'a caminho'; moto amarela com baú cereja, as rodas giram",
+      "nao_usar_quando": "o assunto não é transporte",
+      "camada": "meio",
+      "caixa": {
+        "w": 320,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "a moto balança na pista, as rodas giram e riscos de velocidade passam para trás",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "floco",
+      "nome": "Floco",
+      "familia": "entrega",
+      "tipo": "acao",
+      "serve_para": "frio, congelado, conservação, 'gelado'; o floco gira devagar",
+      "nao_usar_quando": "o assunto é quente ou não tem relação com temperatura",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 230
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 4,
+        "descricao": "o floco gira devagar e pulsa de leve; o ciclo fecha a cada 60 graus",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "geladeira",
+      "nome": "Geladeira",
+      "familia": "entrega",
+      "tipo": "objeto",
+      "serve_para": "armazenamento, frescor, 'guardado gelado'; geladeira de duas portas, vista de frente",
+      "nao_usar_quando": "o assunto não é guardar ou conservar",
+      "camada": "meio",
+      "caixa": {
+        "w": 190,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": null
     },
     {
       "id": "cortina_forma",
