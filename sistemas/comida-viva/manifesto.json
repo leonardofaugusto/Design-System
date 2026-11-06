@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.9.0",
+  "versao": "0.10.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
