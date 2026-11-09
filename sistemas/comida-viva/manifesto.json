@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.11.1",
+  "versao": "0.12.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -85,7 +85,7 @@
     "navegacao": 7,
     "feedback": 8,
     "maos": 6,
-    "conceitos": 10,
+    "conceitos": 11,
     "rotina": 16,
     "cena": 3,
     "transicoes": 5
@@ -4724,6 +4724,43 @@
         "param": "p",
         "duracao_s": 2.6,
         "descricao": "o prédio sobe, as janelas acendem uma a uma, a bandeira abre e o cadeado trava na porta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cerebro",
+      "nome": "Cérebro feliz",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "personificar o Livup Brain e o agente: um cérebro de óculos que entra pulando, pisca, sorri e solta faíscas de ideia",
+      "nao_usar_quando": "o assunto é a memória como dado ou a rede de notas (use grafo ou teia)",
+      "camada": "meio",
+      "caixa": {
+        "w": 380,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o cérebro entra com um pulo, os óculos descem no rosto, o sorriso abre, os olhos piscam e as faíscas de ideia piscam sem parar",
         "usa_t": true
       }
     },

@@ -118,7 +118,7 @@ footer{padding:36px 6vw 60px;color:var(--creme);font-size:14px;opacity:.9}
 <script>
 window.MANIFESTO = {
   "sistema": "comida-viva",
-  "versao": "0.11.1",
+  "versao": "0.12.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -203,7 +203,7 @@ window.MANIFESTO = {
     "navegacao": 7,
     "feedback": 8,
     "maos": 6,
-    "conceitos": 10,
+    "conceitos": 11,
     "rotina": 16,
     "cena": 3,
     "transicoes": 5
@@ -4846,6 +4846,43 @@ window.MANIFESTO = {
       }
     },
     {
+      "id": "cerebro",
+      "nome": "Cérebro feliz",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "personificar o Livup Brain e o agente: um cérebro de óculos que entra pulando, pisca, sorri e solta faíscas de ideia",
+      "nao_usar_quando": "o assunto é a memória como dado ou a rede de notas (use grafo ou teia)",
+      "camada": "meio",
+      "caixa": {
+        "w": 380,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o cérebro entra com um pulo, os óculos descem no rosto, o sorriso abre, os olhos piscam e as faíscas de ideia piscam sem parar",
+        "usa_t": true
+      }
+    },
+    {
       "id": "chip_fonte",
       "nome": "Chip de fonte",
       "familia": "rotina",
@@ -7667,7 +7704,7 @@ window.MANIFESTO = {
 })();
 
 // ===== conceitos.js =====
-// Família CONCEITOS (ideias): ciclo, bloco_peca, grafo, teia, ferramentas, bifurcacao, plano_furado, voto_contra, cadeado e plataforma.
+// Família CONCEITOS (ideias): ciclo, bloco_peca, grafo, teia, ferramentas, bifurcacao, plano_furado, voto_contra, cadeado, plataforma e cérebro feliz.
 // O que o reel usa para explicar ideias abstratas de IA e trabalho: o agente que repete passos, as peças que acendem, a rede de notas,
 // o projeto que envelhece, os caminhos com custo, o plano com furos, a discordância, a confiança e a plataforma.
 // Mesmo estilo do resto: formas chapadas com luz e sombra dura (sem contorno preto, sem blur).
@@ -7895,7 +7932,47 @@ window.MANIFESTO = {
       };
     });
 
-  Object.assign(EL, { ciclo, bloco_peca, grafo, teia, ferramentas, bifurcacao, plano_furado, voto_contra, cadeado, plataforma });
+  // ============ CÉREBRO ============
+  let uidc = 0;
+  const cerebro = acao("cerebro", "Cérebro feliz", "personificar o Livup Brain e o agente: um cérebro de óculos que entra pulando, pisca, sorri e solta faíscas de ideia", "o assunto é a memória como dado ou a rede de notas (use grafo ou teia)", { w: 380, h: 330 }, 2.6,
+    "o cérebro entra com um pulo, os óculos descem no rosto, o sorriso abre, os olhos piscam e as faíscas de ideia piscam sem parar", [], (g, a) => {
+      const w = el("g", {}, g), corpo = el("g", {}, w);
+      el("rect", { x: -20, y: 100, width: 40, height: 38, rx: 16, ...a.f(mix(C.rosa, C.cereja, .45)) }, corpo);
+      [[-70, -40, 70], [0, -65, 72], [70, -40, 70], [-95, 15, 62], [95, 15, 62], [-60, 60, 64], [60, 60, 64], [0, 30, 90]].forEach(([cx, cy, r]) => el("circle", { cx, cy, r, ...a.f(C.rosa) }, corpo));
+      if (!a.flat) {
+        el("circle", { cx: -66, cy: -78, r: 20, fill: C.creme, opacity: .35 }, corpo);
+        ["M0 -132C-12 -108 10 -92 0 -64", "M-62 -104Q-40 -88 -52 -64", "M62 -104Q40 -88 52 -64", "M-134 -22Q-112 -34 -102 -10", "M134 -22Q112 -34 102 -10"].forEach((d) => el("path", { d, ...a.s(C.cereja, 7), opacity: .5 }, corpo));
+        [-52, 52].forEach((cx) => el("ellipse", { cx: cx * 1.5, cy: 66, rx: 17, ry: 10, fill: C.cereja, opacity: .5 }, corpo));
+      }
+      const og = el("g", {}, w);
+      [-52, 52].forEach((cx) => el("circle", { cx, cy: 12, r: 44, ...a.f(C.creme), stroke: C.tinta, "stroke-width": 9 }, og));
+      el("path", { d: "M-9 8Q0 0 9 8", ...a.s(C.tinta, 9) }, og);
+      el("path", { d: "M-96 4L-118 -2M96 4L118 -2", ...a.s(C.tinta, 9) }, og);
+      const olhos = [];
+      if (!a.flat) {
+        [-52, 52].forEach((cx) => {
+          const o = el("g", {}, og); el("circle", { cx, cy: 14, r: 11, fill: C.tinta }, o); el("circle", { cx: cx + 4, cy: 9, r: 4, fill: C.creme }, o); olhos.push({ o, cx });
+          el("path", { d: `M${cx - 30} -10Q${cx - 24} -22 ${cx - 10} -26`, ...a.s(C.creme, 5), opacity: .85 }, og);
+        });
+      }
+      const id = "cb" + (++uidc), bo = el("g", {}, w);
+      const cp = el("clipPath", { id }, bo); el("path", { d: "M-44 62Q0 124 44 62Z" }, cp);
+      el("path", { d: "M-44 62Q0 124 44 62Z", ...a.f(C.tinta) }, bo);
+      if (!a.flat) { const l = el("g", { "clip-path": `url(#${id})` }, bo); el("ellipse", { cx: 0, cy: 100, rx: 20, ry: 16, fill: C.cereja }, l); el("rect", { x: -32, y: 60, width: 64, height: 10, rx: 4, fill: C.creme }, l); }
+      const fa = [[-150, -70, 1], [152, -92, 1.25], [140, 66, .85]].map(([x, y, k]) => { const f = el("g", {}, w); el("path", { d: "M0 -18Q3 -3 18 0Q3 3 0 18Q-3 3 -18 0Q-3 -3 0 -18Z", ...a.f(C.amarelo) }, f); return { f, x, y, k }; });
+      return (p, t) => {
+        const e = pop(p, 0, .3), q = Math.sin(t * 5) * (p > .3 ? 1 : 0);
+        w.setAttribute("transform", `translate(0 ${40 - q * 5}) scale(${e * (1 + q * .012)} ${e * (1 - q * .02)}) translate(0 -40)`);
+        w.setAttribute("opacity", p > 0 ? 1 : 0);
+        const d = clamp((p - .2) / .3); og.setAttribute("transform", `translate(0 ${-70 * (1 - Math.max(0, back(d)))})`); og.setAttribute("opacity", d > 0 ? 1 : 0);
+        mover(bo, 0, 0, pop(p, .45, .65)); bo.setAttribute("opacity", p > .45 ? 1 : 0);
+        const pi = 1 - .9 * bump(p, .78, .86);
+        olhos.forEach(({ o, cx }) => o.setAttribute("transform", `translate(${cx} 14) scale(1 ${pi}) translate(${-cx} -14)`));
+        fa.forEach(({ f, x, y, k }, i) => { const s = pop(p, .55 + i * .08, .75 + i * .08) * k * (1 + .18 * Math.sin(t * 6 + i * 2)); mover(f, x, y, s, Math.sin(t * 3 + i) * 12); f.setAttribute("opacity", p > .55 + i * .08 ? 1 : 0); });
+      };
+    });
+
+  Object.assign(EL, { ciclo, bloco_peca, grafo, teia, ferramentas, bifurcacao, plano_furado, voto_contra, cadeado, plataforma, cerebro });
 })();
 
 // ===== rotina.js =====
@@ -8395,7 +8472,7 @@ const LEDE = {
   navegacao: "Para dizer 'clique aqui', 'troque de aba', 'role para baixo': seta, botão, abas, menu, interruptor, rolagem e pontos de página.",
   feedback: "Para dizer 'deu certo', 'deu errado', 'atenção', 'aguarde', 'nota', 'curti', 'avisou' e 'comemora'.",
   maos: "Mãos e pessoas sem rosto. A cor da pele é parâmetro da paleta, para a mesma peça servir a qualquer pessoa.",
-  conceitos: "Para explicar ideias abstratas de IA e trabalho: o ciclo do agente, as peças que acendem, a rede de notas, o projeto que envelhece, os caminhos com custo, o plano furado, a discordância, a confiança e a plataforma.",
+  conceitos: "Para explicar ideias abstratas de IA e trabalho: o ciclo do agente, as peças que acendem, a rede de notas, o projeto que envelhece, os caminhos com custo, o plano furado, a discordância, a confiança, a plataforma e o cérebro feliz do Livup Brain.",
   rotina: "O dia de trabalho com um agente: de onde veio a informação, o status de cada item, o tempo que passa, o que está espalhado e se junta, a triagem, o café, o 1:1, a linha do tempo e a receita.",
   cena: "As molduras de um reel com apresentador: o rosto em janela, a captura de tela com destaque e o texto de gancho. O vídeo real entra dentro delas.",
   fundos: "Padrões de fundo contínuos, em duas cores, que se movem em loop. Padrão 9:16 (reel); para slide use formato \"slide\" (1920×1080), e também há \"quadrado\" e \"feed\", ou w e h livres.",
