@@ -15,6 +15,9 @@ Referência de direção: o brandbook público "Universo Visual Liv Up" (Behance
 | `navegacao.js` | **navegação**: seta, botão, abas, menu, interruptor, rolagem, pontos de página |
 | `feedback.js` | **feedback**: certo, erro, alerta, carregando, estrelas, coração, sino, confete |
 | `maos.js` | **mãos e pessoas**: aceno, mão que aponta, joinha, avatar (6 penteados), grupo, chef |
+| `conceitos.js` | **ideias**: ciclo, bloco de peça, grafo, teia, ferramentas, bifurcação, plano furado, voto contra, cadeado, plataforma |
+| `rotina.js` | **rotina de trabalho**: chip de fonte, etiqueta de status, original e síntese, cronômetro, dias parado, queda, versões, fontes espalhadas, juntar, gaveteiro, triagem, xícara, dupla, linha do tempo, receita, livro |
+| `cena.js` | **cena do reel**: janela do rosto, moldura de captura, overlay de gancho |
 | `fundos.js` | **fundos** que andam devagar: xadrez, listras, formas, horta, raios, ondas |
 | `transicoes.js` | **transições** de cena (p=0,5 é a tela coberta): cortina de Forma, fatias, cascata, íris, onda |
 | `manifesto.json` | GERADO das fichas das peças (80 peças, 13 famílias); nunca editar à mão |

@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.10.0",
+  "versao": "0.11.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -85,6 +85,9 @@
     "navegacao": 7,
     "feedback": 8,
     "maos": 6,
+    "conceitos": 10,
+    "rotina": 16,
+    "cena": 3,
     "transicoes": 5
   },
   "pecas": [
@@ -4265,6 +4268,1208 @@
         }
       ],
       "movimento": null
+    },
+    {
+      "id": "ciclo",
+      "nome": "Ciclo",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "explicar que o agente repete agir, olhar e decidir até terminar; o passo ativo acende e um ponto percorre as setas",
+      "nao_usar_quando": "o processo é linear e termina num passo só (use fluxo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 420,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulos",
+          "padrao": [
+            "AGIR",
+            "OLHAR",
+            "DECIDIR"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "três passos em círculo: o ativo acende em amarelo e cresce, e um ponto percorre as setas sem parar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "bloco_peca",
+      "nome": "Bloco de peça",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar uma das peças de uma ideia (modelo, ferramentas, contexto, ciclo) que acende na hora em que é citada",
+      "nao_usar_quando": "são mais de seis blocos juntos (vira parede de cartões)",
+      "camada": "meio",
+      "caixa": {
+        "w": 290,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "CONTEXTO"
+        },
+        {
+          "nome": "icone",
+          "padrao": "contexto"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#E50145"
+        },
+        {
+          "nome": "estado",
+          "padrao": "anima"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "o bloco começa apagado, tracejado, e acende numa cor com um pulo; com estado apagado ele fica sem luz",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "grafo",
+      "nome": "Grafo de notas",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar notas ligadas entre si (a memória do agente, o Obsidian); os fios se desenham e as notas aparecem",
+      "nao_usar_quando": "são poucos itens sem relação entre si (use pictograma)",
+      "camada": "meio",
+      "caixa": {
+        "w": 460,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "os fios se desenham um a um, cada nota aparece no fim do fio e a central pulsa",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "teia",
+      "nome": "Teia de aranha",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer que algo parado envelhece e fica esquecido (arquivo que ninguém atualiza); o papel amarela e a teia cresce",
+      "nao_usar_quando": "o conteúdo está só desatualizado, não esquecido (use riscado)",
+      "camada": "meio",
+      "caixa": {
+        "w": 340,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o papel amarela, a teia se desenha no canto e uma aranha desce no fio",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "ferramentas",
+      "nome": "Caixa de ferramentas",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer que o agente tem ferramentas para agir (ler arquivo, consultar agenda, buscar ata); as ferramentas saltam da caixa",
+      "nao_usar_quando": "o assunto é um programa específico (use a peça dele)",
+      "camada": "meio",
+      "caixa": {
+        "w": 340,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "a caixa aparece e a chave inglesa e o martelo saltam para fora, balançando",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "bifurcacao",
+      "nome": "Bifurcação",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar caminhos possíveis com o custo de cada um (crescer a área, escolher uma rota); o tronco se abre em três",
+      "nao_usar_quando": "só existe um caminho (use seta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 540,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "custos",
+          "padrao": [
+            "R$ 40 mil",
+            "R$ 120 mil",
+            "R$ 300 mil"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o tronco sobe, se abre em três ramos e cada ramo termina numa bolinha com o custo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "plano_furado",
+      "nome": "Plano furado",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar um plano que não fecha: onde há risco, dependência sem dono, número que não bate; a rachadura corta e abre furos",
+      "nao_usar_quando": "o plano está saudável (use certo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "o papel aparece, a rachadura corta de cima a baixo, o papel treme e abrem dois furos",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "voto_contra",
+      "nome": "Voto contra",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar a discordância ou o 'não fecha' de quem vota contra um plano; o polegar desce e balança",
+      "nao_usar_quando": "é uma reprovação pessoal (a peça é só sobre ideias)",
+      "camada": "meio",
+      "caixa": {
+        "w": 240,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#B80037"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o polegar para baixo aparece com um pulo e balança uma vez",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cadeado",
+      "nome": "Cadeado",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer 'seguro', 'só você acessa', 'nada sai do seu computador'; a haste fecha com um tranco e uma onda confirma",
+      "nao_usar_quando": "o assunto é bloqueio ou erro (use erro)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 250
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "a haste começa aberta, fecha com um tranco, o corpo dá um pulo e uma onda verde se abre",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "plataforma",
+      "nome": "Plataforma",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer 'vai para a plataforma da empresa, com acesso controlado'; o prédio sobe, acende as janelas e ganha um cadeado",
+      "nao_usar_quando": "a coisa fica só no computador da pessoa (use cadeado)",
+      "camada": "meio",
+      "caixa": {
+        "w": 340,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o prédio sobe, as janelas acendem uma a uma, a bandeira abre e o cadeado trava na porta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "chip_fonte",
+      "nome": "Chip de fonte",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar de onde veio uma informação (a nota, a ata, a data); a pílula entra e o sublinhado se desenha",
+      "nao_usar_quando": "a informação não tem fonte (use etiqueta opiniao)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 90
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "texto",
+          "padrao": "ata de 12/10"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a pílula com ícone de documento entra com um pulo e o sublinhado se desenha",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "etiqueta",
+      "nome": "Etiqueta de status",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "marcar o que o agente fez com um item: decisão, tarefa, pessoa nova, a confirmar, opinião ou dedução; carimba com um pulo",
+      "nao_usar_quando": "o item não tem status ainda (não use etiqueta vazia)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 100
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "tipo",
+          "padrao": "decisao"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.4,
+        "descricao": "a etiqueta cai com um carimbo, gira um pouco e assenta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "citacao",
+      "nome": "Original e síntese",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar que o texto original fica intacto e a síntese do agente fica ao lado, nunca por cima",
+      "nao_usar_quando": "só existe um texto (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o original entra com a barra lateral e a síntese entra por baixo com as linhas se escrevendo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cronometro",
+      "nome": "Cronômetro",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "marcar quanto tempo leva ('dez minutos por dia', '30 segundos'); o arco amarelo se enche e o ponteiro gira",
+      "nao_usar_quando": "o tempo exato não importa (use numero)",
+      "camada": "meio",
+      "caixa": {
+        "w": 280,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "10 MIN"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o arco amarelo se enche enquanto o ponteiro dá uma volta e o cronômetro pulsa no fim",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "dias",
+      "nome": "Dias parado",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar há quantos dias algo está parado ('há 7 dias'); a folha cai e o número conta até o valor",
+      "nao_usar_quando": "o prazo é uma data fixa (use calendario)",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "n",
+          "padrao": 7
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "DIAS"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "a folha de calendário cai com um pulo, o número conta até o valor e a folha balança no fim",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "queda",
+      "nome": "Queda",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "dizer 'o que eu deixei cair' ou 'o que ficou para trás'; um cartão tomba da prateleira",
+      "nao_usar_quando": "a tarefa foi concluída (use certo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 420,
+        "h": 380
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "três cartões em cima da prateleira, o do meio inclina, cai girando e some embaixo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "versoes",
+      "nome": "Versões",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar uma coisa que melhora a cada uso (v1, v2, v3); cada folha nova entra por cima e a última ganha o visto",
+      "nao_usar_quando": "só existe uma versão (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 310
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "três folhas entram em escada, uma por cima da outra, e a última recebe um visto verde",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "fontes",
+      "nome": "Fontes espalhadas",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar que a informação está espalhada em vários lugares (nota de celular, conversa, planilha, áudio, ata); os ícones pulam e flutuam",
+      "nao_usar_quando": "o assunto é um só lugar de informação (use pasta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "cinco ícones genéricos aparecem um a um em lugares diferentes e ficam flutuando de leve",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "juntar",
+      "nome": "Juntar numa pasta",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar tudo que estava espalhado indo parar numa pasta só; os itens voam e a pasta engole cada um",
+      "nao_usar_quando": "a informação já está organizada (use pasta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": ""
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "seis itens saem das bordas, voam até a pasta e somem dentro dela, que dá um pulo a cada chegada",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "gaveteiro",
+      "nome": "Gaveteiro",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar as poucas gavetas onde as coisas ficam (inbox, diário, reuniões, pessoas, projetos, notas); a inbox se destaca",
+      "nao_usar_quando": "são mais de seis categorias (use tabela)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 440
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulos",
+          "padrao": [
+            "INBOX",
+            "DIÁRIO",
+            "REUNIÕES",
+            "PESSOAS",
+            "PROJETOS",
+            "NOTAS"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.8,
+        "descricao": "as seis gavetas surgem uma a uma e a primeira, a inbox, abre um pouco e brilha em amarelo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "triagem",
+      "nome": "Triagem",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar o agente separando um texto bagunçado em decisão, tarefa, pessoa nova e 'a confirmar'; os cartões saem do texto e se alinham",
+      "nao_usar_quando": "o texto já está organizado (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 580,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3.4,
+        "descricao": "o texto bagunçado balança e quatro cartões etiquetados saem dele e se empilham à direita",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "xicara",
+      "nome": "Xícara de café",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "marcar a manhã, o 'antes do primeiro café', o começo do dia; a xícara pula e solta vapor",
+      "nao_usar_quando": "o assunto é noite ou fim do dia",
+      "camada": "meio",
+      "caixa": {
+        "w": 280,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "a xícara dá um pulo, e três fios de vapor sobem ondulando sem parar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "dupla",
+      "nome": "Dupla conversando",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar uma conversa a dois (1:1, combinado, cobrança); dois avatares sem rosto trocam balões",
+      "nao_usar_quando": "são mais de duas pessoas (use grupo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 480,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele1",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "pele2",
+          "padrao": "#F15A22"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "os dois avatares aparecem e trocam balões de fala, um de cada vez",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "linha_tempo",
+      "nome": "Linha do tempo",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar o histórico de reuniões ou atas em ordem de data; a linha se desenha e cada ata aparece",
+      "nao_usar_quando": "são eventos sem ordem (use pictograma)",
+      "camada": "meio",
+      "caixa": {
+        "w": 560,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "datas",
+          "padrao": [
+            "3/10",
+            "10/10",
+            "17/10",
+            "24/10"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "a linha se desenha da esquerda para a direita, cada ata sobe no seu ponto e a última acende em amarelo com 'hoje'",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "receita",
+      "nome": "Cartão de receita",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar a skill como uma receita: nome, passos numerados que se marcam um a um; é o jeito do Claude fazer sempre igual",
+      "nao_usar_quando": "o conteúdo é um documento comum (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 450
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "nome",
+          "padrao": "/resumo-comite"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o cartão entra, o nome aparece e os três passos se acendem em sequência, cada um com um visto verde",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "livro",
+      "nome": "Livro de receitas",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar a pasta de skills como um livro de receitas; o livro abre e uma página vira",
+      "nao_usar_quando": "só existe uma skill (use receita)",
+      "camada": "meio",
+      "caixa": {
+        "w": 420,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o livro aparece, a página da direita vira para a esquerda mostrando mais receitas",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "janela_rosto",
+      "nome": "Janela do rosto",
+      "familia": "cena",
+      "tipo": "layout",
+      "serve_para": "moldurar o vídeo do apresentador em cima ou no canto do reel; o vídeo real entra no recorte e a peça só desenha a moldura",
+      "nao_usar_quando": "o apresentador ocupa a tela inteira (não use moldura)",
+      "camada": "meio",
+      "caixa": {
+        "w": 400,
+        "h": 520
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "forma",
+          "padrao": "retrato"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#E50145"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a moldura cresce com um pulo e se assenta; com forma circulo, retrato ou quadrado",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "moldura_captura",
+      "nome": "Moldura de captura",
+      "familia": "cena",
+      "tipo": "layout",
+      "serve_para": "enquadrar a gravação de tela (Obsidian, Claude Code) e destacar a área que importa com zoom; o resto escurece",
+      "nao_usar_quando": "a tela inteira é o assunto (não use destaque)",
+      "camada": "meio",
+      "caixa": {
+        "w": 700,
+        "h": 460
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "destaque",
+          "padrao": [
+            10,
+            -10,
+            270,
+            110
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.8,
+        "descricao": "a janela aparece, o resto escurece e um retângulo cereja se desenha em volta da área que importa e pulsa",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "overlay_gancho",
+      "nome": "Overlay de gancho",
+      "familia": "cena",
+      "tipo": "layout",
+      "serve_para": "abrir o reel com a frase que prende nos 5 primeiros segundos (a tela inicial do vídeo); a faixa abre e as linhas sobem",
+      "nao_usar_quando": "a frase passa de 8 palavras (corte antes)",
+      "camada": "meio",
+      "caixa": {
+        "w": 960,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "texto",
+          "padrao": "ESPALHADO EM 40 LUGARES"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#E50145"
+        },
+        {
+          "nome": "tc",
+          "padrao": "#FFF9E9"
+        },
+        {
+          "nome": "fs",
+          "padrao": 112
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "a faixa cereja abre de baixo para cima, as linhas sobem uma a uma e o sublinhado amarelo se desenha na última",
+        "usa_t": true
+      }
     },
     {
       "id": "cortina_forma",

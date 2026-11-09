@@ -118,7 +118,7 @@ footer{padding:36px 6vw 60px;color:var(--creme);font-size:14px;opacity:.9}
 <script>
 window.MANIFESTO = {
   "sistema": "comida-viva",
-  "versao": "0.10.0",
+  "versao": "0.11.0",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -203,6 +203,9 @@ window.MANIFESTO = {
     "navegacao": 7,
     "feedback": 8,
     "maos": 6,
+    "conceitos": 10,
+    "rotina": 16,
+    "cena": 3,
     "transicoes": 5
   },
   "pecas": [
@@ -4385,6 +4388,1208 @@ window.MANIFESTO = {
       "movimento": null
     },
     {
+      "id": "ciclo",
+      "nome": "Ciclo",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "explicar que o agente repete agir, olhar e decidir até terminar; o passo ativo acende e um ponto percorre as setas",
+      "nao_usar_quando": "o processo é linear e termina num passo só (use fluxo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 420,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulos",
+          "padrao": [
+            "AGIR",
+            "OLHAR",
+            "DECIDIR"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "três passos em círculo: o ativo acende em amarelo e cresce, e um ponto percorre as setas sem parar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "bloco_peca",
+      "nome": "Bloco de peça",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar uma das peças de uma ideia (modelo, ferramentas, contexto, ciclo) que acende na hora em que é citada",
+      "nao_usar_quando": "são mais de seis blocos juntos (vira parede de cartões)",
+      "camada": "meio",
+      "caixa": {
+        "w": 290,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "CONTEXTO"
+        },
+        {
+          "nome": "icone",
+          "padrao": "contexto"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#E50145"
+        },
+        {
+          "nome": "estado",
+          "padrao": "anima"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "o bloco começa apagado, tracejado, e acende numa cor com um pulo; com estado apagado ele fica sem luz",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "grafo",
+      "nome": "Grafo de notas",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar notas ligadas entre si (a memória do agente, o Obsidian); os fios se desenham e as notas aparecem",
+      "nao_usar_quando": "são poucos itens sem relação entre si (use pictograma)",
+      "camada": "meio",
+      "caixa": {
+        "w": 460,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "os fios se desenham um a um, cada nota aparece no fim do fio e a central pulsa",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "teia",
+      "nome": "Teia de aranha",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer que algo parado envelhece e fica esquecido (arquivo que ninguém atualiza); o papel amarela e a teia cresce",
+      "nao_usar_quando": "o conteúdo está só desatualizado, não esquecido (use riscado)",
+      "camada": "meio",
+      "caixa": {
+        "w": 340,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o papel amarela, a teia se desenha no canto e uma aranha desce no fio",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "ferramentas",
+      "nome": "Caixa de ferramentas",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer que o agente tem ferramentas para agir (ler arquivo, consultar agenda, buscar ata); as ferramentas saltam da caixa",
+      "nao_usar_quando": "o assunto é um programa específico (use a peça dele)",
+      "camada": "meio",
+      "caixa": {
+        "w": 340,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2,
+        "descricao": "a caixa aparece e a chave inglesa e o martelo saltam para fora, balançando",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "bifurcacao",
+      "nome": "Bifurcação",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar caminhos possíveis com o custo de cada um (crescer a área, escolher uma rota); o tronco se abre em três",
+      "nao_usar_quando": "só existe um caminho (use seta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 540,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "custos",
+          "padrao": [
+            "R$ 40 mil",
+            "R$ 120 mil",
+            "R$ 300 mil"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o tronco sobe, se abre em três ramos e cada ramo termina numa bolinha com o custo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "plano_furado",
+      "nome": "Plano furado",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar um plano que não fecha: onde há risco, dependência sem dono, número que não bate; a rachadura corta e abre furos",
+      "nao_usar_quando": "o plano está saudável (use certo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 300,
+        "h": 240
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "o papel aparece, a rachadura corta de cima a baixo, o papel treme e abrem dois furos",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "voto_contra",
+      "nome": "Voto contra",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "mostrar a discordância ou o 'não fecha' de quem vota contra um plano; o polegar desce e balança",
+      "nao_usar_quando": "é uma reprovação pessoal (a peça é só sobre ideias)",
+      "camada": "meio",
+      "caixa": {
+        "w": 240,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "manga",
+          "padrao": "#B80037"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "o polegar para baixo aparece com um pulo e balança uma vez",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cadeado",
+      "nome": "Cadeado",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer 'seguro', 'só você acessa', 'nada sai do seu computador'; a haste fecha com um tranco e uma onda confirma",
+      "nao_usar_quando": "o assunto é bloqueio ou erro (use erro)",
+      "camada": "meio",
+      "caixa": {
+        "w": 200,
+        "h": 250
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.8,
+        "descricao": "a haste começa aberta, fecha com um tranco, o corpo dá um pulo e uma onda verde se abre",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "plataforma",
+      "nome": "Plataforma",
+      "familia": "conceitos",
+      "tipo": "acao",
+      "serve_para": "dizer 'vai para a plataforma da empresa, com acesso controlado'; o prédio sobe, acende as janelas e ganha um cadeado",
+      "nao_usar_quando": "a coisa fica só no computador da pessoa (use cadeado)",
+      "camada": "meio",
+      "caixa": {
+        "w": 340,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o prédio sobe, as janelas acendem uma a uma, a bandeira abre e o cadeado trava na porta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "chip_fonte",
+      "nome": "Chip de fonte",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar de onde veio uma informação (a nota, a ata, a data); a pílula entra e o sublinhado se desenha",
+      "nao_usar_quando": "a informação não tem fonte (use etiqueta opiniao)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 90
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "texto",
+          "padrao": "ata de 12/10"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a pílula com ícone de documento entra com um pulo e o sublinhado se desenha",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "etiqueta",
+      "nome": "Etiqueta de status",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "marcar o que o agente fez com um item: decisão, tarefa, pessoa nova, a confirmar, opinião ou dedução; carimba com um pulo",
+      "nao_usar_quando": "o item não tem status ainda (não use etiqueta vazia)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 100
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "tipo",
+          "padrao": "decisao"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.4,
+        "descricao": "a etiqueta cai com um carimbo, gira um pouco e assenta",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "citacao",
+      "nome": "Original e síntese",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar que o texto original fica intacto e a síntese do agente fica ao lado, nunca por cima",
+      "nao_usar_quando": "só existe um texto (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o original entra com a barra lateral e a síntese entra por baixo com as linhas se escrevendo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "cronometro",
+      "nome": "Cronômetro",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "marcar quanto tempo leva ('dez minutos por dia', '30 segundos'); o arco amarelo se enche e o ponteiro gira",
+      "nao_usar_quando": "o tempo exato não importa (use numero)",
+      "camada": "meio",
+      "caixa": {
+        "w": 280,
+        "h": 330
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "10 MIN"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o arco amarelo se enche enquanto o ponteiro dá uma volta e o cronômetro pulsa no fim",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "dias",
+      "nome": "Dias parado",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar há quantos dias algo está parado ('há 7 dias'); a folha cai e o número conta até o valor",
+      "nao_usar_quando": "o prazo é uma data fixa (use calendario)",
+      "camada": "meio",
+      "caixa": {
+        "w": 230,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "n",
+          "padrao": 7
+        },
+        {
+          "nome": "rotulo",
+          "padrao": "DIAS"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "a folha de calendário cai com um pulo, o número conta até o valor e a folha balança no fim",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "queda",
+      "nome": "Queda",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "dizer 'o que eu deixei cair' ou 'o que ficou para trás'; um cartão tomba da prateleira",
+      "nao_usar_quando": "a tarefa foi concluída (use certo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 420,
+        "h": 380
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.4,
+        "descricao": "três cartões em cima da prateleira, o do meio inclina, cai girando e some embaixo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "versoes",
+      "nome": "Versões",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar uma coisa que melhora a cada uso (v1, v2, v3); cada folha nova entra por cima e a última ganha o visto",
+      "nao_usar_quando": "só existe uma versão (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 310
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "três folhas entram em escada, uma por cima da outra, e a última recebe um visto verde",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "fontes",
+      "nome": "Fontes espalhadas",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar que a informação está espalhada em vários lugares (nota de celular, conversa, planilha, áudio, ata); os ícones pulam e flutuam",
+      "nao_usar_quando": "o assunto é um só lugar de informação (use pasta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "cinco ícones genéricos aparecem um a um em lugares diferentes e ficam flutuando de leve",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "juntar",
+      "nome": "Juntar numa pasta",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar tudo que estava espalhado indo parar numa pasta só; os itens voam e a pasta engole cada um",
+      "nao_usar_quando": "a informação já está organizada (use pasta)",
+      "camada": "meio",
+      "caixa": {
+        "w": 520,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulo",
+          "padrao": ""
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "seis itens saem das bordas, voam até a pasta e somem dentro dela, que dá um pulo a cada chegada",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "gaveteiro",
+      "nome": "Gaveteiro",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar as poucas gavetas onde as coisas ficam (inbox, diário, reuniões, pessoas, projetos, notas); a inbox se destaca",
+      "nao_usar_quando": "são mais de seis categorias (use tabela)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 440
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "rotulos",
+          "padrao": [
+            "INBOX",
+            "DIÁRIO",
+            "REUNIÕES",
+            "PESSOAS",
+            "PROJETOS",
+            "NOTAS"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.8,
+        "descricao": "as seis gavetas surgem uma a uma e a primeira, a inbox, abre um pouco e brilha em amarelo",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "triagem",
+      "nome": "Triagem",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar o agente separando um texto bagunçado em decisão, tarefa, pessoa nova e 'a confirmar'; os cartões saem do texto e se alinham",
+      "nao_usar_quando": "o texto já está organizado (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 580,
+        "h": 420
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3.4,
+        "descricao": "o texto bagunçado balança e quatro cartões etiquetados saem dele e se empilham à direita",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "xicara",
+      "nome": "Xícara de café",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "marcar a manhã, o 'antes do primeiro café', o começo do dia; a xícara pula e solta vapor",
+      "nao_usar_quando": "o assunto é noite ou fim do dia",
+      "camada": "meio",
+      "caixa": {
+        "w": 280,
+        "h": 290
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "a xícara dá um pulo, e três fios de vapor sobem ondulando sem parar",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "dupla",
+      "nome": "Dupla conversando",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar uma conversa a dois (1:1, combinado, cobrança); dois avatares sem rosto trocam balões",
+      "nao_usar_quando": "são mais de duas pessoas (use grupo)",
+      "camada": "meio",
+      "caixa": {
+        "w": 480,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "pele1",
+          "padrao": "#F5D69E"
+        },
+        {
+          "nome": "pele2",
+          "padrao": "#F15A22"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "os dois avatares aparecem e trocam balões de fala, um de cada vez",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "linha_tempo",
+      "nome": "Linha do tempo",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar o histórico de reuniões ou atas em ordem de data; a linha se desenha e cada ata aparece",
+      "nao_usar_quando": "são eventos sem ordem (use pictograma)",
+      "camada": "meio",
+      "caixa": {
+        "w": 560,
+        "h": 260
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "datas",
+          "padrao": [
+            "3/10",
+            "10/10",
+            "17/10",
+            "24/10"
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "a linha se desenha da esquerda para a direita, cada ata sobe no seu ponto e a última acende em amarelo com 'hoje'",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "receita",
+      "nome": "Cartão de receita",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar a skill como uma receita: nome, passos numerados que se marcam um a um; é o jeito do Claude fazer sempre igual",
+      "nao_usar_quando": "o conteúdo é um documento comum (use documento)",
+      "camada": "meio",
+      "caixa": {
+        "w": 360,
+        "h": 450
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "nome",
+          "padrao": "/resumo-comite"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 3,
+        "descricao": "o cartão entra, o nome aparece e os três passos se acendem em sequência, cada um com um visto verde",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "livro",
+      "nome": "Livro de receitas",
+      "familia": "rotina",
+      "tipo": "acao",
+      "serve_para": "mostrar a pasta de skills como um livro de receitas; o livro abre e uma página vira",
+      "nao_usar_quando": "só existe uma skill (use receita)",
+      "camada": "meio",
+      "caixa": {
+        "w": 420,
+        "h": 300
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.6,
+        "descricao": "o livro aparece, a página da direita vira para a esquerda mostrando mais receitas",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "janela_rosto",
+      "nome": "Janela do rosto",
+      "familia": "cena",
+      "tipo": "layout",
+      "serve_para": "moldurar o vídeo do apresentador em cima ou no canto do reel; o vídeo real entra no recorte e a peça só desenha a moldura",
+      "nao_usar_quando": "o apresentador ocupa a tela inteira (não use moldura)",
+      "camada": "meio",
+      "caixa": {
+        "w": 400,
+        "h": 520
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "forma",
+          "padrao": "retrato"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#E50145"
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 1.6,
+        "descricao": "a moldura cresce com um pulo e se assenta; com forma circulo, retrato ou quadrado",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "moldura_captura",
+      "nome": "Moldura de captura",
+      "familia": "cena",
+      "tipo": "layout",
+      "serve_para": "enquadrar a gravação de tela (Obsidian, Claude Code) e destacar a área que importa com zoom; o resto escurece",
+      "nao_usar_quando": "a tela inteira é o assunto (não use destaque)",
+      "camada": "meio",
+      "caixa": {
+        "w": 700,
+        "h": 460
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "destaque",
+          "padrao": [
+            10,
+            -10,
+            270,
+            110
+          ]
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.8,
+        "descricao": "a janela aparece, o resto escurece e um retângulo cereja se desenha em volta da área que importa e pulsa",
+        "usa_t": true
+      }
+    },
+    {
+      "id": "overlay_gancho",
+      "nome": "Overlay de gancho",
+      "familia": "cena",
+      "tipo": "layout",
+      "serve_para": "abrir o reel com a frase que prende nos 5 primeiros segundos (a tela inicial do vídeo); a faixa abre e as linhas sobem",
+      "nao_usar_quando": "a frase passa de 8 palavras (corte antes)",
+      "camada": "meio",
+      "caixa": {
+        "w": 960,
+        "h": 340
+      },
+      "parametros": [
+        {
+          "nome": "x",
+          "padrao": 0
+        },
+        {
+          "nome": "y",
+          "padrao": 0
+        },
+        {
+          "nome": "s",
+          "padrao": 1
+        },
+        {
+          "nome": "rot",
+          "padrao": 0
+        },
+        {
+          "nome": "texto",
+          "padrao": "ESPALHADO EM 40 LUGARES"
+        },
+        {
+          "nome": "cor",
+          "padrao": "#E50145"
+        },
+        {
+          "nome": "tc",
+          "padrao": "#FFF9E9"
+        },
+        {
+          "nome": "fs",
+          "padrao": 112
+        }
+      ],
+      "movimento": {
+        "param": "p",
+        "duracao_s": 2.2,
+        "descricao": "a faixa cereja abre de baixo para cima, as linhas sobem uma a uma e o sublinhado amarelo se desenha na última",
+        "usa_t": true
+      }
+    },
+    {
       "id": "cortina_forma",
       "nome": "Cortina de Forma",
       "familia": "transicoes",
@@ -6405,6 +7610,655 @@ window.MANIFESTO = {
   Object.assign(EL, { aceno, mao_aponta: aponta, joinha, avatar, grupo, chef });
 })();
 
+// ===== conceitos.js =====
+// Família CONCEITOS (ideias): ciclo, bloco_peca, grafo, teia, ferramentas, bifurcacao, plano_furado, voto_contra, cadeado e plataforma.
+// O que o reel usa para explicar ideias abstratas de IA e trabalho: o agente que repete passos, as peças que acendem, a rede de notas,
+// o projeto que envelhece, os caminhos com custo, o plano com furos, a discordância, a confiança e a plataforma.
+// Mesmo estilo do resto: formas chapadas com luz e sombra dura (sem contorno preto, sem blur).
+// Origem das coordenadas: o CENTRO de cada peça. Todas animam em p (0..1) e t (segundos).
+(() => {
+  const { C, el, clamp, ease, back, reg } = EL;
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const mover = (g, x, y, s = 1, rot = 0) => g.setAttribute("transform", `translate(${x} ${y}) rotate(${rot}) scale(${s})`);
+  const pv = (g, cx, cy, s = 1, rot = 0) => g.setAttribute("transform", `translate(${cx} ${cy}) rotate(${rot}) scale(${s}) translate(${-cx} ${-cy})`);
+  const nova = (pai, x, y, s, rot) => { const g = el("g", {}, pai); mover(g, x, y, s, rot); return g; };
+  const UI = 'font-family:Outfit,"Segoe UI",sans-serif;font-weight:700;text-transform:none';
+  const DISP = 'font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase';
+  const txt = (pai, x, y, t, fs, fill, estilo = UI, anchor = "middle") => { const e = el("text", { x, y, "font-size": fs, fill, "text-anchor": anchor, style: estilo }, pai); e.textContent = t; return e; };
+  const P3 = [{ nome: "x", padrao: 0 }, { nome: "y", padrao: 0 }, { nome: "s", padrao: 1 }, { nome: "rot", padrao: 0 }];
+  const A = (flat) => ({
+    flat,
+    f: (c) => ({ fill: flat ? C.tinta : c }),
+    s: (c, w) => ({ fill: "none", stroke: flat ? C.tinta : c, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round" }),
+  });
+  const montar = (pai, o = {}, build) => {
+    const { x = 0, y = 0, s = 1, rot = 0, sombra = true } = o;
+    const g = nova(pai, x, y, s, rot);
+    const sh = sombra ? el("g", { transform: "translate(14 12)", opacity: .24 }, g) : null;
+    const ss = sh ? build(sh, A(true), o) : null, ms = build(g, A(false), o);
+    return { g, set: (p = 0, t = 0) => { if (ss) ss(p, t); ms(p, t); } };
+  };
+  const acao = (id, nome, serve_para, nao_usar_quando, caixa, duracao_s, descricao, extras, build) => {
+    reg({ id, nome, familia: "conceitos", tipo: "acao", serve_para, nao_usar_quando, camada: "meio", caixa, parametros: [...P3, ...extras], movimento: { param: "p", duracao_s, descricao, usa_t: true } });
+    return (pai, o = {}) => montar(pai, o, build);
+  };
+  const pop = (p, u0, u1) => Math.max(0, back(clamp((p - u0) / (u1 - u0))));
+  const bump = (p, u0, u1) => Math.sin(Math.PI * clamp((p - u0) / (u1 - u0)));
+  const mix = (a, b, u) => { const q = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)); const X = q(a), Y = q(b); return "#" + X.map((v, i) => Math.round(v + (Y[i] - v) * u).toString(16).padStart(2, "0")).join(""); };
+  const traco = (e, u) => { e.setAttribute("stroke-dasharray", "1 1"); e.setAttribute("stroke-dashoffset", 1 - u); e.setAttribute("opacity", u > 0 ? 1 : 0); };
+
+  // ============ CICLO ============
+  const ciclo = acao("ciclo", "Ciclo", "explicar que o agente repete agir, olhar e decidir até terminar; o passo ativo acende e um ponto percorre as setas", "o processo é linear e termina num passo só (use fluxo)", { w: 420, h: 420 }, 3,
+    "três passos em círculo: o ativo acende em amarelo e cresce, e um ponto percorre as setas sem parar", [{ nome: "rotulos", padrao: ["AGIR", "OLHAR", "DECIDIR"] }], (g, a, o) => {
+      const rot = o.rotulos || ["AGIR", "OLHAR", "DECIDIR"], R = 140, cores = [C.cereja, C.roxo, C.laranja];
+      const ang = (i) => (-90 + i * 120) * Math.PI / 180;
+      for (let i = 0; i < 3; i++) {
+        const a0 = ang(i) + .62, a1 = ang(i + 1) - .62, x1 = Math.cos(a1) * R, y1 = Math.sin(a1) * R;
+        el("path", { d: `M${Math.cos(a0) * R} ${Math.sin(a0) * R}A${R} ${R} 0 0 1 ${x1} ${y1}`, ...a.s(C.creme, 12) }, g);
+        el("polygon", { points: "-14,-17 20,0 -14,17", ...a.f(C.creme), transform: `translate(${x1} ${y1}) rotate(${Math.atan2(Math.cos(a1), -Math.sin(a1)) * 180 / Math.PI})` }, g);
+      }
+      const ponto = a.flat ? null : el("circle", { r: 14, ...a.f(C.amarelo), stroke: C.creme, "stroke-width": 5 }, g);
+      const nos = [0, 1, 2].map((i) => {
+        const n = el("g", {}, g), c = el("circle", { r: 62, ...a.f(cores[i]) }, n);
+        const t = a.flat ? null : txt(n, 0, 12, rot[i], 36, C.creme, DISP);
+        return { n, c, t, x: Math.cos(ang(i)) * R, y: Math.sin(ang(i)) * R };
+      });
+      return (p) => {
+        const u = p * 3;
+        nos.forEach(({ n, c, t, x, y }, i) => {
+          const d = ((u - i) % 3 + 3) % 3, on = d < 1;
+          mover(n, x, y, 1 + (on ? .16 * Math.sin(Math.PI * d) : 0));
+          if (!a.flat) { c.setAttribute("fill", on ? C.amarelo : cores[i]); t.setAttribute("fill", on ? C.tinta : C.creme); }
+        });
+        if (ponto) { const an = -Math.PI / 2 + u * 2 * Math.PI / 3; ponto.setAttribute("cx", Math.cos(an) * R); ponto.setAttribute("cy", Math.sin(an) * R); }
+      };
+    });
+
+  // ============ BLOCO DE PEÇA ============
+  const ICONES = {
+    modelo: (g, a) => { el("rect", { x: -26, y: -26, width: 52, height: 52, rx: 12, ...a.f(C.creme) }, g); if (!a.flat) { el("rect", { x: -12, y: -12, width: 24, height: 24, rx: 6, fill: C.roxo }, g); for (const d of [-16, 0, 16]) el("path", { d: `M${d} -40V-26M${d} 26V40M-40 ${d}H-26M26 ${d}H40`, ...a.s(C.creme, 6) }, g); } },
+    ferramentas: (g, a) => { el("path", { d: "M-32 34L8 -6", ...a.s(C.creme, 16) }, g); el("path", { d: "M10 -40A30 30 0 1 0 40 -10", ...a.s(C.creme, 14) }, g); },
+    contexto: (g, a) => { [[-14, 16], [0, 4], [14, -8]].forEach(([x, y], i) => { el("rect", { x: x - 28, y: y - 32, width: 56, height: 64, rx: 8, ...a.f(i === 2 ? C.creme : C.areia) }, g); if (!a.flat && i === 2) [-14, 0, 14].forEach((l) => el("rect", { x: x - 18, y: l - 8, width: 36, height: 7, rx: 3, fill: C.tinta, opacity: .3 }, g)); }); },
+    ciclo: (g, a) => { el("path", { d: "M-32 -6A34 34 0 0 1 22 -26", ...a.s(C.creme, 12) }, g); el("path", { d: "M32 6A34 34 0 0 1 -22 26", ...a.s(C.creme, 12) }, g); el("polygon", { points: "10,-42 38,-24 8,-10", ...a.f(C.creme) }, g); el("polygon", { points: "-10,42 -38,24 -8,10", ...a.f(C.creme) }, g); },
+  };
+  const bloco_peca = acao("bloco_peca", "Bloco de peça", "mostrar uma das peças de uma ideia (modelo, ferramentas, contexto, ciclo) que acende na hora em que é citada", "são mais de seis blocos juntos (vira parede de cartões)", { w: 290, h: 290 }, 2,
+    "o bloco começa apagado, tracejado, e acende numa cor com um pulo; com estado apagado ele fica sem luz", [{ nome: "rotulo", padrao: "CONTEXTO" }, { nome: "icone", padrao: "contexto" }, { nome: "cor", padrao: C.cereja }, { nome: "estado", padrao: "anima" }], (g, a, o) => {
+      const cor = o.cor || C.cereja, ic = ICONES[o.icone || "contexto"] || ICONES.contexto;
+      const bl = el("g", {}, g);
+      const ap = a.flat ? null : el("rect", { x: -130, y: -130, width: 260, height: 260, rx: 44, fill: "none", stroke: C.creme, "stroke-width": 8, "stroke-dasharray": "22 16", "stroke-linecap": "round" }, bl);
+      const ac = el("rect", { x: -130, y: -130, width: 260, height: 260, rx: 44, ...a.f(cor) }, bl);
+      const ig = el("g", {}, bl); mover(ig, 0, -22, 1.5); ic(ig, a);
+      const tx = a.flat ? null : txt(bl, 0, 100, o.rotulo || "CONTEXTO", 44, C.creme, DISP);
+      if (!a.flat) el("path", { d: "M-100 -78C-108 -100 -96 -112 -76 -112", ...a.s("#fff", 8), "stroke-opacity": .4 }, bl);
+      return (p) => {
+        const on = o.estado === "aceso" ? 1 : o.estado === "apagado" ? 0 : ease(clamp((p - .25) / .18));
+        ac.setAttribute("opacity", on); if (ap) ap.setAttribute("opacity", 1 - on);
+        ig.setAttribute("opacity", a.flat ? on : .35 + .65 * on); if (tx) tx.setAttribute("opacity", .45 + .55 * on);
+        mover(bl, 0, 0, o.estado ? 1 : 1 + .1 * bump(p, .25, .5));
+      };
+    });
+
+  // ============ GRAFO ============
+  const GN = [[0, 0, 30, C.cereja], [-140, -90, 20, C.laranja], [-10, -135, 18, C.roxo], [135, -95, 22, C.verde], [-190, 20, 18, C.amarelo], [175, 25, 18, C.rosa], [-110, 100, 22, C.roxo], [20, 115, 20, C.laranja], [140, 120, 16, C.verde]];
+  const GA = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 2], [2, 3], [3, 5], [4, 6], [6, 7], [7, 8], [5, 8]];
+  const grafo = acao("grafo", "Grafo de notas", "mostrar notas ligadas entre si (a memória do agente, o Obsidian); os fios se desenham e as notas aparecem", "são poucos itens sem relação entre si (use pictograma)", { w: 460, h: 340 }, 3,
+    "os fios se desenham um a um, cada nota aparece no fim do fio e a central pulsa", [], (g, a) => {
+      const fios = GA.map(([i, j]) => el("line", { x1: GN[i][0], y1: GN[i][1], x2: GN[j][0], y2: GN[j][1], pathLength: 1, ...a.s(C.creme, 6) }, g));
+      const nos = GN.map(([x, y, r, cor]) => { const n = el("g", {}, g); el("circle", { r, ...a.f(cor), stroke: a.flat ? C.tinta : C.creme, "stroke-width": 6 }, n); return { n, x, y }; });
+      return (p) => {
+        fios.forEach((f, k) => traco(f, ease(clamp((p - .04 - k * .035) / .18))));
+        nos.forEach(({ n, x, y }, i) => mover(n, x, y, pop(p, .06 + i * .07, .26 + i * .07) * (i === 0 ? 1 + .12 * bump(p, .75, .95) : 1)));
+      };
+    });
+
+  // ============ TEIA ============
+  const teia = acao("teia", "Teia de aranha", "dizer que algo parado envelhece e fica esquecido (arquivo que ninguém atualiza); o papel amarela e a teia cresce", "o conteúdo está só desatualizado, não esquecido (use riscado)", { w: 340, h: 300 }, 2.6,
+    "o papel amarela, a teia se desenha no canto e uma aranha desce no fio", [], (g, a) => {
+      const doc = el("rect", { x: -110, y: -100, width: 220, height: 200, rx: 18, ...a.f(C.creme) }, g);
+      if (!a.flat) [-62, -32, -2, 28].forEach((y, i) => el("rect", { x: -80, y, width: [160, 120, 150, 90][i], height: 13, rx: 6, fill: C.tinta, opacity: .2 }, g));
+      let radiais = [], arcos = [], fio = null, ar = null;
+      if (!a.flat) {
+        const O = [-110, -100], pt = (r, gr) => [O[0] + Math.cos(gr * Math.PI / 180) * r, O[1] + Math.sin(gr * Math.PI / 180) * r];
+        radiais = [0, 30, 60, 90].map((gr) => el("path", { d: `M${O[0]} ${O[1]}L${pt(135, gr).join(" ")}`, pathLength: 1, ...a.s(C.tinta, 4), "stroke-opacity": .55 }, g));
+        arcos = [45, 85, 125].map((r) => el("path", { d: "M" + [0, 30, 60, 90].map((gr) => pt(r, gr).join(" ")).join("L"), pathLength: 1, ...a.s(C.tinta, 4), "stroke-opacity": .55 }, g));
+        fio = el("line", { x1: -50, y1: -100, x2: -50, y2: -100, ...a.s(C.tinta, 3) }, g);
+        ar = el("g", {}, g); el("circle", { r: 13, fill: C.tinta }, ar);
+        for (const l of [-1, 1]) for (const k of [-8, 8]) el("path", { d: `M${l * 10} ${k * .4}L${l * 26} ${k * 1.6}`, ...a.s(C.tinta, 4) }, ar);
+      }
+      return (p) => {
+        if (!a.flat) {
+          doc.setAttribute("fill", mix(C.creme, C.areia, ease(clamp(p / .55))));
+          radiais.forEach((r) => traco(r, ease(clamp((p - .15) / .3)))); arcos.forEach((r) => traco(r, ease(clamp((p - .4) / .3))));
+          const q = ease(clamp((p - .65) / .3)), y = -100 + q * 150;
+          fio.setAttribute("y2", y); fio.setAttribute("opacity", q > 0 ? 1 : 0); mover(ar, -50, y, q > 0 ? 1 : 0);
+        }
+      };
+    });
+
+  // ============ FERRAMENTAS ============
+  const ferramentas = acao("ferramentas", "Caixa de ferramentas", "dizer que o agente tem ferramentas para agir (ler arquivo, consultar agenda, buscar ata); as ferramentas saltam da caixa", "o assunto é um programa específico (use a peça dele)", { w: 340, h: 290 }, 2,
+    "a caixa aparece e a chave inglesa e o martelo saltam para fora, balançando", [], (g, a) => {
+      const chave = el("g", {}, g), mart = el("g", {}, g);
+      el("rect", { x: -9, y: -20, width: 18, height: 110, rx: 9, ...a.f(C.creme) }, chave);
+      el("path", { d: "M-18 -54A26 26 0 1 1 18 -54", ...a.s(a.flat ? C.tinta : C.creme, 17) }, chave);
+      el("rect", { x: -9, y: -30, width: 18, height: 120, rx: 9, ...a.f(C.areia) }, mart);
+      el("rect", { x: -40, y: -62, width: 80, height: 38, rx: 10, ...a.f(C.cerejaEsc) }, mart);
+      const cx = el("g", {}, g);
+      el("path", { d: "M-70 -22A70 56 0 0 1 70 -22", ...a.s(C.laranjaEsc, 14) }, cx);
+      el("rect", { x: -130, y: -6, width: 260, height: 104, rx: 20, ...a.f(C.laranja) }, cx);
+      if (!a.flat) { el("rect", { x: -130, y: -6, width: 260, height: 30, rx: 14, fill: C.laranjaEsc }, cx); el("rect", { x: -22, y: 10, width: 44, height: 24, rx: 8, fill: C.amarelo }, cx); el("path", { d: "M-108 40V84", ...a.s("#fff", 8), "stroke-opacity": .4 }, cx); }
+      return (p) => {
+        const s1 = pop(p, .15, .5), s2 = pop(p, .3, .65), b = Math.sin(p * Math.PI * 6) * 5 * clamp((p - .5) / .1) * (1 - clamp((p - .6) / .4));
+        pv(chave, -58, -6, 1, -22 + b); chave.setAttribute("transform", `translate(-58 ${20 - 92 * s1}) rotate(${-22 + b})`); chave.setAttribute("opacity", s1 > 0 ? 1 : 0);
+        mart.setAttribute("transform", `translate(54 ${20 - 74 * s2}) rotate(${20 - b})`); mart.setAttribute("opacity", s2 > 0 ? 1 : 0);
+        mover(cx, 0, 0, pop(p, 0, .22));
+      };
+    });
+
+  // ============ BIFURCAÇÃO ============
+  const bifurcacao = acao("bifurcacao", "Bifurcação", "mostrar caminhos possíveis com o custo de cada um (crescer a área, escolher uma rota); o tronco se abre em três", "só existe um caminho (use seta)", { w: 540, h: 340 }, 2.6,
+    "o tronco sobe, se abre em três ramos e cada ramo termina numa bolinha com o custo", [{ nome: "custos", padrao: ["R$ 40 mil", "R$ 120 mil", "R$ 300 mil"] }], (g, a, o) => {
+      const cs = o.custos || ["R$ 40 mil", "R$ 120 mil", "R$ 300 mil"], cores = [C.verde, C.laranja, C.roxo], xs = [-180, 0, 180], ys = [-30, -50, -30];
+      const ramos = xs.map((x, i) => el("path", { d: `M0 150C0 70 ${x} 90 ${x} ${ys[i]}`, pathLength: 1, ...a.s(C.creme, 14) }, g));
+      const folhas = xs.map((x, i) => {
+        const f = el("g", {}, g); el("circle", { r: 32, ...a.f(cores[i]), stroke: a.flat ? C.tinta : C.creme, "stroke-width": 8 }, f);
+        if (!a.flat) { const w = 36 + cs[i].length * 13; el("rect", { x: -w / 2, y: -100, width: w, height: 46, rx: 23, fill: C.creme }, f); txt(f, 0, -68, cs[i], 30, C.tinta, DISP); }
+        return { f, x, y: ys[i] };
+      });
+      return (p) => {
+        ramos.forEach((r, i) => traco(r, ease(clamp((p - .1 - i * .12) / .35))));
+        folhas.forEach(({ f, x, y }, i) => mover(f, x, y, pop(p, .42 + i * .12, .62 + i * .12)));
+      };
+    });
+
+  // ============ PLANO FURADO ============
+  const plano_furado = acao("plano_furado", "Plano furado", "mostrar um plano que não fecha: onde há risco, dependência sem dono, número que não bate; a rachadura corta e abre furos", "o plano está saudável (use certo)", { w: 300, h: 240 }, 2.4,
+    "o papel aparece, a rachadura corta de cima a baixo, o papel treme e abrem dois furos", [], (g, a) => {
+      const cd = el("g", {}, g);
+      el("rect", { x: -130, y: -100, width: 260, height: 200, rx: 20, ...a.f(C.creme) }, cd);
+      let rach = null, f1 = null, f2 = null;
+      if (!a.flat) {
+        [[-60, 200], [-30, 150], [0, 180]].forEach(([y, w]) => el("rect", { x: -100, y, width: w, height: 14, rx: 7, fill: C.tinta, opacity: .2 }, cd));
+        rach = el("path", { d: "M-20 -100L-4 -62L-30 -36L2 -6L-18 28L10 60L-2 100", pathLength: 1, ...a.s(C.cerejaEsc, 9) }, cd);
+        f1 = el("g", {}, cd); el("circle", { r: 26, fill: C.tinta, stroke: C.cereja, "stroke-width": 7 }, f1);
+        f2 = el("g", {}, cd); el("circle", { r: 20, fill: C.tinta, stroke: C.cereja, "stroke-width": 7 }, f2);
+      }
+      return (p) => {
+        const tr = Math.sin(p * Math.PI * 14) * 5 * bump(p, .4, .65);
+        mover(cd, tr, 0, pop(p, 0, .2), tr * .3);
+        if (rach) { traco(rach, ease(clamp((p - .25) / .3))); mover(f1, -70, 50, pop(p, .55, .75)); mover(f2, 80, -50, pop(p, .65, .85)); }
+      };
+    });
+
+  // ============ VOTO CONTRA ============
+  const voto_contra = acao("voto_contra", "Voto contra", "mostrar a discordância ou o 'não fecha' de quem vota contra um plano; o polegar desce e balança", "é uma reprovação pessoal (a peça é só sobre ideias)", { w: 240, h: 260 }, 1.8,
+    "o polegar para baixo aparece com um pulo e balança uma vez", [{ nome: "pele", padrao: C.areia }, { nome: "manga", padrao: C.cerejaEsc }], (g, a, o) => {
+      const pele = o.pele || C.areia, manga = o.manga || C.cerejaEsc, w = el("g", {}, g), h = el("g", { transform: "scale(1 -1)" }, w);
+      el("rect", { x: -104, y: -20, width: 54, height: 112, rx: 14, ...a.f(manga) }, h);
+      for (let i = 0; i < 4; i++) el("rect", { x: -52, y: -12 + i * 28, width: 120, height: 28, rx: 14, ...a.f(pele) }, h);
+      el("path", { d: "M-26 -10V-84", ...a.s(a.flat ? C.tinta : pele, 44) }, h);
+      if (!a.flat) { for (let i = 1; i < 4; i++) el("path", { d: `M-30 ${-12 + i * 28}H62`, ...a.s(C.laranjaEsc, 3), "stroke-opacity": .35 }, h); el("path", { d: "M-100 8V76", ...a.s("#fff", 8), "stroke-opacity": .3 }, h); }
+      return (p) => mover(w, 0, 14 * Math.sin(p * Math.PI * 4) * (1 - p), pop(p, 0, .25), 8 * Math.sin(p * Math.PI * 4) * (1 - p));
+    });
+
+  // ============ CADEADO ============
+  const cadeado = acao("cadeado", "Cadeado", "dizer 'seguro', 'só você acessa', 'nada sai do seu computador'; a haste fecha com um tranco e uma onda confirma", "o assunto é bloqueio ou erro (use erro)", { w: 200, h: 250 }, 1.8,
+    "a haste começa aberta, fecha com um tranco, o corpo dá um pulo e uma onda verde se abre", [], (g, a) => {
+      const onda = a.flat ? null : el("circle", { cy: 20, r: 80, ...a.s(C.verde, 6), opacity: 0 }, g);
+      const ha = el("g", {}, g), co = el("g", {}, g);
+      el("path", { d: "M-46 -10V-52A46 46 0 0 1 46 -52V-10", ...a.s(C.verdeEsc, 26) }, ha);
+      el("rect", { x: -76, y: -14, width: 152, height: 116, rx: 26, ...a.f(C.verde) }, co);
+      if (!a.flat) { el("circle", { cy: 34, r: 16, fill: C.creme }, co); el("rect", { x: -6, y: 40, width: 12, height: 34, rx: 6, fill: C.creme }, co); el("path", { d: "M-56 10C-60 30 -58 50 -58 64", ...a.s("#fff", 8), "stroke-opacity": .45 }, co); }
+      return (p) => {
+        const ab = 1 - ease(clamp((p - .15) / .25));
+        ha.setAttribute("transform", `translate(0 ${-24 * ab}) rotate(${-24 * ab} 46 -10)`);
+        pv(co, 0, 44, 1 + .1 * bump(p, .38, .55));
+        if (onda) { const q = clamp((p - .4) / .5); onda.setAttribute("r", lerp(80, 140, ease(q))); onda.setAttribute("opacity", q > 0 && q < 1 ? .7 * (1 - q) : 0); }
+      };
+    });
+
+  // ============ PLATAFORMA ============
+  const plataforma = acao("plataforma", "Plataforma", "dizer 'vai para a plataforma da empresa, com acesso controlado'; o prédio sobe, acende as janelas e ganha um cadeado", "a coisa fica só no computador da pessoa (use cadeado)", { w: 340, h: 340 }, 2.6,
+    "o prédio sobe, as janelas acendem uma a uma, a bandeira abre e o cadeado trava na porta", [], (g, a) => {
+      const pr = el("g", {}, g);
+      el("rect", { x: -100, y: -60, width: 200, height: 170, rx: 14, ...a.f(C.roxo) }, pr);
+      el("rect", { x: -112, y: -84, width: 224, height: 34, rx: 10, ...a.f(C.roxoEsc) }, pr);
+      el("path", { d: "M0 -84V-140", ...a.s(C.tinta, 6) }, pr);
+      const bd = el("polygon", { points: "0,-140 46,-124 0,-108", ...a.f(C.cereja) }, pr);
+      const jan = [];
+      for (let r = 0; r < 2; r++) for (let c = 0; c < 3; c++) jan.push(el("rect", { x: -78 + c * 56, y: -34 + r * 44, width: 36, height: 28, rx: 6, ...a.f(C.roxoEsc) }, pr));
+      el("rect", { x: -28, y: 58, width: 56, height: 52, rx: 8, ...a.f(C.laranja) }, pr);
+      const ck = el("g", {}, g);
+      el("path", { d: "M80 74V62A16 16 0 0 1 112 62V74", ...a.s(C.verdeEsc, 9) }, ck); el("rect", { x: 70, y: 72, width: 52, height: 40, rx: 10, ...a.f(C.verde) }, ck);
+      if (!a.flat) el("circle", { cx: 96, cy: 90, r: 6, fill: C.creme }, ck);
+      return (p) => {
+        const s = ease(clamp(p / .3)); pv(pr, 0, 110, 1, 0); pr.setAttribute("transform", `translate(0 110) scale(1 ${Math.max(.001, s)}) translate(0 -110)`);
+        jan.forEach((j, i) => { if (!a.flat) j.setAttribute("fill", p > .35 + i * .07 ? C.amarelo : C.roxoEsc); });
+        mover(ck, 0, 0, pop(p, .72, .92));
+        bd.setAttribute("opacity", p > .5 ? 1 : 0);
+      };
+    });
+
+  Object.assign(EL, { ciclo, bloco_peca, grafo, teia, ferramentas, bifurcacao, plano_furado, voto_contra, cadeado, plataforma });
+})();
+
+// ===== rotina.js =====
+// Família ROTINA (trabalho do dia a dia): chip_fonte, etiqueta, citacao, cronometro, dias, queda, versoes, fontes, juntar, gaveteiro,
+// triagem, xicara, dupla, linha_tempo, receita e livro.
+// O que o reel usa para mostrar o dia de trabalho com um agente: de onde veio a informação, o status de cada item, o tempo que passa,
+// o que está espalhado e se junta, a triagem, o café da manhã, o 1:1, a linha do tempo e a receita (a skill).
+// Mesmo estilo do resto: formas chapadas com luz e sombra dura (sem contorno preto, sem blur).
+// Origem das coordenadas: o CENTRO de cada peça. Todas animam em p (0..1) e t (segundos).
+(() => {
+  const { C, el, clamp, ease, back, reg } = EL;
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const mover = (g, x, y, s = 1, rot = 0) => g.setAttribute("transform", `translate(${x} ${y}) rotate(${rot}) scale(${s})`);
+  const pv = (g, cx, cy, s = 1, rot = 0) => g.setAttribute("transform", `translate(${cx} ${cy}) rotate(${rot}) scale(${s}) translate(${-cx} ${-cy})`);
+  const nova = (pai, x, y, s, rot) => { const g = el("g", {}, pai); mover(g, x, y, s, rot); return g; };
+  const UI = 'font-family:Outfit,"Segoe UI",sans-serif;font-weight:700;text-transform:none';
+  const DISP = 'font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase';
+  const txt = (pai, x, y, t, fs, fill, estilo = UI, anchor = "middle") => { const e = el("text", { x, y, "font-size": fs, fill, "text-anchor": anchor, style: estilo }, pai); e.textContent = t; return e; };
+  const P3 = [{ nome: "x", padrao: 0 }, { nome: "y", padrao: 0 }, { nome: "s", padrao: 1 }, { nome: "rot", padrao: 0 }];
+  const A = (flat) => ({
+    flat,
+    f: (c) => ({ fill: flat ? C.tinta : c }),
+    s: (c, w) => ({ fill: "none", stroke: flat ? C.tinta : c, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round" }),
+  });
+  const montar = (pai, o = {}, build) => {
+    const { x = 0, y = 0, s = 1, rot = 0, sombra = true } = o;
+    const g = nova(pai, x, y, s, rot);
+    const sh = sombra ? el("g", { transform: "translate(14 12)", opacity: .24 }, g) : null;
+    const ss = sh ? build(sh, A(true), o) : null, ms = build(g, A(false), o);
+    return { g, set: (p = 0, t = 0) => { if (ss) ss(p, t); ms(p, t); } };
+  };
+  const acao = (id, nome, serve_para, nao_usar_quando, caixa, duracao_s, descricao, extras, build) => {
+    reg({ id, nome, familia: "rotina", tipo: "acao", serve_para, nao_usar_quando, camada: "meio", caixa, parametros: [...P3, ...extras], movimento: { param: "p", duracao_s, descricao, usa_t: true } });
+    return (pai, o = {}) => montar(pai, o, build);
+  };
+  const pop = (p, u0, u1) => Math.max(0, back(clamp((p - u0) / (u1 - u0))));
+  const bump = (p, u0, u1) => Math.sin(Math.PI * clamp((p - u0) / (u1 - u0)));
+  const traco = (e, u) => { e.setAttribute("stroke-dasharray", "1 1"); e.setAttribute("stroke-dashoffset", 1 - u); e.setAttribute("opacity", u > 0 ? 1 : 0); };
+  const barras = (g, x, y, ws, h = 13, gap = 28, cor = C.tinta, op = .2) => ws.forEach((w, i) => el("rect", { x, y: y + i * gap, width: w, height: h, rx: h / 2, fill: cor, opacity: op }, g));
+
+  // ============ CHIP DE FONTE ============
+  const chip_fonte = acao("chip_fonte", "Chip de fonte", "mostrar de onde veio uma informação (a nota, a ata, a data); a pílula entra e o sublinhado se desenha", "a informação não tem fonte (use etiqueta opiniao)", { w: 520, h: 90 }, 1.6,
+    "a pílula com ícone de documento entra com um pulo e o sublinhado se desenha", [{ nome: "texto", padrao: "ata de 12/10" }], (g, a, o) => {
+      const t = o.texto || "ata de 12/10", w = 150 + t.length * 17, h = 84, pl = el("g", {}, g);
+      el("rect", { x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, ...a.f(C.creme) }, pl);
+      el("circle", { cx: -w / 2 + h / 2, r: h / 2 - 9, ...a.f(C.roxo) }, pl);
+      let sub = null;
+      if (!a.flat) {
+        const ix = -w / 2 + h / 2; el("rect", { x: ix - 11, y: -16, width: 22, height: 32, rx: 4, fill: C.creme }, pl); [-6, 2].forEach((y) => el("rect", { x: ix - 6, y, width: 12, height: 4, rx: 2, fill: C.roxo }, pl));
+        txt(pl, -w / 2 + h + 6, 12, t, 38, C.tinta, UI, "start");
+        sub = el("path", { d: `M${-w / 2 + h + 6} 28H${w / 2 - 28}`, pathLength: 1, ...a.s(C.cereja, 5) }, pl);
+      }
+      return (p) => { mover(pl, 0, 0, pop(p, 0, .3)); if (sub) traco(sub, ease(clamp((p - .3) / .4))); };
+    });
+
+  // ============ ETIQUETA ============
+  const ET = { decisao: [C.verde, "DECISÃO", C.creme], tarefa: [C.laranja, "TAREFA", C.creme], pessoa: [C.roxo, "PESSOA NOVA", C.creme], confirmar: [C.amarelo, "A CONFIRMAR", C.tinta], opiniao: [C.rosa, "OPINIÃO", C.tinta], deducao: [C.lilas, "DEDUÇÃO", C.tinta] };
+  const etiqueta = acao("etiqueta", "Etiqueta de status", "marcar o que o agente fez com um item: decisão, tarefa, pessoa nova, a confirmar, opinião ou dedução; carimba com um pulo", "o item não tem status ainda (não use etiqueta vazia)", { w: 360, h: 100 }, 1.4,
+    "a etiqueta cai com um carimbo, gira um pouco e assenta", [{ nome: "tipo", padrao: "decisao" }], (g, a, o) => {
+      const [cor, rot, tc] = ET[o.tipo || "decisao"] || ET.decisao, w = 90 + rot.length * 24, h = 80, e = el("g", {}, g);
+      el("rect", { x: -w / 2, y: -h / 2, width: w, height: h, rx: 22, ...a.f(cor) }, e);
+      if (!a.flat) { el("circle", { cx: -w / 2 + 26, r: 9, fill: C.creme }, e); txt(e, 16, 15, rot, 44, tc, DISP); el("path", { d: `M${-w / 2 + 50} -26H${w / 2 - 18}`, ...a.s("#fff", 5), "stroke-opacity": .35 }, e); }
+      return (p) => { const q = ease(clamp(p / .3)); mover(e, 0, 0, lerp(1.7, 1, q) * (1 + .06 * bump(p, .3, .5)), lerp(-9, -2, q)); e.setAttribute("opacity", p > 0 ? Math.min(1, p / .12) : 0); };
+    });
+
+  // ============ CITAÇÃO ============
+  const citacao = acao("citacao", "Original e síntese", "mostrar que o texto original fica intacto e a síntese do agente fica ao lado, nunca por cima", "só existe um texto (use documento)", { w: 520, h: 330 }, 2.6,
+    "o original entra com a barra lateral e a síntese entra por baixo com as linhas se escrevendo", [], (g, a) => {
+      const orig = el("g", {}, g), sint = el("g", {}, g);
+      el("rect", { x: -230, y: -150, width: 460, height: 140, rx: 22, ...a.f(C.creme) }, orig);
+      el("rect", { x: -230, y: -150, width: 18, height: 140, rx: 9, ...a.f(C.cereja) }, orig);
+      el("rect", { x: -230, y: 10, width: 460, height: 140, rx: 22, ...a.f(C.roxo) }, sint);
+      const ls = [];
+      if (!a.flat) {
+        [[-190, -120, 150], [-190, -90, 200], [-190, -60, 120]].forEach(([x, y, w]) => ls.push(el("rect", { x, y, width: w, height: 16, rx: 8, fill: C.tinta, opacity: .25 }, orig)));
+        [[-196, 42, 150], [-196, 72, 200], [-196, 102, 100]].forEach(([x, y, w]) => ls.push(el("rect", { x, y, width: w, height: 16, rx: 8, fill: C.lilas }, sint)));
+        el("rect", { x: 140, y: -138, width: 78, height: 34, rx: 17, fill: C.cereja }, orig); txt(orig, 179, -113, "ORIGINAL", 22, C.creme, DISP);
+        el("rect", { x: 140, y: 22, width: 78, height: 34, rx: 17, fill: C.amarelo }, sint); txt(sint, 179, 47, "SÍNTESE", 22, C.tinta, DISP);
+      }
+      return (p) => {
+        mover(orig, 0, 0, pop(p, 0, .22));
+        sint.setAttribute("transform", `translate(0 ${lerp(60, 0, ease(clamp((p - .35) / .25)))})`); sint.setAttribute("opacity", clamp((p - .35) / .12));
+        ls.forEach((l, i) => { const k = i < 3 ? 0 : 3, u = i < 3 ? .12 + i * .06 : .55 + (i - 3) * .08; l.setAttribute("transform", `scale(${ease(clamp((p - u) / .18))} 1)`); l.setAttribute("transform-origin", `${l.getAttribute("x")}px 0px`); });
+      };
+    });
+
+  // ============ CRONÔMETRO ============
+  const cronometro = acao("cronometro", "Cronômetro", "marcar quanto tempo leva ('dez minutos por dia', '30 segundos'); o arco amarelo se enche e o ponteiro gira", "o tempo exato não importa (use numero)", { w: 280, h: 330 }, 3,
+    "o arco amarelo se enche enquanto o ponteiro dá uma volta e o cronômetro pulsa no fim", [{ nome: "rotulo", padrao: "10 MIN" }], (g, a, o) => {
+      const cr = el("g", {}, g);
+      el("rect", { x: -16, y: -156, width: 32, height: 26, rx: 8, ...a.f(C.cerejaEsc) }, cr);
+      el("circle", { cy: 14, r: 118, ...a.f(C.cereja) }, cr);
+      el("circle", { cy: 14, r: 96, ...a.f(C.creme) }, cr);
+      let arco = null, mao = null;
+      if (!a.flat) {
+        [0, 90, 180, 270].forEach((an) => el("path", { d: "M0 -84V-70", ...a.s(C.tinta, 6), transform: `translate(0 14) rotate(${an})`, "stroke-opacity": .5 }, cr));
+        arco = el("circle", { cy: 14, r: 107, pathLength: 1, ...a.s(C.amarelo, 17), transform: "rotate(-90 0 14)" }, cr);
+        mao = el("g", { }, cr); el("path", { d: "M0 0V-70", ...a.s(C.tinta, 9) }, mao); el("circle", { r: 13, fill: C.tinta }, mao);
+        txt(cr, 0, 82, o.rotulo || "10 MIN", 38, C.tinta, DISP);
+      }
+      return (p) => {
+        mover(cr, 0, 0, pop(p, 0, .15) * (1 + .06 * bump(p, .9, 1)));
+        if (arco) { const u = ease(clamp((p - .1) / .78)); arco.setAttribute("stroke-dasharray", `${u} 1`); arco.setAttribute("opacity", u > 0 ? 1 : 0); mover(mao, 0, 14, 1, u * 360); }
+      };
+    });
+
+  // ============ DIAS ============
+  const dias = acao("dias", "Dias parado", "mostrar há quantos dias algo está parado ('há 7 dias'); a folha cai e o número conta até o valor", "o prazo é uma data fixa (use calendario)", { w: 230, h: 260 }, 2.2,
+    "a folha de calendário cai com um pulo, o número conta até o valor e a folha balança no fim", [{ nome: "n", padrao: 7 }, { nome: "rotulo", padrao: "DIAS" }], (g, a, o) => {
+      const n = o.n == null ? 7 : o.n, f = el("g", {}, g);
+      el("rect", { x: -100, y: -110, width: 200, height: 230, rx: 24, ...a.f(C.creme) }, f);
+      el("rect", { x: -100, y: -110, width: 200, height: 58, rx: 24, ...a.f(C.cereja) }, f); el("rect", { x: -100, y: -78, width: 200, height: 26, ...a.f(C.cereja) }, f);
+      let num = null;
+      if (!a.flat) { [-50, 50].forEach((x) => el("circle", { cx: x, cy: -110, r: 13, fill: C.tinta }, f)); txt(f, 0, -66, o.rotulo || "DIAS", 40, C.creme, DISP); num = txt(f, 0, 72, "0", 150, C.tinta, DISP); }
+      return (p) => {
+        const q = ease(clamp((p - .18) / .5)); if (num) num.textContent = String(Math.round(n * q));
+        const ba = Math.sin(p * Math.PI * 7) * 7 * clamp((p - .7) / .06) * (1 - clamp((p - .76) / .24));
+        f.setAttribute("transform", `translate(0 ${lerp(-120, 0, Math.min(1, ease(clamp(p / .22))))}) rotate(${ba} 0 -110) scale(${1 + .07 * bump(p, .2, .34)})`);
+        f.setAttribute("opacity", p > 0 ? 1 : 0);
+      };
+    });
+
+  // ============ QUEDA ============
+  const queda = acao("queda", "Queda", "dizer 'o que eu deixei cair' ou 'o que ficou para trás'; um cartão tomba da prateleira", "a tarefa foi concluída (use certo)", { w: 420, h: 380 }, 2.4,
+    "três cartões em cima da prateleira, o do meio inclina, cai girando e some embaixo", [], (g, a) => {
+      el("rect", { x: -190, y: 104, width: 380, height: 22, rx: 11, ...a.f(C.roxoEsc) }, g);
+      const cs = [-120, 0, 120].map((x, i) => {
+        const c = el("g", {}, g); el("rect", { x: -48, y: -118, width: 96, height: 118, rx: 14, ...a.f([C.amarelo, C.laranja, C.menta][i]) }, c);
+        if (!a.flat) { el("rect", { x: -32, y: -98, width: 22, height: 22, rx: 6, fill: C.creme }, c); barras(c, -32, -62, [64, 44], 12, 26, C.tinta, .35); }
+        return { c, x };
+      });
+      return (p) => cs.forEach(({ c, x }, i) => {
+        const u = pop(p, i * .06, i * .06 + .2);
+        if (i === 1) {
+          const t1 = ease(clamp((p - .35) / .2)), q = clamp((p - .55) / .45);
+          c.setAttribute("transform", `translate(${x + 40 * q * 1.5} ${104 + 320 * q * q}) rotate(${22 * t1 + 120 * q}) translate(48 0) scale(${Math.max(.01, u)}) translate(-48 0)`);
+        } else c.setAttribute("transform", `translate(${x} 104) scale(${u})`);
+      });
+    });
+
+  // ============ VERSÕES ============
+  const versoes = acao("versoes", "Versões", "mostrar uma coisa que melhora a cada uso (v1, v2, v3); cada folha nova entra por cima e a última ganha o visto", "só existe uma versão (use documento)", { w: 360, h: 310 }, 2.6,
+    "três folhas entram em escada, uma por cima da outra, e a última recebe um visto verde", [], (g, a) => {
+      const fs = [[-44, 52, C.areia, "V1"], [0, 8, C.lilas, "V2"], [44, -36, C.creme, "V3"]].map(([x, y, cor, r]) => {
+        const f = el("g", {}, g); el("rect", { x: -110, y: -75, width: 220, height: 150, rx: 18, ...a.f(cor) }, f);
+        if (!a.flat) { txt(f, -92, 62, r, 44, C.cerejaEsc, DISP, "start"); barras(f, -86, -50, [150, 110, 130], 12, 28); }
+        return { f, x, y };
+      });
+      const ck = el("g", {}, g); el("circle", { r: 34, ...a.f(C.verde), stroke: a.flat ? C.tinta : C.creme, "stroke-width": 7 }, ck); if (!a.flat) el("path", { d: "M-14 2L-4 14L16 -12", ...a.s(C.creme, 10) }, ck);
+      return (p) => {
+        fs.forEach(({ f, x, y }, i) => { const q = ease(clamp((p - i * .22) / .24)); mover(f, x + (1 - q) * 120, y, pop(p, i * .22, i * .22 + .24)); f.setAttribute("opacity", q > 0 ? 1 : 0); });
+        mover(ck, 112, -86, pop(p, .78, .95));
+      };
+    });
+
+  // ============ FONTES ESPALHADAS ============
+  const ICFONTE = [
+    (g, a) => { el("rect", { x: -34, y: -52, width: 68, height: 104, rx: 14, ...a.f(C.areia) }, g); if (!a.flat) barras(g, -20, -30, [40, 30, 36, 24], 8, 18, C.tinta, .35); },
+    (g, a) => { el("path", { d: "M-52 -34a14 14 0 0 1 14 -14H38a14 14 0 0 1 14 14V14a14 14 0 0 1 -14 14H-14L-40 50V28H-38a14 14 0 0 1 -14 -14Z", ...a.f(C.verde) }, g); if (!a.flat) barras(g, -34, -26, [64, 40], 9, 20, C.creme, 1); },
+    (g, a) => { el("rect", { x: -46, y: -44, width: 92, height: 88, rx: 10, ...a.f(C.verdeEsc) }, g); if (!a.flat) for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) el("rect", { x: -38 + c * 28, y: -36 + r * 26, width: 24, height: 22, rx: 4, fill: r === 0 ? C.menta : C.creme }, g); },
+    (g, a) => { el("circle", { r: 46, ...a.f(C.laranja) }, g); if (!a.flat) [-24, -10, 4, 18].forEach((x, i) => el("rect", { x: x - 4, y: -[14, 28, 38, 22][i] / 2, width: 8, height: [14, 28, 38, 22][i], rx: 4, fill: C.creme }, g)); },
+    (g, a) => { el("rect", { x: -38, y: -52, width: 76, height: 104, rx: 12, ...a.f(C.lilas) }, g); if (!a.flat) { el("rect", { x: -26, y: -40, width: 30, height: 8, rx: 4, fill: C.roxo }, g); barras(g, -26, -18, [52, 44, 52, 30], 8, 18, C.roxo, .45); } },
+  ];
+  const FPOS = [[-200, -60, -8], [-100, 70, 6], [10, -70, -4], [110, 70, 8], [205, -40, -6]];
+  const fontes = acao("fontes", "Fontes espalhadas", "mostrar que a informação está espalhada em vários lugares (nota de celular, conversa, planilha, áudio, ata); os ícones pulam e flutuam", "o assunto é um só lugar de informação (use pasta)", { w: 520, h: 300 }, 3,
+    "cinco ícones genéricos aparecem um a um em lugares diferentes e ficam flutuando de leve", [], (g, a) => {
+      const is = ICFONTE.map((ic, i) => { const n = el("g", {}, g); ic(n, a); return { n, x: FPOS[i][0], y: FPOS[i][1], r: FPOS[i][2] }; });
+      return (p, t) => is.forEach(({ n, x, y, r }, i) => mover(n, x, y + 7 * Math.sin(t * 2.2 + i * 1.3), pop(p, .05 + i * .14, .3 + i * .14), r + 3 * Math.sin(t * 1.7 + i)));
+    });
+
+  // ============ JUNTAR ============
+  const JP = [[-230, -120, C.areia], [220, -140, C.verde], [-240, 80, C.lilas], [235, 100, C.laranja], [-20, -190, C.verdeEsc], [30, 190, C.rosa]];
+  const juntar = acao("juntar", "Juntar numa pasta", "mostrar tudo que estava espalhado indo parar numa pasta só; os itens voam e a pasta engole cada um", "a informação já está organizada (use pasta)", { w: 520, h: 420 }, 3,
+    "seis itens saem das bordas, voam até a pasta e somem dentro dela, que dá um pulo a cada chegada", [{ nome: "rotulo", padrao: "" }], (g, a, o) => {
+      const fl = JP.map(([x, y, cor]) => { const n = el("g", {}, g); el("rect", { x: -34, y: -34, width: 68, height: 68, rx: 14, ...a.f(cor) }, n); return { n, x, y }; });
+      const pa = el("g", {}, g);
+      el("path", { d: "M-100 -62H-30L-8 -86H80A18 18 0 0 1 98 -68V70A18 18 0 0 1 80 88H-82A18 18 0 0 1 -100 70Z", ...a.f(C.laranja) }, pa);
+      el("rect", { x: -100, y: -36, width: 200, height: 124, rx: 18, ...a.f(C.amarelo) }, pa);
+      if (!a.flat) { el("path", { d: "M-80 -20C-86 6 -86 40 -84 66", ...a.s("#fff", 8), "stroke-opacity": .5 }, pa); if (o.rotulo) txt(pa, 0, 40, o.rotulo, 54, C.tinta, DISP); }
+      return (p) => {
+        let b = 0;
+        fl.forEach(({ n, x, y }, i) => {
+          const u0 = .08 + i * .12, q = ease(clamp((p - u0) / .3)); mover(n, lerp(x, 0, q), lerp(y, 10, q), lerp(1, .15, q), q * 120 * (i % 2 ? 1 : -1)); n.setAttribute("opacity", q > 0 && q < 1 ? 1 : q === 0 ? 1 : 0);
+          b += .08 * bump(p, u0 + .22, u0 + .36);
+        });
+        pv(pa, 0, 40, 1 + b);
+      };
+    });
+
+  // ============ GAVETEIRO ============
+  const gaveteiro = acao("gaveteiro", "Gaveteiro", "mostrar as poucas gavetas onde as coisas ficam (inbox, diário, reuniões, pessoas, projetos, notas); a inbox se destaca", "são mais de seis categorias (use tabela)", { w: 360, h: 440 }, 2.8,
+    "as seis gavetas surgem uma a uma e a primeira, a inbox, abre um pouco e brilha em amarelo", [{ nome: "rotulos", padrao: ["INBOX", "DIÁRIO", "REUNIÕES", "PESSOAS", "PROJETOS", "NOTAS"] }], (g, a, o) => {
+      const rs = o.rotulos || ["INBOX", "DIÁRIO", "REUNIÕES", "PESSOAS", "PROJETOS", "NOTAS"];
+      el("rect", { x: -170, y: -210, width: 340, height: 420, rx: 28, ...a.f(C.roxoEsc) }, g);
+      const dr = rs.map((r, i) => {
+        const c = i % 2, l = Math.floor(i / 2), n = el("g", {}, g), x = c ? 6 : -158, y = -190 + l * 130;
+        const body = el("rect", { x, y, width: 152, height: 116, rx: 16, ...a.f(i === 0 ? C.amarelo : C.roxo) }, n);
+        let pl = null;
+        if (!a.flat) { pl = el("rect", { x: x + 18, y: y + 24, width: 116, height: 40, rx: 20, fill: C.creme }, n); txt(n, x + 76, y + 53, r, 26, C.tinta, DISP); el("rect", { x: x + 52, y: y + 82, width: 48, height: 12, rx: 6, fill: i === 0 ? C.laranja : C.roxoEsc }, n); }
+        return { n, body, i };
+      });
+      return (p) => dr.forEach(({ n, body, i }) => {
+        const u = pop(p, .04 + i * .1, .24 + i * .1), ab = i === 0 ? ease(clamp((p - .7) / .15)) * 14 : 0;
+        pv(n, 0, 0, u, 0); n.setAttribute("transform", `translate(0 ${ab}) translate(${(i % 2 ? 80 : -80)} ${-130 + Math.floor(i / 2) * 130}) scale(${Math.max(.001, u)}) translate(${-(i % 2 ? 80 : -80)} ${130 - Math.floor(i / 2) * 130})`);
+      });
+    });
+
+  // ============ TRIAGEM ============
+  const TRI = [[C.verde, "DECISÃO", C.creme], [C.laranja, "TAREFA", C.creme], [C.roxo, "PESSOA NOVA", C.creme], [C.amarelo, "A CONFIRMAR", C.tinta]];
+  const triagem = acao("triagem", "Triagem", "mostrar o agente separando um texto bagunçado em decisão, tarefa, pessoa nova e 'a confirmar'; os cartões saem do texto e se alinham", "o texto já está organizado (use documento)", { w: 580, h: 420 }, 3.4,
+    "o texto bagunçado balança e quatro cartões etiquetados saem dele e se empilham à direita", [], (g, a) => {
+      const bg = el("g", {}, g);
+      el("rect", { x: -90, y: -130, width: 180, height: 260, rx: 18, ...a.f(C.areia) }, bg);
+      if (!a.flat) el("path", { d: "M-60 -90C-40 -100 -20 -80 0 -92S40 -84 60 -92M-62 -50C-42 -60 -18 -40 2 -52S40 -44 60 -50M-60 -10C-40 -20 -18 0 2 -12S40 -4 58 -10M-62 30C-42 20 -20 40 0 28S38 36 58 30M-60 70C-40 60 -18 80 2 68", ...a.s(C.tinta, 6), "stroke-opacity": .4 }, bg);
+      const cs = TRI.map(([cor, r, tc], i) => {
+        const n = el("g", {}, g); el("rect", { x: -108, y: -38, width: 216, height: 76, rx: 18, ...a.f(cor) }, n);
+        if (!a.flat) { txt(n, 0, 14, r, 42, tc, DISP); if (i === 3) el("circle", { cx: -78, r: 0 }, n); }
+        return { n, y: -150 + i * 100 };
+      });
+      return (p) => {
+        mover(bg, -190, 0, 1, Math.sin(p * Math.PI * 12) * 3 * (1 - clamp((p - .6) / .3)));
+        cs.forEach(({ n, y }, i) => { const u0 = .2 + i * .15, q = ease(clamp((p - u0) / .28)); mover(n, lerp(-190, 150, q), lerp(0, y, q), lerp(.3, 1, q) * (1 + .08 * bump(p, u0 + .22, u0 + .36)), lerp(-20, 0, q)); n.setAttribute("opacity", q > 0 ? 1 : 0); });
+      };
+    });
+
+  // ============ XÍCARA DE CAFÉ ============
+  const xicara = acao("xicara", "Xícara de café", "marcar a manhã, o 'antes do primeiro café', o começo do dia; a xícara pula e solta vapor", "o assunto é noite ou fim do dia", { w: 280, h: 290 }, 3,
+    "a xícara dá um pulo, e três fios de vapor sobem ondulando sem parar", [], (g, a) => {
+      el("ellipse", { cy: 104, rx: 128, ry: 24, ...a.f(C.creme) }, g);
+      const xi = el("g", {}, g);
+      el("path", { d: "M86 -10H110A36 36 0 0 1 110 62H78", ...a.s(a.flat ? C.tinta : C.laranjaEsc, 16) }, xi);
+      el("path", { d: "M-86 -34H86V30C86 76 52 98 0 98C-52 98 -86 76 -86 30Z", ...a.f(C.laranja) }, xi);
+      el("ellipse", { cy: -34, rx: 86, ry: 16, ...a.f(C.laranjaEsc) }, xi);
+      if (!a.flat) { el("ellipse", { cy: -34, rx: 70, ry: 10, fill: C.tinta }, xi); el("path", { d: "M-64 -4C-68 20 -64 46 -56 64", ...a.s("#fff", 8), "stroke-opacity": .45 }, xi); }
+      const vs = a.flat ? [] : [-34, 0, 34].map((x) => el("path", { d: `M${x} -62C${x - 16} -88 ${x + 16} -106 ${x} -132`, ...a.s(C.creme, 9) }, g));
+      return (p, t) => {
+        pv(xi, 0, 98, 1 + .12 * bump(p, 0, .2) , 0); xi.setAttribute("transform", `translate(0 ${-14 * bump(p, 0, .2)}) scale(1 ${1 + .08 * bump(p, 0, .2)})`);
+        vs.forEach((v, i) => { v.setAttribute("opacity", clamp((p - .15) / .15) * (.55 + .45 * Math.sin(t * 2.6 + i * 2))); v.setAttribute("transform", `translate(${6 * Math.sin(t * 2 + i * 1.6)} ${-8 * ((t * .9 + i * .3) % 1)})`); });
+      };
+    });
+
+  // ============ DUPLA ============
+  const busto = (g, a, x, pele, roupa, coque) => {
+    const b = el("g", { transform: `translate(${x} 34)` }, g);
+    el("path", { d: "M-74 120C-74 54 -42 34 0 34C42 34 74 54 74 120Z", ...a.f(roupa) }, b);
+    el("rect", { x: -14, y: 6, width: 28, height: 34, rx: 10, ...a.f(pele) }, b);
+    el("circle", { cy: -30, r: 46, ...a.f(pele) }, b);
+    if (!a.flat) { el("path", { d: "M-48 -32C-50 -88 50 -88 48 -32C30 -58 -30 -58 -48 -32Z", fill: C.tinta }, b); if (coque) el("circle", { cy: -86, r: 22, fill: C.tinta }, b); }
+    return b;
+  };
+  const dupla = acao("dupla", "Dupla conversando", "mostrar uma conversa a dois (1:1, combinado, cobrança); dois avatares sem rosto trocam balões", "são mais de duas pessoas (use grupo)", { w: 480, h: 340 }, 3,
+    "os dois avatares aparecem e trocam balões de fala, um de cada vez", [{ nome: "pele1", padrao: C.areia }, { nome: "pele2", padrao: C.laranja }], (g, a, o) => {
+      busto(g, a, -130, o.pele1 || C.areia, C.roxo, false); busto(g, a, 130, o.pele2 || C.laranja, C.verde, true);
+      const bl = [[-90, C.creme, -1], [90, C.lilas, 1]].map(([x, cor, d]) => {
+        const n = el("g", {}, g); el("rect", { x: -78, y: -48, width: 156, height: 84, rx: 28, ...a.f(cor) }, n); el("path", { d: `M${-24 * d} 34L${-44 * d} 62L${6 * d} 34Z`, ...a.f(cor) }, n);
+        if (!a.flat) barras(n, -52, -26, [104, 68], 13, 28, C.tinta, .3);
+        return { n, x };
+      });
+      return (p) => bl.forEach(({ n, x }, i) => { const u0 = .12 + i * .38, vis = clamp((p - u0) / .08) * (i === 1 ? 1 : 1 - clamp((p - u0 - .36) / .06)); mover(n, x, -110, pop(p, u0, u0 + .18) * (vis > 0 ? 1 : 0)); });
+    });
+
+  // ============ LINHA DO TEMPO ============
+  const linha_tempo = acao("linha_tempo", "Linha do tempo", "mostrar o histórico de reuniões ou atas em ordem de data; a linha se desenha e cada ata aparece", "são eventos sem ordem (use pictograma)", { w: 560, h: 260 }, 3,
+    "a linha se desenha da esquerda para a direita, cada ata sobe no seu ponto e a última acende em amarelo com 'hoje'", [{ nome: "datas", padrao: ["3/10", "10/10", "17/10", "24/10"] }], (g, a, o) => {
+      const ds = o.datas || ["3/10", "10/10", "17/10", "24/10"], n = ds.length, xs = ds.map((_, i) => n === 1 ? 0 : -210 + i * 420 / (n - 1));
+      const li = el("path", { d: "M-250 0H250", pathLength: 1, ...a.s(C.creme, 12) }, g);
+      const no = ds.map((d, i) => {
+        const nd = el("g", {}, g), ult = i === n - 1;
+        el("circle", { r: 18, ...a.f(ult ? C.amarelo : C.cereja), stroke: a.flat ? C.tinta : C.creme, "stroke-width": 7 }, nd);
+        el("rect", { x: -32, y: -118, width: 64, height: 76, rx: 12, ...a.f(ult ? C.amarelo : C.creme) }, nd);
+        if (!a.flat) { barras(nd, -20, -102, [40, 32, 40], 8, 18, C.tinta, .35); txt(nd, 0, 62, d, 36, C.creme, DISP); if (ult) { el("rect", { x: -40, y: -158, width: 80, height: 32, rx: 16, fill: C.cereja }, nd); txt(nd, 0, -134, "HOJE", 24, C.creme, DISP); } }
+        return { nd, x: xs[i] };
+      });
+      return (p) => { traco(li, ease(clamp(p / .6))); no.forEach(({ nd, x }, i) => mover(nd, x, 0, pop(p, .1 + i * .14, .3 + i * .14))); };
+    });
+
+  // ============ RECEITA ============
+  const receita = acao("receita", "Cartão de receita", "mostrar a skill como uma receita: nome, passos numerados que se marcam um a um; é o jeito do Claude fazer sempre igual", "o conteúdo é um documento comum (use documento)", { w: 360, h: 450 }, 3,
+    "o cartão entra, o nome aparece e os três passos se acendem em sequência, cada um com um visto verde", [{ nome: "nome", padrao: "/resumo-comite" }], (g, a, o) => {
+      const cd = el("g", {}, g);
+      el("rect", { x: -170, y: -215, width: 340, height: 430, rx: 26, ...a.f(C.creme) }, cd);
+      el("rect", { x: -170, y: -215, width: 340, height: 86, rx: 26, ...a.f(C.cereja) }, cd); el("rect", { x: -170, y: -170, width: 340, height: 41, ...a.f(C.cereja) }, cd);
+      const pas = [];
+      if (!a.flat) {
+        txt(cd, 0, -150, "RECEITA", 50, C.creme, DISP); txt(cd, 0, -80, o.nome || "/resumo-comite", 36, C.roxo, UI);
+        [-20, 50, 120].forEach((y, i) => { const p = el("g", {}, cd); el("circle", { cx: -120, cy: y, r: 24, fill: C.laranja }, p); txt(p, -120, y + 11, String(i + 1), 30, C.creme, DISP); el("rect", { x: -82, y: y - 9, width: [170, 140, 156][i], height: 18, rx: 9, fill: C.tinta, opacity: .22 }, p); const ck = el("g", {}, p); el("circle", { cx: 132, cy: y, r: 20, fill: C.verde }, ck); el("path", { d: `M122 ${y + 1}L130 ${y + 9}L145 ${y - 9}`, ...a.s(C.creme, 6) }, ck); pas.push({ p, ck, y }); });
+      }
+      return (p) => {
+        mover(cd, 0, 0, pop(p, 0, .2));
+        pas.forEach(({ p: pp, ck, y }, i) => { const u = .3 + i * .22; pp.setAttribute("opacity", clamp((p - u) / .1)); pv(ck, 132, y, pop(p, u + .12, u + .26)); });
+      };
+    });
+
+  // ============ LIVRO DE RECEITAS ============
+  const livro = acao("livro", "Livro de receitas", "mostrar a pasta de skills como um livro de receitas; o livro abre e uma página vira", "só existe uma skill (use receita)", { w: 420, h: 300 }, 2.6,
+    "o livro aparece, a página da direita vira para a esquerda mostrando mais receitas", [], (g, a) => {
+      const lv = el("g", {}, g);
+      el("rect", { x: -204, y: -134, width: 408, height: 268, rx: 20, ...a.f(C.cerejaEsc) }, lv);
+      el("rect", { x: -190, y: -120, width: 188, height: 240, rx: 8, ...a.f(C.creme) }, lv);
+      el("rect", { x: 2, y: -120, width: 188, height: 240, rx: 8, ...a.f(C.areia) }, lv);
+      const pg = el("g", {}, lv); el("rect", { x: 2, y: -120, width: 188, height: 240, rx: 8, ...a.f(C.creme) }, pg);
+      let esq = null;
+      if (!a.flat) {
+        esq = el("g", {}, lv); txt(esq, -96, 30, "/", 130, C.cereja, DISP); barras(esq, -150, 56, [100, 70], 11, 24, C.tinta, .25);
+        barras(pg, 22, -90, [140, 110, 140, 90, 120], 12, 34, C.tinta, .22);
+      }
+      el("rect", { x: -3, y: -120, width: 6, height: 240, fill: C.cerejaEsc, opacity: a.flat ? 0 : .6 }, lv);
+      return (p) => {
+        mover(lv, 0, 0, pop(p, 0, .22));
+        const q = ease(clamp((p - .4) / .45)), sx = Math.cos(q * Math.PI);
+        pg.setAttribute("transform", `scale(${Math.abs(sx) < .02 ? .02 : sx} 1)`);
+        pg.firstChild.setAttribute("fill", a.flat ? C.tinta : sx < 0 ? C.areia : C.creme);
+        if (esq) esq.setAttribute("opacity", sx > 0 ? 1 : 0);
+      };
+    });
+
+  Object.assign(EL, { chip_fonte, etiqueta, citacao, cronometro, dias, queda, versoes, fontes, juntar, gaveteiro, triagem, xicara, dupla, linha_tempo, receita, livro });
+})();
+
+// ===== cena.js =====
+// Família CENA (molduras de composição do reel 9:16): janela_rosto, moldura_captura e overlay_gancho.
+// São as três peças que montam a tela de um reel com apresentador e demonstração: o rosto em janela, a captura de tela com destaque
+// e o texto de gancho dos primeiros segundos. O vídeo real entra DENTRO das molduras; as peças só desenham o contorno e o destaque.
+// Mesmo estilo do resto: formas chapadas com luz e sombra dura (sem contorno preto, sem blur).
+// Origem das coordenadas: o CENTRO de cada peça. Todas animam em p (0..1) e t (segundos).
+(() => {
+  const { C, el, clamp, ease, back, reg } = EL;
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const mover = (g, x, y, s = 1, rot = 0) => g.setAttribute("transform", `translate(${x} ${y}) rotate(${rot}) scale(${s})`);
+  const nova = (pai, x, y, s, rot) => { const g = el("g", {}, pai); mover(g, x, y, s, rot); return g; };
+  const UI = 'font-family:Outfit,"Segoe UI",sans-serif;font-weight:700;text-transform:none';
+  const DISP = 'font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:900;text-transform:uppercase';
+  const txt = (pai, x, y, t, fs, fill, estilo = UI, anchor = "middle") => { const e = el("text", { x, y, "font-size": fs, fill, "text-anchor": anchor, style: estilo }, pai); e.textContent = t; return e; };
+  const P3 = [{ nome: "x", padrao: 0 }, { nome: "y", padrao: 0 }, { nome: "s", padrao: 1 }, { nome: "rot", padrao: 0 }];
+  const A = (flat) => ({
+    flat,
+    f: (c) => ({ fill: flat ? C.tinta : c }),
+    s: (c, w) => ({ fill: "none", stroke: flat ? C.tinta : c, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round" }),
+  });
+  const montar = (pai, o = {}, build) => {
+    const { x = 0, y = 0, s = 1, rot = 0, sombra = true } = o;
+    const g = nova(pai, x, y, s, rot);
+    const sh = sombra ? el("g", { transform: "translate(14 12)", opacity: .24 }, g) : null;
+    const ss = sh ? build(sh, A(true), o) : null, ms = build(g, A(false), o);
+    return { g, set: (p = 0, t = 0) => { if (ss) ss(p, t); ms(p, t); } };
+  };
+  const acao = (id, nome, serve_para, nao_usar_quando, caixa, duracao_s, descricao, extras, build) => {
+    reg({ id, nome, familia: "cena", tipo: "layout", serve_para, nao_usar_quando, camada: "meio", caixa, parametros: [...P3, ...extras], movimento: { param: "p", duracao_s, descricao, usa_t: true } });
+    return (pai, o = {}) => montar(pai, o, build);
+  };
+  const pop = (p, u0, u1) => Math.max(0, back(clamp((p - u0) / (u1 - u0))));
+  const traco = (e, u) => { e.setAttribute("stroke-dasharray", "1 1"); e.setAttribute("stroke-dashoffset", 1 - u); e.setAttribute("opacity", u > 0 ? 1 : 0); };
+  let uid = 0;
+
+  // ============ JANELA DO ROSTO ============
+  const janela_rosto = acao("janela_rosto", "Janela do rosto", "moldurar o vídeo do apresentador em cima ou no canto do reel; o vídeo real entra no recorte e a peça só desenha a moldura", "o apresentador ocupa a tela inteira (não use moldura)", { w: 400, h: 520 }, 1.6,
+    "a moldura cresce com um pulo e se assenta; com forma circulo, retrato ou quadrado", [{ nome: "forma", padrao: "retrato" }, { nome: "cor", padrao: C.cereja }], (g, a, o) => {
+      const f = o.forma || "retrato", cor = o.cor || C.cereja, W = f === "retrato" ? 300 : 340, H = f === "retrato" ? 400 : 340, R = f === "circulo" ? 170 : 34, w = el("g", {}, g);
+      el("rect", { x: -W / 2 - 14, y: -H / 2 - 14, width: W + 28, height: H + 28, rx: R + 14, ...a.f(cor) }, w);
+      if (!a.flat) {
+        const id = "jr" + (++uid), cp = el("clipPath", { id }, w); el("rect", { x: -W / 2, y: -H / 2, width: W, height: H, rx: R }, cp);
+        const c = el("g", { "clip-path": `url(#${id})` }, w);
+        el("rect", { x: -W / 2, y: -H / 2, width: W, height: H, fill: C.creme }, c);
+        el("path", { d: `M${-W * .42} ${H / 2}C${-W * .42} ${H * .14} ${-W * .2} ${H * .06} 0 ${H * .06}C${W * .2} ${H * .06} ${W * .42} ${H * .14} ${W * .42} ${H / 2}Z`, fill: C.lilas }, c);
+        el("circle", { cy: -H * .1, r: Math.min(W, H) * .2, fill: C.areia }, c);
+        el("rect", { x: -W / 2, y: H / 2 - 52, width: W, height: 52, fill: C.roxo, opacity: .9 }, c); txt(c, 0, H / 2 - 16, "SEU ROSTO AQUI", 32, C.creme, DISP);
+        el("circle", { cx: W / 2 - 4 - (f === "circulo" ? 38 : 0), cy: -H / 2 + (f === "circulo" ? 46 : 4), r: 0 }, w);
+      }
+      return (p) => { mover(w, 0, 0, pop(p, 0, .35), lerp(-4, 0, ease(clamp(p / .4)))); w.setAttribute("opacity", p > 0 ? 1 : 0); };
+    });
+
+  // ============ MOLDURA DE CAPTURA ============
+  const moldura_captura = acao("moldura_captura", "Moldura de captura", "enquadrar a gravação de tela (Obsidian, Claude Code) e destacar a área que importa com zoom; o resto escurece", "a tela inteira é o assunto (não use destaque)", { w: 700, h: 460 }, 2.8,
+    "a janela aparece, o resto escurece e um retângulo cereja se desenha em volta da área que importa e pulsa", [{ nome: "destaque", padrao: [10, -10, 270, 110] }], (g, a, o) => {
+      const d = o.destaque || [10, -10, 270, 110], [hx, hy, hw, hh] = d, w = el("g", {}, g);
+      el("rect", { x: -340, y: -210, width: 680, height: 420, rx: 28, ...a.f(C.creme) }, w);
+      el("rect", { x: -340, y: -210, width: 680, height: 62, rx: 28, ...a.f(C.lilas) }, w); el("rect", { x: -340, y: -176, width: 680, height: 28, ...a.f(C.lilas) }, w);
+      let dim = null, bx = null;
+      if (!a.flat) {
+        [C.cereja, C.amarelo, C.verde].forEach((c, i) => el("circle", { cx: -304 + i * 32, cy: -179, r: 10, fill: c }, w));
+        [[-310, -120, 300], [-310, -88, 220], [-310, -56, 340], [-310, -24, 180], [-310, 8, 280], [-310, 40, 220], [-310, 72, 320], [-310, 104, 160], [-310, 136, 260]].forEach(([x, y, ww]) => el("rect", { x, y, width: ww, height: 14, rx: 7, fill: C.tinta, opacity: .2 }, w));
+        [[40, -120, 230], [40, -88, 180], [40, -56, 250], [40, -24, 150], [40, 8, 220], [40, 40, 170]].forEach(([x, y, ww]) => el("rect", { x, y, width: ww, height: 14, rx: 7, fill: C.roxo, opacity: .3 }, w));
+        dim = el("path", { d: `M-340 -148H340V210H-340ZM${hx} ${hy}V${hy + hh}H${hx + hw}V${hy}Z`, "fill-rule": "evenodd", fill: C.tinta, opacity: 0 }, w);
+        bx = el("rect", { x: hx, y: hy, width: hw, height: hh, rx: 12, pathLength: 1, ...a.s(C.cereja, 8) }, w);
+      }
+      return (p) => {
+        mover(w, 0, 0, pop(p, 0, .22));
+        if (dim) {
+          dim.setAttribute("opacity", .55 * ease(clamp((p - .3) / .2))); traco(bx, ease(clamp((p - .4) / .3)));
+          const pu = 1 + .04 * Math.max(0, Math.sin(Math.PI * clamp((p - .75) / .25) * 2)), cx = hx + hw / 2, cy = hy + hh / 2;
+          bx.setAttribute("transform", `translate(${cx} ${cy}) scale(${pu}) translate(${-cx} ${-cy})`);
+        }
+      };
+    });
+
+  // ============ OVERLAY DE GANCHO ============
+  const quebra = (t) => { const ps = t.trim().split(/\s+/); if (ps.length < 3 || t.length <= 14) return [t]; let melhor = 1, dif = 1e9; for (let i = 1; i < ps.length; i++) { const d = Math.abs(ps.slice(0, i).join(" ").length - ps.slice(i).join(" ").length); if (d < dif) { dif = d; melhor = i; } } return [ps.slice(0, melhor).join(" "), ps.slice(melhor).join(" ")]; };
+  const overlay_gancho = acao("overlay_gancho", "Overlay de gancho", "abrir o reel com a frase que prende nos 5 primeiros segundos (a tela inicial do vídeo); a faixa abre e as linhas sobem", "a frase passa de 8 palavras (corte antes)", { w: 960, h: 340 }, 2.2,
+    "a faixa cereja abre de baixo para cima, as linhas sobem uma a uma e o sublinhado amarelo se desenha na última", [{ nome: "texto", padrao: "ESPALHADO EM 40 LUGARES" }, { nome: "cor", padrao: C.cereja }, { nome: "tc", padrao: C.creme }, { nome: "fs", padrao: 112 }], (g, a, o) => {
+      const t = String(o.texto || "ESPALHADO EM 40 LUGARES").toUpperCase(), fs = o.fs || 112, ls = quebra(t), mx = Math.max(...ls.map((l) => l.length));
+      const W = Math.min(940, mx * .44 * fs + 100), H = ls.length * fs * .95 + 64, band = el("g", {}, g);
+      el("rect", { x: -W / 2, y: -H / 2, width: W, height: H, rx: 30, ...a.f(o.cor || C.cereja) }, band);
+      const linhas = [];
+      let mk = null;
+      if (!a.flat) {
+        ls.forEach((l, i) => { const y = -H / 2 + 32 + fs * .82 + i * fs * .95, e = txt(band, 0, y, l, fs, o.tc || C.creme, DISP); linhas.push({ e, y }); });
+        const ult = ls[ls.length - 1], uw = ult.length * .44 * fs, yb = linhas[linhas.length - 1].y + 12;
+        mk = el("path", { d: `M${-uw / 2} ${yb}H${uw / 2}`, pathLength: 1, ...a.s(C.amarelo, 14) }, band);
+      }
+      return (p) => {
+        const q = ease(clamp(p / .22)); band.setAttribute("transform", `scale(1 ${Math.max(.001, q)})`);
+        linhas.forEach(({ e, y }, i) => { const u = ease(clamp((p - .15 - i * .14) / .25)); e.setAttribute("transform", `translate(0 ${(1 - u) * 40})`); e.setAttribute("opacity", u); });
+        if (mk) traco(mk, ease(clamp((p - .55) / .3)));
+      };
+    });
+
+  Object.assign(EL, { janela_rosto, moldura_captura, overlay_gancho });
+})();
+
 // ===== transicoes.js =====
 // Família TRANSIÇÕES: o que cobre a tela para trocar de cena. Todas seguem o MESMO contrato:
 //   set(p): p = 0 tela limpa · p = 0,5 tela totalmente coberta (é aqui que se troca a cena) · p = 1 tela limpa de novo.
@@ -6468,7 +8322,7 @@ document.documentElement.dataset.fundo = document.documentElement.dataset.fundo 
 const M = window.MANIFESTO, K = window.EL, { C, el, clamp, back } = K;
 const lim = (x) => clamp(x, 0, 1);
 const CHAVE = { "colher-de-pau": "colherPau", "garrafa-azeite": "azeite" };
-const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", navegacao: "Navegação", feedback: "Feedback", maos: "Mãos e pessoas", fundos: "Fundos", transicoes: "Transições" };
+const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", navegacao: "Navegação", feedback: "Feedback", maos: "Mãos e pessoas", conceitos: "Ideias", rotina: "Rotina de trabalho", cena: "Cena do reel", fundos: "Fundos", transicoes: "Transições" };
 const LEDE = {
   forma: "A assinatura visual: o recorte que abriga um objeto, um número ou um título.",
   cozinha: "Cenas de cozinha que se montam sozinhas: o pote enche, a marmita fecha, o prato é servido.",
@@ -6485,11 +8339,14 @@ const LEDE = {
   navegacao: "Para dizer 'clique aqui', 'troque de aba', 'role para baixo': seta, botão, abas, menu, interruptor, rolagem e pontos de página.",
   feedback: "Para dizer 'deu certo', 'deu errado', 'atenção', 'aguarde', 'nota', 'curti', 'avisou' e 'comemora'.",
   maos: "Mãos e pessoas sem rosto. A cor da pele é parâmetro da paleta, para a mesma peça servir a qualquer pessoa.",
+  conceitos: "Para explicar ideias abstratas de IA e trabalho: o ciclo do agente, as peças que acendem, a rede de notas, o projeto que envelhece, os caminhos com custo, o plano furado, a discordância, a confiança e a plataforma.",
+  rotina: "O dia de trabalho com um agente: de onde veio a informação, o status de cada item, o tempo que passa, o que está espalhado e se junta, a triagem, o café, o 1:1, a linha do tempo e a receita.",
+  cena: "As molduras de um reel com apresentador: o rosto em janela, a captura de tela com destaque e o texto de gancho. O vídeo real entra dentro delas.",
   fundos: "Padrões de fundo contínuos, em duas cores, que se movem em loop. Formato 9:16.",
   transicoes: "Cortinas entre cenas: em p=0,5 a tela está coberta e é aí que a cena troca. Formato 9:16."
 };
 const VERT = new Set(["fundos", "transicoes"]);
-const LARGA = new Set(["graficos", "computador", "dados"]);
+const LARGA = new Set(["graficos", "computador", "dados", "cena"]);
 
 // ---------- demos: argumentos para peças que precisam de dados
 const DEMO = {
@@ -6500,6 +8357,7 @@ const DEMO = {
   checklista: { itens: ["Ler a pasta", "Processar", "Conferir", "Enviar"] },
   calendario: { marcados: [3, 8, 12, 19], hoje: 12 },
   pasta: { rotulo: "CONTEXTO" },
+  juntar: { rotulo: "TUDO" },
   janela: { titulo: "Janela" },
   tabela: { cor: C.roxo },
   progresso: { valor: .72, rotulo: "Meta do mês" },
@@ -6513,6 +8371,9 @@ const VARIANTES = {
   corrida: ["barras", "podio", "pistas"].map((e) => ({ rot: e, args: { estilo: e } })),
   antes_depois: ["barras", "potes", "roleta"].map((e) => ({ rot: e, args: { estilo: e } })),
   avatar: [["curto", C.areia, C.roxo], ["longo", C.laranja, C.verde], ["coque", C.rosa, C.cereja], ["cacheado", C.areia, C.laranja], ["careca", C.laranja, C.roxo], ["lenco", C.rosa, C.verde]].map(([c, pele, roupa]) => ({ rot: c, args: { cabelo: c, pele, roupa } })),
+  etiqueta: ["decisao", "tarefa", "pessoa", "confirmar", "opiniao", "deducao"].map((e) => ({ rot: e, args: { tipo: e } })),
+  janela_rosto: ["retrato", "circulo", "quadrado"].map((e) => ({ rot: e, args: { forma: e } })),
+  bloco_peca: [["modelo", "MODELO", C.roxo], ["ferramentas", "FERRAMENTAS", C.laranja], ["contexto", "CONTEXTO", C.cereja], ["ciclo", "CICLO", C.verde]].map(([ic, r, cor]) => ({ rot: ic, args: { icone: ic, rotulo: r, cor } })),
   botao: ["COMEÇAR", "BAIXAR", "ENVIAR"].map((r) => ({ rot: r.toLowerCase(), args: { rotulo: r } })),
   documento: [{ rot: "texto", args: { tipo: "texto" } }, { rot: "lista", args: { tipo: "lista" } }],
   balao: [{ rot: "esquerda", args: { lado: "esq", linhas: 3 } }, { rot: "direita", args: { lado: "dir", cor: C.roxo, tc: C.lilas, linhas: 3 } }]

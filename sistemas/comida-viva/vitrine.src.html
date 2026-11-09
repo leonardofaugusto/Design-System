@@ -127,7 +127,7 @@ document.documentElement.dataset.fundo = document.documentElement.dataset.fundo 
 const M = window.MANIFESTO, K = window.EL, { C, el, clamp, back } = K;
 const lim = (x) => clamp(x, 0, 1);
 const CHAVE = { "colher-de-pau": "colherPau", "garrafa-azeite": "azeite" };
-const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", navegacao: "Navegação", feedback: "Feedback", maos: "Mãos e pessoas", fundos: "Fundos", transicoes: "Transições" };
+const ROTULO = { forma: "Forma-assinatura", cozinha: "Cozinha em ação", ingrediente: "Ingredientes", talher: "Talheres", utensilio: "Utensílios", louca: "Louça", layout: "Layout do reel", computador: "Computador", dados: "Dados", graficos: "Gráficos vivos", texto: "Texto em movimento", entrega: "Plantação e entrega", navegacao: "Navegação", feedback: "Feedback", maos: "Mãos e pessoas", conceitos: "Ideias", rotina: "Rotina de trabalho", cena: "Cena do reel", fundos: "Fundos", transicoes: "Transições" };
 const LEDE = {
   forma: "A assinatura visual: o recorte que abriga um objeto, um número ou um título.",
   cozinha: "Cenas de cozinha que se montam sozinhas: o pote enche, a marmita fecha, o prato é servido.",
@@ -144,11 +144,14 @@ const LEDE = {
   navegacao: "Para dizer 'clique aqui', 'troque de aba', 'role para baixo': seta, botão, abas, menu, interruptor, rolagem e pontos de página.",
   feedback: "Para dizer 'deu certo', 'deu errado', 'atenção', 'aguarde', 'nota', 'curti', 'avisou' e 'comemora'.",
   maos: "Mãos e pessoas sem rosto. A cor da pele é parâmetro da paleta, para a mesma peça servir a qualquer pessoa.",
+  conceitos: "Para explicar ideias abstratas de IA e trabalho: o ciclo do agente, as peças que acendem, a rede de notas, o projeto que envelhece, os caminhos com custo, o plano furado, a discordância, a confiança e a plataforma.",
+  rotina: "O dia de trabalho com um agente: de onde veio a informação, o status de cada item, o tempo que passa, o que está espalhado e se junta, a triagem, o café, o 1:1, a linha do tempo e a receita.",
+  cena: "As molduras de um reel com apresentador: o rosto em janela, a captura de tela com destaque e o texto de gancho. O vídeo real entra dentro delas.",
   fundos: "Padrões de fundo contínuos, em duas cores, que se movem em loop. Formato 9:16.",
   transicoes: "Cortinas entre cenas: em p=0,5 a tela está coberta e é aí que a cena troca. Formato 9:16."
 };
 const VERT = new Set(["fundos", "transicoes"]);
-const LARGA = new Set(["graficos", "computador", "dados"]);
+const LARGA = new Set(["graficos", "computador", "dados", "cena"]);
 
 // ---------- demos: argumentos para peças que precisam de dados
 const DEMO = {
@@ -159,6 +162,7 @@ const DEMO = {
   checklista: { itens: ["Ler a pasta", "Processar", "Conferir", "Enviar"] },
   calendario: { marcados: [3, 8, 12, 19], hoje: 12 },
   pasta: { rotulo: "CONTEXTO" },
+  juntar: { rotulo: "TUDO" },
   janela: { titulo: "Janela" },
   tabela: { cor: C.roxo },
   progresso: { valor: .72, rotulo: "Meta do mês" },
@@ -172,6 +176,9 @@ const VARIANTES = {
   corrida: ["barras", "podio", "pistas"].map((e) => ({ rot: e, args: { estilo: e } })),
   antes_depois: ["barras", "potes", "roleta"].map((e) => ({ rot: e, args: { estilo: e } })),
   avatar: [["curto", C.areia, C.roxo], ["longo", C.laranja, C.verde], ["coque", C.rosa, C.cereja], ["cacheado", C.areia, C.laranja], ["careca", C.laranja, C.roxo], ["lenco", C.rosa, C.verde]].map(([c, pele, roupa]) => ({ rot: c, args: { cabelo: c, pele, roupa } })),
+  etiqueta: ["decisao", "tarefa", "pessoa", "confirmar", "opiniao", "deducao"].map((e) => ({ rot: e, args: { tipo: e } })),
+  janela_rosto: ["retrato", "circulo", "quadrado"].map((e) => ({ rot: e, args: { forma: e } })),
+  bloco_peca: [["modelo", "MODELO", C.roxo], ["ferramentas", "FERRAMENTAS", C.laranja], ["contexto", "CONTEXTO", C.cereja], ["ciclo", "CICLO", C.verde]].map(([ic, r, cor]) => ({ rot: ic, args: { icone: ic, rotulo: r, cor } })),
   botao: ["COMEÇAR", "BAIXAR", "ENVIAR"].map((r) => ({ rot: r.toLowerCase(), args: { rotulo: r } })),
   documento: [{ rot: "texto", args: { tipo: "texto" } }, { rot: "lista", args: { tipo: "lista" } }],
   balao: [{ rot: "esquerda", args: { lado: "esq", linhas: 3 } }, { rot: "direita", args: { lado: "dir", cor: C.roxo, tc: C.lilas, linhas: 3 } }]
