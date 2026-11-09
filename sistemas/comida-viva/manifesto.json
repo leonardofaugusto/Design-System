@@ -1,6 +1,6 @@
 {
   "sistema": "comida-viva",
-  "versao": "0.11.0",
+  "versao": "0.11.1",
   "estado": "rascunho",
   "gerado_de": [
     "elementos.js",
@@ -2967,6 +2967,14 @@
           "padrao": "cor do desenho"
         },
         {
+          "nome": "formato",
+          "padrao": "reel"
+        },
+        {
+          "nome": "w|h",
+          "padrao": "do formato"
+        },
+        {
           "nome": "tam",
           "padrao": 120
         },
@@ -3002,6 +3010,14 @@
         {
           "nome": "cor2",
           "padrao": "cor do desenho"
+        },
+        {
+          "nome": "formato",
+          "padrao": "reel"
+        },
+        {
+          "nome": "w|h",
+          "padrao": "do formato"
         },
         {
           "nome": "larg",
@@ -3045,6 +3061,14 @@
           "padrao": "cor do desenho"
         },
         {
+          "nome": "formato",
+          "padrao": "reel"
+        },
+        {
+          "nome": "w|h",
+          "padrao": "do formato"
+        },
+        {
           "nome": "op",
           "padrao": 0.16
         }
@@ -3076,6 +3100,14 @@
         {
           "nome": "cor2",
           "padrao": "cor do desenho"
+        },
+        {
+          "nome": "formato",
+          "padrao": "reel"
+        },
+        {
+          "nome": "w|h",
+          "padrao": "do formato"
         },
         {
           "nome": "op",
@@ -3111,6 +3143,14 @@
           "padrao": "cor do desenho"
         },
         {
+          "nome": "formato",
+          "padrao": "reel"
+        },
+        {
+          "nome": "w|h",
+          "padrao": "do formato"
+        },
+        {
           "nome": "n",
           "padrao": 20
         },
@@ -3120,7 +3160,7 @@
         },
         {
           "nome": "cx|cy",
-          "padrao": "540|960"
+          "padrao": "centro do formato"
         }
       ],
       "movimento": {
@@ -3152,8 +3192,16 @@
           "padrao": "cor do desenho"
         },
         {
+          "nome": "formato",
+          "padrao": "reel"
+        },
+        {
+          "nome": "w|h",
+          "padrao": "do formato"
+        },
+        {
           "nome": "n",
-          "padrao": 14
+          "padrao": "cobre a altura"
         },
         {
           "nome": "amp",
